@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Festival Years | Sri Durgamamba Youth</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    rgba(18, 9, 9, 0.88),
+                    rgba(18, 9, 9, 0.94)
+                ),
+                url("images/vinayaka.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            color: #f5e6c8;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            width: 100%;
+            padding: 20px 6%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(18, 9, 9, 0.94);
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+
+        .logo {
+            font-family: "Playfair Display", serif;
+
+            font-size: 24px;
+            font-weight: 700;
+
+            color: #d4af37;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .home-btn {
+            text-decoration: none;
+
+            color: #120909;
+
+            background: #d4af37;
+
+            padding: 10px 23px;
+
+            border-radius: 4px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+
+        .home-btn:hover {
+            background: #f0cf70;
+            transform: translateY(-2px);
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 88%;
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 80px 0 70px;
+        }
+
+
+        .heading {
+            text-align: center;
+
+            margin-bottom: 55px;
+        }
+
+
+        .heading h1 {
+            font-family: "Playfair Display", serif;
+
+            font-size: 52px;
+
+            color: #d4af37;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .heading p {
+            color: #d9c8a8;
+
+            font-size: 15px;
+
+            font-weight: 300;
+        }
+
+
+        .gold-line {
+            width: 70px;
+            height: 2px;
+
+            background: #d4af37;
+
+            margin: 18px auto 0;
+        }
+
+
+        /* ================= YEARS GRID ================= */
+
+        #yearsContainer {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 30px;
+        }
+
+
+        .year-card {
+
+            background: rgba(18, 9, 9, 0.82);
+
+            border: 1px solid rgba(212, 175, 55, 0.4);
+
+            border-radius: 6px;
+
+            padding: 42px 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.35);
+
+            transition: 0.35s;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .year-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background: #d4af37;
+        }
+
+
+        .year-card:hover {
+
+            transform: translateY(-8px);
+
+            border-color: #d4af37;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+
+        .year-card h2 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 52px;
+
+            color: #d4af37;
+
+            margin-bottom: 12px;
+        }
+
+
+        .year-card p {
+
+            font-size: 13px;
+
+            color: #d9c8a8;
+
+            margin-bottom: 25px;
+
+            line-height: 1.6;
+        }
+
+
+        .view-btn {
+
+            display: inline-block;
+
+            padding: 10px 24px;
+
+            border: 1px solid #d4af37;
+
+            border-radius: 4px;
+
+            background: transparent;
+
+            color: #d4af37;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            transition: 0.3s;
+        }
+
+
+        .view-btn:hover {
+
+            background: #d4af37;
+
+            color: #120909;
+        }
+
+
+        /* ================= EMPTY MESSAGE ================= */
+
+        .empty-message {
+
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 65px 25px;
+
+            background: rgba(18, 9, 9, 0.82);
+
+            border: 1px solid rgba(212, 175, 55, 0.35);
+
+            border-radius: 6px;
+        }
+
+
+        .empty-message h2 {
+
+            font-family: "Playfair Display", serif;
+
+            color: #d4af37;
+
+            font-size: 28px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .empty-message p {
+
+            color: #d9c8a8;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 38px 20px;
+
+            margin-top: 30px;
+
+            background: rgba(10, 5, 5, 0.95);
+
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+
+            color: #bfae8d;
+
+            font-size: 13px;
+
+            line-height: 1.9;
+        }
+
+
+        footer a {
+
+            color: #d4af37;
+
+            text-decoration: none;
+        }
+
+
+        footer a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width: 600px) {
+
+            nav {
+                padding: 17px 5%;
+            }
+
+
+            .logo {
+                font-size: 20px;
+            }
+
+
+            .home-btn {
+                padding: 8px 17px;
+            }
+
+
+            .container {
+
+                width: 90%;
+
+                padding: 55px 0;
+            }
+
+
+            .heading h1 {
+
+                font-size: 38px;
+            }
+
+
+            .heading p {
+
+                font-size: 14px;
+            }
+
+
+            #yearsContainer {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .year-card h2 {
+
+                font-size: 45px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            Sri Durgamamba Youth
+        </div>
+
+        <a
+            href="index.html"
+            class="home-btn"
+        >
+            Home
+        </a>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <div class="heading">
+
+            <h1>Festival Years</h1>
+
+            <p>
+                Explore celebrations and memories from different years.
+            </p>
+
+            <div class="gold-line"></div>
+
+        </div>
+
+
+        <div id="yearsContainer">
+
+            <div class="empty-message">
+
+                <h2>Loading Festival Years...</h2>
+
+                <p>
+                    Please wait while we load the archive.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © Sri Durgamamba Youth
+        </p>
+
+        <p>
+
+            Instagram:
+
+            <a
+                href="https://www.instagram.com/durga_mamba_youth/"
+                target="_blank"
+            >
+                @durga_mamba_youth
+            </a>
+
+        </p>
+
+        <p>
+            Durga Nagar, Saripalli, Pendurthi
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const API_URL = "http://localhost:5000";
+
+        const yearsContainer =
+            document.getElementById("yearsContainer");
+
+
+        async function loadFestivalYears() {
+
+            try {
+
+                /* ================= FETCH DATA ================= */
+
+                const [
+                    eventsResponse,
+                    photosResponse,
+                    videosResponse,
+                    auctionsResponse,
+                    nimajjanamResponse,
+                    sponsorsResponse,
+                    committeeResponse
+                ] = await Promise.all([
+
+                    fetch(`${API_URL}/api/events`),
+
+                    fetch(`${API_URL}/api/photos`),
+
+                    fetch(`${API_URL}/api/videos`),
+
+                    fetch(`${API_URL}/api/auctions`),
+
+                    fetch(`${API_URL}/api/nimajjanam`),
+
+                    fetch(`${API_URL}/api/sponsors`),
+
+                    fetch(`${API_URL}/api/committee`)
+
+                ]);
+
+
+                /* ================= CONVERT TO JSON ================= */
+
+                const events =
+                    await eventsResponse.json();
+
+                const photos =
+                    await photosResponse.json();
+
+                const videos =
+                    await videosResponse.json();
+
+                const auctions =
+                    await auctionsResponse.json();
+
+                const nimajjanam =
+                    await nimajjanamResponse.json();
+
+                const sponsors =
+                    await sponsorsResponse.json();
+
+                const committee =
+                    await committeeResponse.json();
+
+
+                /* ================= COLLECT YEARS ================= */
+
+                const years = new Set();
+
+
+                events.forEach(event => {
+
+                    if (event.festivalYear) {
+
+                        years.add(
+                            Number(event.festivalYear)
+                        );
+
+                    }
+
+                });
+
+
+                photos.forEach(photo => {
+
+                    if (photo.festivalYear) {
+
+                        years.add(
+                            Number(photo.festivalYear)
+                        );
+
+                    }
+
+                });
+
+
+                videos.forEach(video => {
+
+                    if (video.festivalYear) {
+
+                        years.add(
+                            Number(video.festivalYear)
+                        );
+
+                    }
+
+                });
+
+
+                auctions.forEach(auction => {
+
+                    if (auction.festivalYear) {
+
+                        years.add(
+                            Number(auction.festivalYear)
+                        );
+
+                    }
+
+                });
+
+
+                nimajjanam.forEach(record => {
+
+                    if (record.festivalYear) {
+
+                        years.add(
+                            Number(record.festivalYear)
+                        );
+
+                    }
+
+                });
+
+
+                sponsors.forEach(sponsor => {
+
+                    if (sponsor.festivalYear) {
+
+                        years.add(
+                            Number(sponsor.festivalYear)
+                        );
+
+                    }
+
+                });
+
+
+                committee.forEach(member => {
+
+                    if (member.festivalYear) {
+
+                        years.add(
+                            Number(member.festivalYear)
+                        );
+
+                    }
+
+                });
+
+
+                /* ================= SORT YEARS ================= */
+
+                const sortedYears =
+                    Array.from(years)
+                        .sort((a, b) => b - a);
+
+
+                /* ================= NO DATA ================= */
+
+                if (sortedYears.length === 0) {
+
+                    yearsContainer.innerHTML = `
+
+                        <div class="empty-message">
+
+                            <h2>No Festival Records Yet</h2>
+
+                            <p>
+                                Festival years will appear here
+                                when festival records are added.
+                            </p>
+
+                        </div>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                /* ================= DISPLAY YEARS ================= */
+
+                yearsContainer.innerHTML = "";
+
+
+                sortedYears.forEach(year => {
+
+                    const card =
+                        document.createElement("div");
+
+
+                    card.className =
+                        "year-card";
+
+
+                    card.innerHTML = `
+
+                        <h2>${year}</h2>
+
+                        <p>
+                            Festival memories and celebrations
+                        </p>
+
+                        <a
+                            href="festival-year.html?year=${year}"
+                            class="view-btn"
+                        >
+                            View Year
+                        </a>
+
+                    `;
+
+
+                    yearsContainer.appendChild(card);
+
+                });
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Error loading festival years:",
+                    error
+                );
+
+
+                yearsContainer.innerHTML = `
+
+                    <div class="empty-message">
+
+                        <h2>Unable to Load Archive</h2>
+
+                        <p>
+                            Please make sure the backend
+                            server is running.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        loadFestivalYears();
+
+    </script>
+
+
+</body>
+
+</html>

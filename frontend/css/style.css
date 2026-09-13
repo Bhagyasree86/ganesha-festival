@@ -1,0 +1,695 @@
+/* ========================================
+   SRI DURGAMAMBA YOUTH
+   GANESH FESTIVAL WEBSITE
+======================================== */
+
+
+/* ========================================
+   BASIC RESET
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: "Poppins", sans-serif;
+
+    background: #fff8f5;
+
+    color: #2d2020;
+}
+
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+.navbar {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    padding: 24px 4%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    z-index: 10;
+
+}
+
+
+/* Website name */
+
+.logo {
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    white-space: nowrap;
+
+}
+
+
+/* Navigation links */
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 18px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.nav-links a {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 400;
+
+    transition: 0.3s ease;
+
+}
+
+
+.nav-links a:hover {
+
+    opacity: 0.65;
+
+}
+
+
+/* ========================================
+   HERO SECTION
+======================================== */
+
+.hero {
+
+    width: 100%;
+
+    height: 100vh;
+
+    min-height: 650px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+
+    /* VINAYAKA BACKGROUND */
+
+    background-image: url("../images/vinayaka.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* ========================================
+   IMAGE OVERLAY
+======================================== */
+
+.hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    /*
+       Keep this light so that
+       the Vinayaka picture remains visible.
+    */
+
+    background: rgba(0, 0, 0, 0.18);
+
+}
+
+
+/* ========================================
+   HERO CONTENT
+======================================== */
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    color: white;
+
+    padding: 30px;
+
+    max-width: 900px;
+
+}
+
+
+/* ========================================
+   TEXT HIGHLIGHT BOX
+======================================== */
+
+.text-highlight {
+
+    display: inline-block;
+
+    padding: 40px 60px;
+
+    /*
+       Transparent dark background
+       only behind the text.
+    */
+
+    background: rgba(20, 10, 10, 0.50);
+
+    border-radius: 18px;
+
+    backdrop-filter: blur(4px);
+
+    -webkit-backdrop-filter: blur(4px);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.30);
+
+}
+
+
+/* ========================================
+   SMALL HERO TITLE
+======================================== */
+
+.small-title {
+
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 25px;
+
+    font-weight: 500;
+
+}
+
+
+/* ========================================
+   MAIN HERO TITLE
+======================================== */
+
+.hero h1 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(65px, 10vw, 125px);
+
+    line-height: 0.85;
+
+    font-weight: 600;
+
+    letter-spacing: 5px;
+
+    margin: 0;
+
+}
+
+
+/* ========================================
+   YEAR
+======================================== */
+
+.year {
+
+    font-size: 22px;
+
+    letter-spacing: 8px;
+
+    margin-top: 28px;
+
+    font-weight: 500;
+
+}
+
+
+/* ========================================
+   TAGLINE
+======================================== */
+
+.tagline {
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    margin-top: 12px;
+
+    opacity: 0.95;
+
+}
+
+
+/* ========================================
+   HERO BUTTON
+======================================== */
+
+.hero-button {
+
+    display: inline-block;
+
+    margin-top: 35px;
+
+    padding: 14px 32px;
+
+    border: 1px solid white;
+
+    border-radius: 30px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    transition: all 0.3s ease;
+
+}
+
+
+.hero-button:hover {
+
+    background: white;
+
+    color: #2d2020;
+
+}
+
+
+/* ========================================
+   WELCOME SECTION
+======================================== */
+
+.welcome {
+
+    padding: 100px 20px;
+
+    text-align: center;
+
+    background: #fff8f5;
+
+}
+
+
+/* Small heading */
+
+.welcome-label {
+
+    color: #b85c6b;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* Welcome title */
+
+.welcome h2 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(35px, 5vw, 60px);
+
+    line-height: 1.15;
+
+    font-weight: 500;
+
+    color: #2d2020;
+
+}
+
+
+/* Discover link */
+
+.discover-link {
+
+    display: inline-block;
+
+    margin-top: 30px;
+
+    color: #b85c6b;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #b85c6b;
+
+    padding-bottom: 4px;
+
+    transition: 0.3s;
+
+}
+
+
+.discover-link:hover {
+
+    opacity: 0.6;
+
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+
+    background: #24191a;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+}
+
+
+/* Footer title */
+
+.footer-content h3 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 25px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* Footer text */
+
+.footer-content p {
+
+    font-size: 13px;
+
+    margin: 9px 0;
+
+    color: #e8dede;
+
+}
+
+
+/* Instagram link */
+
+.footer-content a {
+
+    color: #f2a4b1;
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+}
+
+
+.footer-content a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* Footer divider */
+
+.footer-line {
+
+    width: 80px;
+
+    height: 1px;
+
+    background: #b85c6b;
+
+    margin: 25px auto;
+
+}
+
+
+/* Copyright */
+
+.footer-content .copyright {
+
+    font-size: 11px;
+
+    color: #a99b9b;
+
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1100px) {
+
+
+    .navbar {
+
+        padding: 20px 25px;
+
+    }
+
+
+    .nav-links {
+
+        gap: 12px;
+
+    }
+
+
+    .nav-links a {
+
+        font-size: 11px;
+
+    }
+
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 750px) {
+
+
+    .navbar {
+
+        position: absolute;
+
+        justify-content: center;
+
+        padding: 20px;
+
+    }
+
+
+    .logo {
+
+        font-size: 14px;
+
+    }
+
+
+    /*
+       Hide desktop navigation on mobile.
+    */
+
+    .nav-links {
+
+        display: none;
+
+    }
+
+
+    .hero {
+
+        min-height: 600px;
+
+    }
+
+
+    .hero-content {
+
+        padding: 20px;
+
+    }
+
+
+    .text-highlight {
+
+        padding: 30px 25px;
+
+        width: 90vw;
+
+    }
+
+
+    .small-title {
+
+        font-size: 9px;
+
+        letter-spacing: 2px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 58px;
+
+        letter-spacing: 3px;
+
+    }
+
+
+    .year {
+
+        font-size: 18px;
+
+        letter-spacing: 6px;
+
+    }
+
+
+    .tagline {
+
+        font-size: 11px;
+
+        letter-spacing: 1px;
+
+    }
+
+
+    .hero-button {
+
+        padding: 12px 25px;
+
+    }
+
+
+    .welcome {
+
+        padding: 75px 20px;
+
+    }
+
+
+    .welcome h2 {
+
+        font-size: 36px;
+
+    }
+
+
+    footer {
+
+        padding: 40px 20px;
+
+    }
+
+
+    .footer-content h3 {
+
+        font-size: 21px;
+
+    }
+
+}
+
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 450px) {
+
+
+    .hero h1 {
+
+        font-size: 48px;
+
+    }
+
+
+    .small-title {
+
+        font-size: 8px;
+
+    }
+
+
+    .tagline {
+
+        font-size: 10px;
+
+    }
+
+
+    .text-highlight {
+
+        padding: 25px 18px;
+
+    }
+
+}

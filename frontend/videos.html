@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Videos | Sri Durgamamba Youth</title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: "Poppins", sans-serif;
+
+            min-height: 100vh;
+
+            color: #f5e6c8;
+
+            background:
+                linear-gradient(
+                    rgba(18, 9, 9, 0.88),
+                    rgba(18, 9, 9, 0.94)
+                ),
+                url("images/vinayaka.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-attachment: fixed;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 20px 6%;
+
+            background:
+                rgba(18, 9, 9, 0.95);
+
+            border-bottom:
+                1px solid
+                rgba(212, 175, 55, 0.35);
+        }
+
+
+        .logo {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            color: #d4af37;
+        }
+
+
+        .home-btn {
+
+            text-decoration: none;
+
+            color: #120909;
+
+            background: #d4af37;
+
+            padding: 10px 23px;
+
+            border-radius: 4px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+
+        .home-btn:hover {
+
+            background: #f0cf70;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 70px 0;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+
+        .brand {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 14px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            color: #c9ad6b;
+
+            margin-bottom: 10px;
+        }
+
+
+        header h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(42px, 7vw, 65px);
+
+            font-weight: 600;
+
+            color: #d4af37;
+
+            letter-spacing: 1px;
+        }
+
+
+        header p {
+
+            margin-top: 12px;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+            color: #d9c8a8;
+        }
+
+
+        .gold-line {
+
+            width: 70px;
+
+            height: 2px;
+
+            background: #d4af37;
+
+            margin: 18px auto 0;
+        }
+
+
+        /* =========================
+           FILTER
+        ========================= */
+
+        .filter-box {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 40px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .filter-box label {
+
+            color: #c9ad6b;
+
+            font-size: 13px;
+        }
+
+
+        .filter-box input {
+
+            width: 180px;
+
+            padding: 11px 14px;
+
+            background:
+                rgba(18, 9, 9, 0.85);
+
+            color: #d4af37;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.5);
+
+            border-radius: 4px;
+
+            outline: none;
+
+            font-family: "Poppins", sans-serif;
+        }
+
+
+        .filter-box input::placeholder {
+
+            color: #927f62;
+        }
+
+
+        button {
+
+            padding: 11px 20px;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+
+        .filter-btn {
+
+            border:
+                1px solid #d4af37;
+
+            background: #d4af37;
+
+            color: #120909;
+        }
+
+
+        .filter-btn:hover {
+
+            background: #f0cf70;
+        }
+
+
+        .all-btn {
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.5);
+
+            background:
+                rgba(18, 9, 9, 0.8);
+
+            color: #d4af37;
+        }
+
+
+        .all-btn:hover {
+
+            background:
+                rgba(212, 175, 55, 0.12);
+        }
+
+
+        /* =========================
+           VIDEO GRID
+        ========================= */
+
+        .video-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(320px, 1fr)
+                );
+
+            gap: 28px;
+        }
+
+
+        /* =========================
+           VIDEO CARD
+        ========================= */
+
+        .video-card {
+
+            background:
+                rgba(18, 9, 9, 0.88);
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.35);
+
+            border-radius: 6px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.4);
+
+            transition:
+                transform 0.35s ease,
+                border-color 0.35s ease;
+        }
+
+
+        .video-card:hover {
+
+            transform:
+                translateY(-7px);
+
+            border-color:
+                rgba(212, 175, 55, 0.75);
+        }
+
+
+        /* =========================
+           VIDEO
+        ========================= */
+
+        .video-card video {
+
+            width: 100%;
+
+            height: 230px;
+
+            display: block;
+
+            background: #080505;
+
+            object-fit: cover;
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+
+            padding: 20px;
+        }
+
+
+        .year {
+
+            display: inline-block;
+
+            padding: 6px 11px;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.45);
+
+            background:
+                rgba(212, 175, 55, 0.08);
+
+            color: #d4af37;
+
+            border-radius: 4px;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .content h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 21px;
+
+            font-weight: 600;
+
+            color: #d4af37;
+
+            margin-bottom: 9px;
+        }
+
+
+        .description {
+
+            color: #bfae8d;
+
+            line-height: 1.6;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        #message {
+
+            text-align: center;
+
+            color: #c8b58f;
+
+            padding: 55px 20px;
+
+            font-size: 13px;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back {
+
+            display: block;
+
+            width: fit-content;
+
+            margin:
+                10px auto 60px;
+
+            padding:
+                12px 25px;
+
+            background: #d4af37;
+
+            color: #120909;
+
+            text-decoration: none;
+
+            border-radius: 4px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+
+        .back:hover {
+
+            background: #f0cf70;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 38px 20px;
+
+            background:
+                rgba(10, 5, 5, 0.95);
+
+            border-top:
+                1px solid
+                rgba(212, 175, 55, 0.3);
+
+            color: #bfae8d;
+
+            font-size: 13px;
+
+            line-height: 1.9;
+        }
+
+
+        footer h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 23px;
+
+            color: #d4af37;
+
+            font-weight: 600;
+        }
+
+
+        footer a {
+
+            color: #d4af37;
+
+            text-decoration: none;
+        }
+
+
+        footer a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            nav {
+
+                padding: 17px 5%;
+            }
+
+
+            .logo {
+
+                font-size: 20px;
+            }
+
+
+            .home-btn {
+
+                padding:
+                    8px 17px;
+            }
+
+
+            .container {
+
+                width: 92%;
+
+                padding:
+                    55px 0;
+            }
+
+
+            .video-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .video-card video {
+
+                height: 230px;
+            }
+
+
+            .filter-box {
+
+                flex-direction: column;
+            }
+
+
+            .filter-box input {
+
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            Sri Durgamamba Youth
+        </div>
+
+
+        <a
+            href="index.html"
+            class="home-btn"
+        >
+            Home
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- HEADER -->
+
+        <header>
+
+            <div class="brand">
+                Sri Durgamamba Youth
+            </div>
+
+
+            <h1>
+                Festival Videos
+            </h1>
+
+
+            <p>
+                Our Festival • Our Memories
+            </p>
+
+
+            <div class="gold-line"></div>
+
+        </header>
+
+
+        <!-- =========================
+             FILTER
+        ========================= -->
+
+        <div class="filter-box">
+
+            <label for="yearInput">
+                Festival Year
+            </label>
+
+
+            <input
+                type="number"
+                id="yearInput"
+                placeholder="Enter year"
+            >
+
+
+            <button
+                class="filter-btn"
+                onclick="filterVideos()"
+            >
+                Filter
+            </button>
+
+
+            <button
+                class="all-btn"
+                onclick="loadVideos()"
+            >
+                Show All
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             VIDEOS
+        ========================= -->
+
+        <div
+            class="video-grid"
+            id="videoGrid"
+        >
+        </div>
+
+
+        <p id="message">
+            Loading videos...
+        </p>
+
+    </main>
+
+
+    <!-- =========================
+         BACK
+    ========================= -->
+
+    <a
+        href="index.html"
+        class="back"
+    >
+        Back to Home
+    </a>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <h3>
+            Sri Durgamamba Youth
+        </h3>
+
+
+        <p>
+
+            Instagram:
+
+            <a
+                href="https://www.instagram.com/durga_mamba_youth/"
+                target="_blank"
+            >
+                @durga_mamba_youth
+            </a>
+
+        </p>
+
+
+        <p>
+            Durga Nagar, Saripalli, Pendurthi
+        </p>
+
+
+        <p>
+            © Sri Durgamamba Youth
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        /* =========================
+           API
+        ========================= */
+
+        const API =
+            "http://localhost:5000/api/videos";
+
+
+        /* =========================
+           STORE VIDEOS
+        ========================= */
+
+        let videos = [];
+
+
+        /* =========================
+           LOAD VIDEOS
+        ========================= */
+
+        async function loadVideos() {
+
+            const grid =
+                document.getElementById(
+                    "videoGrid"
+                );
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                );
+
+
+            message.textContent =
+                "Loading videos...";
+
+
+            grid.innerHTML = "";
+
+
+            try {
+
+                const response =
+                    await fetch(API);
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load videos"
+                    );
+
+                }
+
+
+                videos =
+                    await response.json();
+
+
+                /* =====================
+                   URL YEAR
+                ===================== */
+
+                const urlParams =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+
+                const selectedYear =
+                    urlParams.get("year");
+
+
+                if (selectedYear) {
+
+                    document.getElementById(
+                        "yearInput"
+                    ).value =
+                        selectedYear;
+
+
+                    const filtered =
+                        videos.filter(
+                            function(video) {
+
+                                return String(
+                                    video.festivalYear
+                                ) ===
+                                String(
+                                    selectedYear
+                                );
+
+                            }
+                        );
+
+
+                    displayVideos(
+                        filtered
+                    );
+
+                }
+
+                else {
+
+                    displayVideos(
+                        videos
+                    );
+
+                }
+
+            }
+
+
+            catch (error) {
+
+                console.error(error);
+
+
+                grid.innerHTML = "";
+
+
+                message.textContent =
+                    "Unable to load videos.";
+
+            }
+
+        }
+
+
+        /* =========================
+           DISPLAY VIDEOS
+        ========================= */
+
+        function displayVideos(list) {
+
+            const grid =
+                document.getElementById(
+                    "videoGrid"
+                );
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                );
+
+
+            grid.innerHTML = "";
+
+
+            if (list.length === 0) {
+
+                message.textContent =
+                    "No videos available.";
+
+                return;
+
+            }
+
+
+            message.textContent = "";
+
+
+            list.forEach(
+                function(video) {
+
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "video-card";
+
+
+                    /* =====================
+                       VIDEO
+                    ===================== */
+
+                    const videoElement =
+                        document.createElement(
+                            "video"
+                        );
+
+
+                    videoElement.controls =
+                        true;
+
+
+                    videoElement.preload =
+                        "metadata";
+
+
+                    videoElement.src =
+                        video.videoUrl;
+
+
+                    /* =====================
+                       CONTENT
+                    ===================== */
+
+                    const content =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    content.className =
+                        "content";
+
+
+                    const year =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    year.className =
+                        "year";
+
+
+                    year.textContent =
+                        video.festivalYear ||
+                        "Festival";
+                    
+
+                    const title =
+                        document.createElement(
+                            "h2"
+                        );
+
+
+                    title.textContent =
+                        video.title ||
+                        "Festival Video";
+
+
+                    const description =
+                        document.createElement(
+                            "p"
+                        );
+
+
+                    description.className =
+                        "description";
+
+
+                    description.textContent =
+                        video.description ||
+                        "";
+
+
+                    content.appendChild(
+                        year
+                    );
+
+
+                    content.appendChild(
+                        title
+                    );
+
+
+                    content.appendChild(
+                        description
+                    );
+
+
+                    card.appendChild(
+                        videoElement
+                    );
+
+
+                    card.appendChild(
+                        content
+                    );
+
+
+                    grid.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           FILTER VIDEOS
+        ========================= */
+
+        function filterVideos() {
+
+            const year =
+                document.getElementById(
+                    "yearInput"
+                ).value;
+
+
+            if (!year) {
+
+                alert(
+                    "Please enter a festival year."
+                );
+
+                return;
+
+            }
+
+
+            const filtered =
+                videos.filter(
+                    function(video) {
+
+                        return String(
+                            video.festivalYear
+                        ) ===
+                        String(year);
+
+                    }
+                );
+
+
+            displayVideos(
+                filtered
+            );
+
+
+            window.history.replaceState(
+                {},
+                "",
+                "videos.html?year=" +
+                year
+            );
+
+        }
+
+
+        /* =========================
+           START
+        ========================= */
+
+        loadVideos();
+
+    </script>
+
+
+</body>
+
+</html>

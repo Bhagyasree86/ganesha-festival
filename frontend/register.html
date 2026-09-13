@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sri Durgamamba Youth | Registration</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fff1e6, #ffd6d6);
+            padding: 20px;
+        }
+
+        .register-box {
+            width: 400px;
+            max-width: 100%;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .ganesha {
+            text-align: center;
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #b85c6b;
+            margin-bottom: 10px;
+            font-size: 27px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #e88a9a;
+            box-shadow: 0 0 5px rgba(232, 138, 154, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #e88a9a;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b85c6b;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #b85c6b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register-box">
+
+        <div class="ganesha">
+            🙏
+        </div>
+
+        <h1>Sri Durgamamba Youth</h1>
+
+        <p class="subtitle">
+            Ganesha Festival Committee Registration
+        </p>
+
+        <form id="registerForm">
+
+            <label for="name">
+                Committee Member Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                required
+            >
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter email"
+                required
+            >
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Create password"
+                required
+            >
+
+            <button type="submit">
+                Register
+            </button>
+
+        </form>
+
+        <p id="message"></p>
+
+        <div class="login-link">
+            Already registered?
+            <a href="login.html">Login here</a>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const form = document.getElementById("registerForm");
+
+        form.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const name =
+                document.getElementById("name").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const message =
+                document.getElementById("message");
+
+            message.textContent = "Registering...";
+
+            message.style.color = "#b85c6b";
+
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:5000/api/auth/register",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+
+                const data = await response.json();
+
+
+                if (response.ok) {
+
+                    message.textContent =
+                        "Registration successful!";
+
+                    message.style.color = "green";
+
+
+                    setTimeout(function() {
+
+                        window.location.href =
+                            "login.html";
+
+                    }, 1500);
+
+                } else {
+
+                    message.textContent =
+                        data.message || "Registration failed.";
+
+                    message.style.color = "red";
+                }
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Unable to connect to server. Make sure the backend is running.";
+
+                message.style.color = "red";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title id="pageTitle">
+        Add Event | Sri Durgamamba Youth
+    </title>
+
+
+    <!-- GOOGLE FONTS -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+
+        /* =====================================
+           RESET
+        ===================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* =====================================
+           BODY
+        ===================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            color:
+                #f5f1e8;
+
+            background:
+
+                radial-gradient(
+                    circle at top,
+                    rgba(
+                        212,
+                        175,
+                        55,
+                        0.12
+                    ),
+                    transparent 38%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #050505,
+                    #111111 55%,
+                    #050505
+                );
+
+            background-attachment:
+                fixed;
+
+        }
+
+
+        /* =====================================
+           PREMIUM GOLDEN FRAME
+        ===================================== */
+
+        body::before {
+
+            content:
+                "";
+
+            position:
+                fixed;
+
+            inset:
+                12px;
+
+            border:
+                1px solid
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.35
+                );
+
+            pointer-events:
+                none;
+
+            z-index:
+                100;
+
+        }
+
+
+        /* =====================================
+           NAVBAR
+        ===================================== */
+
+        nav {
+
+            width:
+                100%;
+
+            padding:
+                18px 6%;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            background:
+                rgba(
+                    5,
+                    5,
+                    5,
+                    0.92
+                );
+
+            backdrop-filter:
+                blur(12px);
+
+            border-bottom:
+                1px solid
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.35
+                );
+
+            position:
+                relative;
+
+            z-index:
+                5;
+
+        }
+
+
+        /* =====================================
+           LOGO
+        ===================================== */
+
+        .logo {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                22px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                1px;
+
+            color:
+                #d4af37;
+
+        }
+
+
+        /* =====================================
+           NAV BUTTON
+        ===================================== */
+
+        .nav-btn {
+
+            text-decoration:
+                none;
+
+            color:
+                #d4af37;
+
+            border:
+                1px solid
+                #8b712b;
+
+            padding:
+                10px 20px;
+
+            border-radius:
+                7px;
+
+            font-size:
+                13px;
+
+            transition:
+                0.3s;
+
+        }
+
+
+        .nav-btn:hover {
+
+            background:
+                #d4af37;
+
+            color:
+                #111;
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        /* =====================================
+           MAIN CONTAINER
+        ===================================== */
+
+        .container {
+
+            width:
+                90%;
+
+            max-width:
+                650px;
+
+            margin:
+                65px auto;
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+        }
+
+
+        /* =====================================
+           HEADING
+        ===================================== */
+
+        .heading {
+
+            text-align:
+                center;
+
+            margin-bottom:
+                35px;
+
+        }
+
+
+        .heading h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                44px;
+
+            color:
+                #d4af37;
+
+            letter-spacing:
+                1px;
+
+            margin-bottom:
+                10px;
+
+        }
+
+
+        .heading p {
+
+            color:
+                #aaa294;
+
+            font-size:
+                14px;
+
+        }
+
+
+        /* =====================================
+           FORM CARD
+        ===================================== */
+
+        .form-card {
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(
+                        212,
+                        175,
+                        55,
+                        0.08
+                    ),
+                    rgba(
+                        15,
+                        15,
+                        15,
+                        0.97
+                    )
+                );
+
+            padding:
+                38px;
+
+            border-radius:
+                18px;
+
+            border:
+                1px solid
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.4
+                );
+
+            box-shadow:
+
+                0 20px 60px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.55
+                ),
+
+                inset 0 0 30px
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.03
+                );
+
+        }
+
+
+        /* =====================================
+           GOLD TOP LINE
+        ===================================== */
+
+        .form-card::before {
+
+            content:
+                "";
+
+            display:
+                block;
+
+            height:
+                3px;
+
+            width:
+                100%;
+
+            background:
+                #d4af37;
+
+            margin:
+                -38px 0 30px;
+
+            border-radius:
+                18px 18px 0 0;
+
+        }
+
+
+        /* =====================================
+           FORM GROUP
+        ===================================== */
+
+        .form-group {
+
+            margin-bottom:
+                22px;
+
+        }
+
+
+        /* =====================================
+           LABEL
+        ===================================== */
+
+        label {
+
+            display:
+                block;
+
+            margin-bottom:
+                8px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                600;
+
+            color:
+                #d4af37;
+
+        }
+
+
+        /* =====================================
+           INPUTS
+        ===================================== */
+
+        input,
+        textarea {
+
+            width:
+                100%;
+
+            padding:
+                14px 15px;
+
+            border:
+                1px solid
+                #403716;
+
+            border-radius:
+                9px;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size:
+                14px;
+
+            outline:
+                none;
+
+            background:
+                #0b0b0b;
+
+            color:
+                #f5f1e8;
+
+            transition:
+                0.3s;
+
+        }
+
+
+        /* =====================================
+           PLACEHOLDER
+        ===================================== */
+
+        input::placeholder,
+        textarea::placeholder {
+
+            color:
+                #77736b;
+
+        }
+
+
+        /* =====================================
+           INPUT FOCUS
+        ===================================== */
+
+        input:focus,
+        textarea:focus {
+
+            border-color:
+                #d4af37;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.10
+                );
+
+        }
+
+
+        /* =====================================
+           DATE INPUT
+        ===================================== */
+
+        input[type="date"] {
+
+            color-scheme:
+                dark;
+
+        }
+
+
+        /* =====================================
+           TEXTAREA
+        ===================================== */
+
+        textarea {
+
+            min-height:
+                120px;
+
+            resize:
+                vertical;
+
+        }
+
+
+        /* =====================================
+           SUBMIT BUTTON
+        ===================================== */
+
+        .submit-btn {
+
+            width:
+                100%;
+
+            border:
+                1px solid
+                #d4af37;
+
+            padding:
+                14px;
+
+            border-radius:
+                30px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #d4af37,
+                    #b68b20
+                );
+
+            color:
+                #111;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size:
+                15px;
+
+            font-weight:
+                600;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.3s;
+
+        }
+
+
+        .submit-btn:hover {
+
+            background:
+                #f0d878;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.20
+                );
+
+        }
+
+
+        /* =====================================
+           DISABLED BUTTON
+        ===================================== */
+
+        .submit-btn:disabled {
+
+            opacity:
+                0.7;
+
+            cursor:
+                not-allowed;
+
+            transform:
+                none;
+
+        }
+
+
+        /* =====================================
+           MESSAGE
+        ===================================== */
+
+        #message {
+
+            margin-top:
+                18px;
+
+            text-align:
+                center;
+
+            font-size:
+                14px;
+
+            font-weight:
+                500;
+
+        }
+
+
+        /* =====================================
+           BACK BUTTON
+        ===================================== */
+
+        .back {
+
+            display:
+                block;
+
+            width:
+                fit-content;
+
+            margin:
+                28px auto 0;
+
+            text-decoration:
+                none;
+
+            color:
+                #d4af37;
+
+            font-size:
+                14px;
+
+            transition:
+                0.3s;
+
+        }
+
+
+        .back:hover {
+
+            color:
+                #f0d878;
+
+        }
+
+
+        /* =====================================
+           FOOTER
+        ===================================== */
+
+        footer {
+
+            text-align:
+                center;
+
+            padding:
+                35px 15px;
+
+            margin-top:
+                60px;
+
+            color:
+                #8f8a80;
+
+            font-size:
+                13px;
+
+            line-height:
+                1.8;
+
+            background:
+                #070707;
+
+            border-top:
+                1px solid
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.3
+                );
+
+        }
+
+
+        /* =====================================
+           FOOTER TITLE
+        ===================================== */
+
+        footer p:first-child {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color:
+                #d4af37;
+
+            font-size:
+                20px;
+
+            letter-spacing:
+                1px;
+
+        }
+
+
+        /* =====================================
+           FOOTER INSTAGRAM
+        ===================================== */
+
+        footer p:nth-child(2) {
+
+            color:
+                #d4af37;
+
+        }
+
+
+        /* =====================================
+           MOBILE
+        ===================================== */
+
+        @media (max-width: 600px) {
+
+            body::before {
+
+                inset:
+                    6px;
+
+            }
+
+
+            nav {
+
+                padding:
+                    15px 5%;
+
+            }
+
+
+            .logo {
+
+                font-size:
+                    18px;
+
+            }
+
+
+            .nav-btn {
+
+                padding:
+                    8px 13px;
+
+                font-size:
+                    11px;
+
+            }
+
+
+            .container {
+
+                width:
+                    94%;
+
+                margin:
+                    45px auto;
+
+            }
+
+
+            .heading h1 {
+
+                font-size:
+                    35px;
+
+            }
+
+
+            .form-card {
+
+                padding:
+                    27px 20px;
+
+            }
+
+
+            .form-card::before {
+
+                margin:
+                    -27px 0 25px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+
+<nav>
+
+
+    <div class="logo">
+
+        Sri Durgamamba Youth
+
+    </div>
+
+
+    <a
+        href="event-management.html"
+        class="nav-btn">
+
+        Manage Events
+
+    </a>
+
+
+</nav>
+
+
+
+<!-- =====================================
+     MAIN
+===================================== -->
+
+<div class="container">
+
+
+    <!-- HEADING -->
+
+    <div class="heading">
+
+        <h1 id="headingTitle">
+
+            Add Festival Event
+
+        </h1>
+
+
+        <p id="headingDescription">
+
+            Add an event to the festival schedule
+
+        </p>
+
+    </div>
+
+
+
+    <!-- =====================================
+         FORM CARD
+    ===================================== -->
+
+    <div class="form-card">
+
+
+        <form id="eventForm">
+
+
+            <!-- FESTIVAL YEAR -->
+
+            <div class="form-group">
+
+                <label for="festivalYear">
+
+                    Festival Year
+
+                </label>
+
+
+                <input
+                    type="number"
+                    id="festivalYear"
+                    placeholder="Enter festival year"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- EVENT TITLE -->
+
+            <div class="form-group">
+
+                <label for="title">
+
+                    Event Title
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Example: Ganesh Idol Installation"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- EVENT DATE -->
+
+            <div class="form-group">
+
+                <label for="date">
+
+                    Event Date
+
+                </label>
+
+
+                <input
+                    type="date"
+                    id="date"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- EVENT TIME -->
+
+            <div class="form-group">
+
+                <label for="time">
+
+                    Event Time
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="time"
+                    placeholder="Example: 6:00 PM onwards"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group">
+
+                <label for="description">
+
+                    Description
+
+                </label>
+
+
+                <textarea
+                    id="description"
+                    placeholder="Enter a short description of the event"
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn">
+
+                Add Event
+
+            </button>
+
+
+            <!-- MESSAGE -->
+
+            <div id="message"></div>
+
+
+        </form>
+
+
+    </div>
+
+
+
+    <!-- BACK -->
+
+    <a
+        href="event-management.html"
+        class="back">
+
+        ← Back to Event Management
+
+    </a>
+
+
+</div>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer>
+
+
+    <p>
+
+        SRI DURGAMAMBA YOUTH
+
+    </p>
+
+
+    <p>
+
+        @durga_mamba_youth
+
+    </p>
+
+
+    <p>
+
+        Durga Nagar, Saripalli, Pendurthi
+
+    </p>
+
+
+    <p>
+
+        © Sri Durgamamba Youth
+
+    </p>
+
+
+</footer>
+
+
+
+<script>
+
+
+// ==========================================
+// LOGIN CHECK
+// ==========================================
+
+const token =
+    localStorage.getItem(
+        "token"
+    );
+
+
+if (!token) {
+
+    alert(
+        "Please login first."
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+// ==========================================
+// CHECK ADD OR EDIT MODE
+// ==========================================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const eventId =
+    urlParams.get(
+        "id"
+    );
+
+
+const isEditMode =
+    Boolean(
+        eventId
+    );
+
+
+// ==========================================
+// ELEMENTS
+// ==========================================
+
+const form =
+    document.getElementById(
+        "eventForm"
+    );
+
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+const submitBtn =
+    document.getElementById(
+        "submitBtn"
+    );
+
+
+const headingTitle =
+    document.getElementById(
+        "headingTitle"
+    );
+
+
+const headingDescription =
+    document.getElementById(
+        "headingDescription"
+    );
+
+
+const pageTitle =
+    document.getElementById(
+        "pageTitle"
+    );
+
+
+// ==========================================
+// CHANGE PAGE FOR EDIT MODE
+// ==========================================
+
+if (isEditMode) {
+
+    pageTitle.textContent =
+        "Edit Event | Sri Durgamamba Youth";
+
+
+    headingTitle.textContent =
+        "Edit Festival Event";
+
+
+    headingDescription.textContent =
+        "Update the festival event details";
+
+
+    submitBtn.textContent =
+        "Update Event";
+
+
+    loadEvent();
+
+}
+
+
+// ==========================================
+// LOAD EVENT
+// ==========================================
+
+async function loadEvent() {
+
+    try {
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/events/" +
+                eventId
+            );
+
+
+        const event =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                event.message ||
+                "Unable to load event."
+            );
+
+        }
+
+
+        // FESTIVAL YEAR
+
+        document.getElementById(
+            "festivalYear"
+        ).value =
+            event.festivalYear;
+
+
+        // TITLE
+
+        document.getElementById(
+            "title"
+        ).value =
+            event.title;
+
+
+        // DATE
+
+        const eventDate =
+            new Date(
+                event.date
+            );
+
+
+        const year =
+            eventDate.getFullYear();
+
+
+        const month =
+            String(
+                eventDate.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            );
+
+
+        const day =
+            String(
+                eventDate.getDate()
+            ).padStart(
+                2,
+                "0"
+            );
+
+
+        document.getElementById(
+            "date"
+        ).value =
+            `${year}-${month}-${day}`;
+
+
+        // TIME
+
+        document.getElementById(
+            "time"
+        ).value =
+            event.time;
+
+
+        // DESCRIPTION
+
+        document.getElementById(
+            "description"
+        ).value =
+            event.description || "";
+
+
+    }
+
+    catch (error) {
+
+        console.log(
+            error
+        );
+
+
+        message.style.color =
+            "#d66a78";
+
+
+        message.textContent =
+            "Unable to load event details.";
+
+    }
+
+}
+
+
+// ==========================================
+// ADD / UPDATE EVENT
+// ==========================================
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        // ==================================
+        // GET FORM VALUES
+        // ==================================
+
+        const festivalYear =
+            document.getElementById(
+                "festivalYear"
+            ).value;
+
+
+        const title =
+            document.getElementById(
+                "title"
+            ).value.trim();
+
+
+        const date =
+            document.getElementById(
+                "date"
+            ).value;
+
+
+        const time =
+            document.getElementById(
+                "time"
+            ).value.trim();
+
+
+        const description =
+            document.getElementById(
+                "description"
+            ).value.trim();
+
+
+        // ==================================
+        // EVENT DATA
+        // ==================================
+
+        const eventData = {
+
+            festivalYear:
+                Number(
+                    festivalYear
+                ),
+
+            title:
+                title,
+
+            date:
+                date,
+
+            time:
+                time,
+
+            description:
+                description
+
+        };
+
+
+        // ==================================
+        // METHOD
+        // ==================================
+
+        const method =
+            isEditMode
+            ? "PUT"
+            : "POST";
+
+
+        // ==================================
+        // API URL
+        // ==================================
+
+        const url =
+            isEditMode
+
+            ? "http://localhost:5000/api/events/" +
+              eventId
+
+            : "http://localhost:5000/api/events";
+
+
+        // ==================================
+        // DISABLE BUTTON
+        // ==================================
+
+        submitBtn.disabled =
+            true;
+
+
+        submitBtn.textContent =
+            isEditMode
+            ? "Updating..."
+            : "Adding...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    url,
+                    {
+
+                        method:
+                            method,
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                "Bearer " +
+                                token
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                eventData
+                            )
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            // ==================================
+            // SUCCESS
+            // ==================================
+
+            if (response.ok) {
+
+                message.style.color =
+                    "#d4af37";
+
+
+                message.textContent =
+                    isEditMode
+
+                    ? "Event updated successfully!"
+
+                    : "Event added successfully!";
+
+
+                // EDIT MODE
+
+                if (isEditMode) {
+
+                    setTimeout(
+                        function() {
+
+                            window.location.href =
+                                "event-management.html";
+
+                        },
+                        1000
+                    );
+
+                }
+
+
+                // ADD MODE
+
+                else {
+
+                    form.reset();
+
+
+                    submitBtn.disabled =
+                        false;
+
+
+                    submitBtn.textContent =
+                        "Add Event";
+
+                }
+
+            }
+
+
+            // ==================================
+            // ERROR
+            // ==================================
+
+            else {
+
+                message.style.color =
+                    "#d66a78";
+
+
+                message.textContent =
+                    data.message ||
+                    "Operation failed.";
+
+
+                submitBtn.disabled =
+                    false;
+
+
+                submitBtn.textContent =
+                    isEditMode
+
+                    ? "Update Event"
+
+                    : "Add Event";
+
+            }
+
+
+        }
+
+
+        catch (error) {
+
+            console.log(
+                error
+            );
+
+
+            message.style.color =
+                "#d66a78";
+
+
+            message.textContent =
+                "Unable to connect to the server.";
+
+
+            submitBtn.disabled =
+                false;
+
+
+            submitBtn.textContent =
+                isEditMode
+
+                ? "Update Event"
+
+                : "Add Event";
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

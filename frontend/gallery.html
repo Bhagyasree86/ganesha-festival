@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Gallery | Sri Durgamamba Youth</title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: "Poppins", sans-serif;
+
+            min-height: 100vh;
+
+            color: #f5e6c8;
+
+            background:
+                linear-gradient(
+                    rgba(18, 9, 9, 0.88),
+                    rgba(18, 9, 9, 0.94)
+                ),
+                url("images/vinayaka.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-attachment: fixed;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 20px 6%;
+
+            background: rgba(18, 9, 9, 0.95);
+
+            border-bottom:
+                1px solid
+                rgba(212, 175, 55, 0.35);
+        }
+
+
+        .logo {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            color: #d4af37;
+        }
+
+
+        .home-btn {
+
+            text-decoration: none;
+
+            color: #120909;
+
+            background: #d4af37;
+
+            padding: 10px 23px;
+
+            border-radius: 4px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+
+        .home-btn:hover {
+
+            background: #f0cf70;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1400px;
+
+            margin: auto;
+
+            padding: 70px 0;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+
+        .brand {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 14px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            color: #c9ad6b;
+
+            margin-bottom: 10px;
+        }
+
+
+        h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(42px, 7vw, 65px);
+
+            font-weight: 600;
+
+            color: #d4af37;
+
+            letter-spacing: 1px;
+        }
+
+
+        .subtitle {
+
+            margin-top: 12px;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+            color: #d9c8a8;
+        }
+
+
+        .gold-line {
+
+            width: 70px;
+
+            height: 2px;
+
+            background: #d4af37;
+
+            margin: 18px auto 0;
+        }
+
+
+        /* =========================
+           YEAR FILTER
+        ========================= */
+
+        .filter-box {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 35px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .filter-box label {
+
+            color: #c9ad6b;
+
+            font-size: 13px;
+        }
+
+
+        #yearFilter {
+
+            background: rgba(18, 9, 9, 0.9);
+
+            color: #d4af37;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.5);
+
+            border-radius: 4px;
+
+            padding: 9px 15px;
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 13px;
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+
+        #yearFilter option {
+
+            background: #180c0c;
+
+            color: #d4af37;
+        }
+
+
+        /* =========================
+           GALLERY TITLE
+        ========================= */
+
+        .gallery-title {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .gallery-title span {
+
+            display: inline-block;
+
+            padding: 8px 22px;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.5);
+
+            border-radius: 4px;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            color: #d4af37;
+
+            background:
+                rgba(18, 9, 9, 0.75);
+        }
+
+
+        /* =========================
+           HORIZONTAL GALLERY
+        ========================= */
+
+        .gallery-wrapper {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+            overflow-y: hidden;
+
+            padding:
+                15px 5px 30px;
+
+            scroll-behavior: smooth;
+        }
+
+
+        .gallery-wrapper::-webkit-scrollbar {
+
+            height: 7px;
+        }
+
+
+        .gallery-wrapper::-webkit-scrollbar-track {
+
+            background:
+                rgba(212, 175, 55, 0.12);
+        }
+
+
+        .gallery-wrapper::-webkit-scrollbar-thumb {
+
+            background: #d4af37;
+
+            border-radius: 10px;
+        }
+
+
+        .gallery {
+
+            display: flex;
+
+            gap: 25px;
+
+            width: max-content;
+
+            align-items: flex-start;
+        }
+
+
+        /* =========================
+           PHOTO ITEM
+        ========================= */
+
+        .photo-item {
+
+            width: 330px;
+
+            flex-shrink: 0;
+
+            transition:
+                transform 0.4s ease;
+        }
+
+
+        .photo-item:nth-child(even) {
+
+            margin-top: 35px;
+        }
+
+
+        .photo-item:hover {
+
+            transform:
+                translateY(-10px);
+        }
+
+
+        /* =========================
+           PHOTO FRAME
+        ========================= */
+
+        .photo-frame {
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 6px;
+
+            background: #180c0c;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.4);
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.4);
+        }
+
+
+        .photo-frame img {
+
+            width: 100%;
+
+            height: auto;
+
+            display: block;
+
+            transition:
+                transform 0.6s ease;
+
+            cursor: pointer;
+        }
+
+
+        .photo-frame:hover img {
+
+            transform:
+                scale(1.04);
+        }
+
+
+        /* =========================
+           PHOTO NUMBER
+        ========================= */
+
+        .number {
+
+            position: absolute;
+
+            top: 12px;
+
+            left: 12px;
+
+            z-index: 2;
+
+            background:
+                rgba(18, 9, 9, 0.85);
+
+            color: #d4af37;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.5);
+
+            padding: 5px 9px;
+
+            border-radius: 4px;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================
+           VIEW OVERLAY
+        ========================= */
+
+        .view {
+
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(18, 9, 9, 0.45);
+
+            opacity: 0;
+
+            transition: 0.35s;
+
+            cursor: pointer;
+        }
+
+
+        .photo-frame:hover .view {
+
+            opacity: 1;
+        }
+
+
+        .view span {
+
+            background:
+                rgba(18, 9, 9, 0.92);
+
+            color: #d4af37;
+
+            border:
+                1px solid
+                #d4af37;
+
+            padding: 10px 18px;
+
+            border-radius: 4px;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================
+           CAPTION
+        ========================= */
+
+        .caption {
+
+            padding:
+                12px 4px;
+        }
+
+
+        .caption h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            color: #d4af37;
+        }
+
+
+        .caption p {
+
+            font-size: 10px;
+
+            margin-top: 5px;
+
+            color: #bfae8d;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        #loading,
+        #error,
+        #noPhotos {
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            font-size: 13px;
+
+            color: #c8b58f;
+        }
+
+
+        #error,
+        #noPhotos {
+
+            display: none;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(10, 5, 5, 0.96);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 1000;
+
+            padding: 25px;
+        }
+
+
+        .modal img {
+
+            max-width: 94vw;
+
+            max-height: 90vh;
+
+            width: auto;
+
+            height: auto;
+
+            object-fit: contain;
+
+            border-radius: 5px;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.5);
+        }
+
+
+        .close {
+
+            position: absolute;
+
+            top: 15px;
+
+            right: 28px;
+
+            color: #d4af37;
+
+            font-size: 40px;
+
+            font-family: Arial, sans-serif;
+
+            cursor: pointer;
+
+            z-index: 1001;
+        }
+
+
+        /* =========================
+           SCROLL HINT
+        ========================= */
+
+        .scroll-hint {
+
+            text-align: center;
+
+            margin-top: 12px;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            color: #a99570;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 38px 20px;
+
+            margin-top: 20px;
+
+            background:
+                rgba(10, 5, 5, 0.95);
+
+            border-top:
+                1px solid
+                rgba(212, 175, 55, 0.3);
+
+            color: #bfae8d;
+
+            font-size: 13px;
+
+            line-height: 1.9;
+        }
+
+
+        footer h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 23px;
+
+            color: #d4af37;
+
+            font-weight: 600;
+        }
+
+
+        footer a {
+
+            color: #d4af37;
+
+            text-decoration: none;
+        }
+
+
+        footer a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            nav {
+
+                padding: 17px 5%;
+            }
+
+
+            .logo {
+
+                font-size: 20px;
+            }
+
+
+            .home-btn {
+
+                padding: 8px 17px;
+            }
+
+
+            .container {
+
+                width: 92%;
+
+                padding:
+                    55px 0;
+            }
+
+
+            h1 {
+
+                font-size: 42px;
+            }
+
+
+            .photo-item {
+
+                width: 280px;
+            }
+
+
+            .photo-item:nth-child(even) {
+
+                margin-top: 20px;
+            }
+
+
+            .gallery-wrapper {
+
+                padding-left: 5px;
+
+                padding-right: 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            Sri Durgamamba Youth
+        </div>
+
+
+        <a
+            href="index.html"
+            class="home-btn"
+        >
+            Home
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- HEADER -->
+
+        <header>
+
+            <div class="brand">
+                Sri Durgamamba Youth
+            </div>
+
+
+            <h1>
+                Gallery
+            </h1>
+
+
+            <div class="subtitle">
+                Our Festival • Our Memories
+            </div>
+
+
+            <div class="gold-line"></div>
+
+        </header>
+
+
+        <!-- YEAR FILTER -->
+
+        <div class="filter-box">
+
+            <label for="yearFilter">
+                Festival Year
+            </label>
+
+
+            <select id="yearFilter">
+
+                <option value="all">
+                    All Years
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- GALLERY TITLE -->
+
+        <div class="gallery-title">
+
+            <span>
+                Festival Memories
+            </span>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div id="loading">
+            Loading photos...
+        </div>
+
+
+        <div id="error">
+            Unable to load photos.
+        </div>
+
+
+        <div id="noPhotos">
+            No photos added yet.
+        </div>
+
+
+        <!-- GALLERY -->
+
+        <div
+            class="gallery-wrapper"
+            id="galleryWrapper"
+            style="display:none;"
+        >
+
+            <div
+                class="gallery"
+                id="gallery"
+            >
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="scroll-hint"
+            id="scrollHint"
+            style="display:none;"
+        >
+
+            Scroll horizontally to explore
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <h3>
+            Sri Durgamamba Youth
+        </h3>
+
+
+        <p>
+
+            Instagram:
+
+            <a
+                href="https://www.instagram.com/durga_mamba_youth/"
+                target="_blank"
+            >
+                @durga_mamba_youth
+            </a>
+
+        </p>
+
+
+        <p>
+            Durga Nagar, Saripalli, Pendurthi
+        </p>
+
+
+        <p>
+            © Sri Durgamamba Youth
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         MODAL
+    ========================= -->
+
+    <div
+        class="modal"
+        id="photoModal"
+    >
+
+        <span
+            class="close"
+            id="closeModal"
+        >
+            ×
+        </span>
+
+
+        <img
+            id="modalImage"
+            src=""
+            alt="Festival Photo"
+        >
+
+    </div>
+
+
+    <script>
+
+        /* =========================
+           API
+        ========================= */
+
+        const API_URL =
+            "http://localhost:5000";
+
+
+        /* =========================
+           ELEMENTS
+        ========================= */
+
+        const loading =
+            document.getElementById(
+                "loading"
+            );
+
+
+        const error =
+            document.getElementById(
+                "error"
+            );
+
+
+        const noPhotos =
+            document.getElementById(
+                "noPhotos"
+            );
+
+
+        const wrapper =
+            document.getElementById(
+                "galleryWrapper"
+            );
+
+
+        const gallery =
+            document.getElementById(
+                "gallery"
+            );
+
+
+        const hint =
+            document.getElementById(
+                "scrollHint"
+            );
+
+
+        const yearFilter =
+            document.getElementById(
+                "yearFilter"
+            );
+
+
+        /* =========================
+           STORE ALL PHOTOS
+        ========================= */
+
+        let allPhotos = [];
+
+
+        /* =========================
+           DISPLAY PHOTOS
+        ========================= */
+
+        function displayPhotos(photos) {
+
+            gallery.innerHTML = "";
+
+
+            if (photos.length === 0) {
+
+                wrapper.style.display =
+                    "none";
+
+                hint.style.display =
+                    "none";
+
+                noPhotos.style.display =
+                    "block";
+
+                noPhotos.textContent =
+                    "No photos found for this festival year.";
+
+                return;
+            }
+
+
+            noPhotos.style.display =
+                "none";
+
+
+            wrapper.style.display =
+                "block";
+
+
+            hint.style.display =
+                "block";
+
+
+            photos.forEach(
+                function(photo, index) {
+
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "photo-item";
+
+
+                    /* =====================
+                       FRAME
+                    ===================== */
+
+                    const frame =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    frame.className =
+                        "photo-frame";
+
+
+                    /* =====================
+                       NUMBER
+                    ===================== */
+
+                    const number =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    number.className =
+                        "number";
+
+
+                    number.textContent =
+                        String(index + 1)
+                            .padStart(2, "0");
+
+
+                    /* =====================
+                       IMAGE
+                    ===================== */
+
+                    const image =
+                        document.createElement(
+                            "img"
+                        );
+
+
+                    image.src =
+                        API_URL +
+                        photo.imageUrl;
+
+
+                    image.alt =
+                        photo.title ||
+                        "Festival Photo";
+
+
+                    image.loading =
+                        "lazy";
+
+
+                    /* =====================
+                       VIEW
+                    ===================== */
+
+                    const view =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    view.className =
+                        "view";
+
+
+                    const viewText =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    viewText.textContent =
+                        "View Photo";
+
+
+                    view.appendChild(
+                        viewText
+                    );
+
+
+                    /* =====================
+                       OPEN MODAL
+                    ===================== */
+
+                    image.addEventListener(
+                        "click",
+                        function() {
+
+                            openModal(
+                                image.src
+                            );
+
+                        }
+                    );
+
+
+                    view.addEventListener(
+                        "click",
+                        function() {
+
+                            openModal(
+                                image.src
+                            );
+
+                        }
+                    );
+
+
+                    /* =====================
+                       FRAME
+                    ===================== */
+
+                    frame.appendChild(
+                        number
+                    );
+
+
+                    frame.appendChild(
+                        image
+                    );
+
+
+                    frame.appendChild(
+                        view
+                    );
+
+
+                    /* =====================
+                       CAPTION
+                    ===================== */
+
+                    const caption =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    caption.className =
+                        "caption";
+
+
+                    const title =
+                        document.createElement(
+                            "h3"
+                        );
+
+
+                    title.textContent =
+                        photo.title ||
+                        "Festival Memory";
+
+
+                    const details =
+                        document.createElement(
+                            "p"
+                        );
+
+
+                    let detailsText =
+                        photo.event ||
+                        "Ganesh Festival";
+
+
+                    if (photo.festivalYear) {
+
+                        detailsText +=
+                            "  •  " +
+                            photo.festivalYear;
+
+                    }
+
+
+                    details.textContent =
+                        detailsText;
+
+
+                    caption.appendChild(
+                        title
+                    );
+
+
+                    caption.appendChild(
+                        details
+                    );
+
+
+                    /* =====================
+                       COMPLETE ITEM
+                    ===================== */
+
+                    item.appendChild(
+                        frame
+                    );
+
+
+                    item.appendChild(
+                        caption
+                    );
+
+
+                    gallery.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           LOAD PHOTOS
+        ========================= */
+
+        async function loadPhotos() {
+
+            try {
+
+                loading.style.display =
+                    "block";
+
+
+                error.style.display =
+                    "none";
+
+
+                noPhotos.style.display =
+                    "none";
+
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/photos`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load photos"
+                    );
+
+                }
+
+
+                allPhotos =
+                    await response.json();
+
+
+                loading.style.display =
+                    "none";
+
+
+                /* =====================
+                   CREATE YEAR FILTER
+                ===================== */
+
+                const years =
+                    new Set();
+
+
+                allPhotos.forEach(
+                    function(photo) {
+
+                        if (
+                            photo.festivalYear
+                        ) {
+
+                            years.add(
+                                Number(
+                                    photo.festivalYear
+                                )
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                const sortedYears =
+                    Array.from(years)
+                        .sort(
+                            (a, b) =>
+                                b - a
+                        );
+
+
+                sortedYears.forEach(
+                    function(year) {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+
+                        option.value =
+                            year;
+
+
+                        option.textContent =
+                            year;
+
+
+                        yearFilter.appendChild(
+                            option
+                        );
+
+                    }
+                );
+
+
+                /* =====================
+                   URL YEAR
+                ===================== */
+
+                const urlParams =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+
+                const selectedYear =
+                    urlParams.get("year");
+
+
+                if (selectedYear) {
+
+                    yearFilter.value =
+                        selectedYear;
+
+
+                    const filtered =
+                        allPhotos.filter(
+                            function(photo) {
+
+                                return String(
+                                    photo.festivalYear
+                                ) ===
+                                String(
+                                    selectedYear
+                                );
+
+                            }
+                        );
+
+
+                    displayPhotos(
+                        filtered
+                    );
+
+                }
+
+                else {
+
+                    displayPhotos(
+                        allPhotos
+                    );
+
+                }
+
+            }
+
+
+            catch (err) {
+
+                console.error(err);
+
+
+                loading.style.display =
+                    "none";
+
+
+                error.style.display =
+                    "block";
+
+
+                wrapper.style.display =
+                    "none";
+
+
+                hint.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        /* =========================
+           YEAR FILTER CHANGE
+        ========================= */
+
+        yearFilter.addEventListener(
+            "change",
+            function() {
+
+                const selected =
+                    yearFilter.value;
+
+
+                if (selected === "all") {
+
+                    displayPhotos(
+                        allPhotos
+                    );
+
+
+                    window.history.replaceState(
+                        {},
+                        "",
+                        "gallery.html"
+                    );
+
+                    return;
+                }
+
+
+                const filtered =
+                    allPhotos.filter(
+                        function(photo) {
+
+                            return String(
+                                photo.festivalYear
+                            ) ===
+                            String(
+                                selected
+                            );
+
+                        }
+                    );
+
+
+                displayPhotos(
+                    filtered
+                );
+
+
+                window.history.replaceState(
+                    {},
+                    "",
+                    "gallery.html?year=" +
+                    selected
+                );
+
+            }
+        );
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        function openModal(src) {
+
+            const modal =
+                document.getElementById(
+                    "photoModal"
+                );
+
+
+            const modalImage =
+                document.getElementById(
+                    "modalImage"
+                );
+
+
+            modalImage.src =
+                src;
+
+
+            modal.style.display =
+                "flex";
+
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        function closeModal() {
+
+            const modal =
+                document.getElementById(
+                    "photoModal"
+                );
+
+
+            modal.style.display =
+                "none";
+
+
+            document.body.style.overflow =
+                "auto";
+
+        }
+
+
+        /* =========================
+           CLOSE BUTTON
+        ========================= */
+
+        document
+            .getElementById("closeModal")
+            .addEventListener(
+                "click",
+                closeModal
+            );
+
+
+        /* =========================
+           CLOSE OUTSIDE
+        ========================= */
+
+        document
+            .getElementById("photoModal")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === this
+                    ) {
+
+                        closeModal();
+
+                    }
+
+                }
+            );
+
+
+        /* =========================
+           ESCAPE KEY
+        ========================= */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closeModal();
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           START
+        ========================= */
+
+        loadPhotos();
+
+    </script>
+
+
+</body>
+
+</html>

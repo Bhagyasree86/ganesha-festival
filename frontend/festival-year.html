@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Festival Archive | Sri Durgamamba Youth</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: "Poppins", sans-serif;
+
+            min-height: 100vh;
+
+            color: #f5e6c8;
+
+            background:
+                linear-gradient(
+                    rgba(18, 9, 9, 0.88),
+                    rgba(18, 9, 9, 0.94)
+                ),
+                url("images/vinayaka.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-attachment: fixed;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 20px 6%;
+
+            background: rgba(18, 9, 9, 0.95);
+
+            border-bottom:
+                1px solid
+                rgba(212, 175, 55, 0.35);
+        }
+
+
+        .logo {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            color: #d4af37;
+        }
+
+
+        .home-btn {
+
+            text-decoration: none;
+
+            color: #120909;
+
+            background: #d4af37;
+
+            padding: 10px 23px;
+
+            border-radius: 4px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+
+        .home-btn:hover {
+
+            background: #f0cf70;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+
+            width: 88%;
+
+            max-width: 1150px;
+
+            margin: auto;
+
+            padding: 75px 0;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        .archive-header {
+
+            text-align: center;
+
+            margin-bottom: 55px;
+        }
+
+
+        .archive-header h1 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 52px;
+
+            color: #d4af37;
+
+            margin-bottom: 12px;
+
+            letter-spacing: 1px;
+        }
+
+
+        .archive-header p {
+
+            color: #d9c8a8;
+
+            font-size: 14px;
+
+            font-weight: 300;
+        }
+
+
+        .gold-line {
+
+            width: 70px;
+
+            height: 2px;
+
+            background: #d4af37;
+
+            margin: 18px auto 0;
+        }
+
+
+        /* ================= ARCHIVE GRID ================= */
+
+        .archive-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(250px, 1fr)
+                );
+
+            gap: 25px;
+        }
+
+
+        .archive-card {
+
+            background: rgba(18, 9, 9, 0.82);
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.4);
+
+            border-radius: 6px;
+
+            padding: 32px 25px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.35);
+
+            transition: 0.35s;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .archive-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 3px;
+
+            background: #d4af37;
+        }
+
+
+        .archive-card:hover {
+
+            transform: translateY(-6px);
+
+            border-color: #d4af37;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0, 0, 0, 0.5);
+        }
+
+
+        .archive-card h2 {
+
+            font-family: "Playfair Display", serif;
+
+            color: #d4af37;
+
+            font-size: 26px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .archive-card p {
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            color: #d9c8a8;
+
+            margin-bottom: 22px;
+        }
+
+
+        .archive-btn {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: transparent;
+
+            color: #d4af37;
+
+            padding: 9px 19px;
+
+            border:
+                1px solid
+                #d4af37;
+
+            border-radius: 4px;
+
+            font-size: 12px;
+
+            transition: 0.3s;
+
+            border: 1px solid #d4af37;
+
+            cursor: pointer;
+
+            font-family: "Poppins", sans-serif;
+        }
+
+
+        .archive-btn:hover {
+
+            background: #d4af37;
+
+            color: #120909;
+        }
+
+
+        /* ================= EVENTS ================= */
+
+        .events-section {
+
+            margin-top: 65px;
+        }
+
+
+        .section-title {
+
+            font-family: "Playfair Display", serif;
+
+            text-align: center;
+
+            color: #d4af37;
+
+            font-size: 36px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .section-line {
+
+            width: 60px;
+
+            height: 2px;
+
+            background: #d4af37;
+
+            margin: -15px auto 28px;
+        }
+
+
+        #eventsContainer {
+
+            display: grid;
+
+            gap: 18px;
+        }
+
+
+        .event-card {
+
+            background: rgba(18, 9, 9, 0.82);
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.3);
+
+            border-left:
+                4px solid
+                #d4af37;
+
+            border-radius: 5px;
+
+            padding: 23px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.3);
+        }
+
+
+        .event-card h3 {
+
+            font-family: "Playfair Display", serif;
+
+            color: #d4af37;
+
+            font-size: 22px;
+
+            margin-bottom: 9px;
+        }
+
+
+        .event-info {
+
+            font-size: 12px;
+
+            color: #c8b58f;
+
+            margin-bottom: 9px;
+        }
+
+
+        .event-description {
+
+            font-size: 13px;
+
+            color: #d9c8a8;
+
+            line-height: 1.7;
+        }
+
+
+        /* ================= MEMORIES ================= */
+
+        .photo-section {
+
+            margin-top: 65px;
+        }
+
+
+        #photoContainer {
+
+            display: flex;
+
+            gap: 18px;
+
+            overflow-x: auto;
+
+            padding: 10px 3px 20px;
+
+            scrollbar-width: thin;
+        }
+
+
+        .photo-card {
+
+            min-width: 270px;
+
+            background: rgba(18, 9, 9, 0.88);
+
+            padding: 10px;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.35);
+
+            border-radius: 6px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.35);
+        }
+
+
+        .photo-card img {
+
+            width: 100%;
+
+            height: 210px;
+
+            object-fit: cover;
+
+            border-radius: 4px;
+
+            display: block;
+        }
+
+
+        .photo-card p {
+
+            font-size: 12px;
+
+            color: #d9c8a8;
+
+            padding: 10px 4px 3px;
+        }
+
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+
+            text-align: center;
+
+            padding: 32px;
+
+            background: rgba(18, 9, 9, 0.82);
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.3);
+
+            border-radius: 6px;
+
+            color: #c8b58f;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 38px 20px;
+
+            margin-top: 40px;
+
+            background: rgba(10, 5, 5, 0.95);
+
+            border-top:
+                1px solid
+                rgba(212, 175, 55, 0.3);
+
+            color: #bfae8d;
+
+            font-size: 13px;
+
+            line-height: 1.9;
+        }
+
+
+        footer a {
+
+            color: #d4af37;
+
+            text-decoration: none;
+        }
+
+
+        footer a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width: 600px) {
+
+            nav {
+
+                padding: 17px 5%;
+            }
+
+
+            .logo {
+
+                font-size: 20px;
+            }
+
+
+            .home-btn {
+
+                padding: 8px 17px;
+            }
+
+
+            .container {
+
+                width: 90%;
+
+                padding: 55px 0;
+            }
+
+
+            .archive-header h1 {
+
+                font-size: 38px;
+            }
+
+
+            .section-title {
+
+                font-size: 30px;
+            }
+
+
+            .archive-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .photo-card {
+
+                min-width: 250px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            Sri Durgamamba Youth
+        </div>
+
+
+        <a
+            href="index.html"
+            class="home-btn"
+        >
+            Home
+        </a>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <!-- YEAR HEADER -->
+
+        <div class="archive-header">
+
+            <h1 id="yearTitle">
+                Festival Archive
+            </h1>
+
+            <p>
+                Celebrations, memories and moments
+                from this festival year.
+            </p>
+
+            <div class="gold-line"></div>
+
+        </div>
+
+
+        <!-- ================= ARCHIVE MODULES ================= -->
+
+        <div class="archive-grid">
+
+
+            <!-- EVENTS -->
+
+            <div class="archive-card">
+
+                <h2>
+                    Events
+                </h2>
+
+                <p>
+                    View the events and schedule
+                    from this festival year.
+                </p>
+
+                <a
+                    id="eventsLink"
+                    href="events.html"
+                    class="archive-btn"
+                >
+                    View Events
+                </a>
+
+            </div>
+
+
+            <!-- GALLERY -->
+
+            <div class="archive-card">
+
+                <h2>
+                    Gallery
+                </h2>
+
+                <p>
+                    Explore photos and memorable
+                    moments from this year.
+                </p>
+
+                <a
+                    id="galleryLink"
+                    href="gallery.html"
+                    class="archive-btn"
+                >
+                    View Gallery
+                </a>
+
+            </div>
+
+
+            <!-- VIDEOS -->
+
+            <div class="archive-card">
+
+                <h2>
+                    Videos
+                </h2>
+
+                <p>
+                    View festival videos.
+                </p>
+
+                <button
+                    class="archive-btn"
+                    id="videosButton"
+                >
+                    View Videos
+                </button>
+
+            </div>
+
+
+            <!-- LADDU AUCTION -->
+
+            <div class="archive-card">
+
+                <h2>
+                    Laddu Auction
+                </h2>
+
+                <p>
+                    View auction details
+                    and winning bids.
+                </p>
+
+                <button
+                    class="archive-btn"
+                    id="auctionButton"
+                >
+                    View Auction
+                </button>
+
+            </div>
+
+
+            <!-- NIMAJJANAM -->
+
+            <div class="archive-card">
+
+                <h2>
+                    Nimajjanam
+                </h2>
+
+                <p>
+                    View Nimajjanam details.
+                </p>
+
+                <button
+                    class="archive-btn"
+                    id="nimajjanamButton"
+                >
+                    View Details
+                </button>
+
+            </div>
+
+
+            <!-- SPONSORS -->
+
+            <div class="archive-card">
+
+                <h2>
+                    Sponsors
+                </h2>
+
+                <p>
+                    View sponsors for this
+                    festival year.
+                </p>
+
+                <button
+                    class="archive-btn"
+                    id="sponsorsButton"
+                >
+                    View Sponsors
+                </button>
+
+            </div>
+
+
+            <!-- COMMITTEE -->
+
+            <div class="archive-card">
+
+                <h2>
+                    Committee
+                </h2>
+
+                <p>
+                    View committee members
+                    for this festival year.
+                </p>
+
+                <button
+                    class="archive-btn"
+                    id="committeeButton"
+                >
+                    View Committee
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= EVENTS ================= -->
+
+        <section
+            class="events-section"
+            id="events"
+        >
+
+            <h2 class="section-title">
+                Events
+            </h2>
+
+            <div class="section-line"></div>
+
+
+            <div id="eventsContainer">
+
+                <div class="empty">
+                    Loading events...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MEMORIES ================= -->
+
+        <section class="photo-section">
+
+            <h2 class="section-title">
+                Memories
+            </h2>
+
+            <div class="section-line"></div>
+
+
+            <div id="photoContainer">
+
+                <div class="empty">
+                    Loading photos...
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © Sri Durgamamba Youth
+        </p>
+
+
+        <p>
+
+            Instagram:
+
+            <a
+                href="https://www.instagram.com/durga_mamba_youth/"
+                target="_blank"
+            >
+                @durga_mamba_youth
+            </a>
+
+        </p>
+
+
+        <p>
+            Durga Nagar, Saripalli, Pendurthi
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        /* ================= API ================= */
+
+        const API_URL =
+            "http://localhost:5000";
+
+
+        /* ================= GET YEAR ================= */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const festivalYear =
+            params.get("year");
+
+
+        /* ================= ELEMENTS ================= */
+
+        const yearTitle =
+            document.getElementById(
+                "yearTitle"
+            );
+
+
+        const eventsLink =
+            document.getElementById(
+                "eventsLink"
+            );
+
+
+        const galleryLink =
+            document.getElementById(
+                "galleryLink"
+            );
+
+
+        const videosButton =
+            document.getElementById(
+                "videosButton"
+            );
+
+
+        const auctionButton =
+            document.getElementById(
+                "auctionButton"
+            );
+
+
+        const nimajjanamButton =
+            document.getElementById(
+                "nimajjanamButton"
+            );
+
+
+        const sponsorsButton =
+            document.getElementById(
+                "sponsorsButton"
+            );
+
+
+        const committeeButton =
+            document.getElementById(
+                "committeeButton"
+            );
+
+
+        /* ================= SET YEAR ================= */
+
+        if (!festivalYear) {
+
+            yearTitle.textContent =
+                "Festival Archive";
+
+        } else {
+
+            yearTitle.textContent =
+                `${festivalYear} Festival`;
+
+        }
+
+
+        /* ================= YEAR LINKS ================= */
+
+        if (festivalYear) {
+
+            eventsLink.href =
+                "events.html?year=" +
+                festivalYear;
+
+
+            galleryLink.href =
+                "gallery.html?year=" +
+                festivalYear;
+
+
+            videosButton.onclick =
+                function() {
+
+                    window.location.href =
+                        "videos.html?year=" +
+                        festivalYear;
+
+                };
+
+
+            auctionButton.onclick =
+                function() {
+
+                    window.location.href =
+                        "auction.html?year=" +
+                        festivalYear;
+
+                };
+
+
+            nimajjanamButton.onclick =
+                function() {
+
+                    window.location.href =
+                        "nimajjanam.html?year=" +
+                        festivalYear;
+
+                };
+
+
+            sponsorsButton.onclick =
+                function() {
+
+                    window.location.href =
+                        "sponsors.html?year=" +
+                        festivalYear;
+
+                };
+
+
+            committeeButton.onclick =
+                function() {
+
+                    window.location.href =
+                        "committee.html?year=" +
+                        festivalYear;
+
+                };
+
+        }
+
+
+        /* ================= LOAD EVENTS ================= */
+
+        async function loadEvents() {
+
+            const container =
+                document.getElementById(
+                    "eventsContainer"
+                );
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/events?festivalYear=${festivalYear}`
+                    );
+
+
+                const events =
+                    await response.json();
+
+
+                if (!events.length) {
+
+                    container.innerHTML = `
+
+                        <div class="empty">
+
+                            No events have been added
+                            for this festival year yet.
+
+                        </div>
+
+                    `;
+
+                    return;
+                }
+
+
+                container.innerHTML = "";
+
+
+                events.forEach(event => {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "event-card";
+
+
+                    const eventDate =
+                        new Date(
+                            event.date
+                        );
+
+
+                    const formattedDate =
+                        eventDate.toLocaleDateString(
+                            "en-IN",
+                            {
+                                day: "2-digit",
+                                month: "long",
+                                year: "numeric"
+                            }
+                        );
+
+
+                    card.innerHTML = `
+
+                        <h3>
+                            ${event.title}
+                        </h3>
+
+                        <div class="event-info">
+
+                            ${formattedDate}
+
+                            &nbsp; | &nbsp;
+
+                            ${event.time}
+
+                        </div>
+
+                        <div class="event-description">
+
+                            ${event.description || ""}
+
+                        </div>
+
+                    `;
+
+
+                    container.appendChild(
+                        card
+                    );
+
+                });
+
+            }
+
+
+            catch (error) {
+
+                console.error(error);
+
+
+                container.innerHTML = `
+
+                    <div class="empty">
+
+                        Unable to load events.
+
+                        <br>
+
+                        Please make sure the
+                        backend server is running.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* ================= LOAD PHOTOS ================= */
+
+        async function loadPhotos() {
+
+            const container =
+                document.getElementById(
+                    "photoContainer"
+                );
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/photos`
+                    );
+
+
+                const photos =
+                    await response.json();
+
+
+                const yearPhotos =
+                    photos.filter(
+                        photo =>
+                            Number(
+                                photo.festivalYear
+                            ) ===
+                            Number(
+                                festivalYear
+                            )
+                    );
+
+
+                if (!yearPhotos.length) {
+
+                    container.innerHTML = `
+
+                        <div class="empty">
+
+                            No photos have been added
+                            for this festival year yet.
+
+                        </div>
+
+                    `;
+
+                    return;
+                }
+
+
+                container.innerHTML = "";
+
+
+                yearPhotos.forEach(photo => {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "photo-card";
+
+
+                    card.innerHTML = `
+
+                        <img
+                            src="${API_URL}${photo.imageUrl}"
+                            alt="${photo.title || "Festival photo"}"
+                        >
+
+                        <p>
+                            ${photo.title || ""}
+                        </p>
+
+                    `;
+
+
+                    container.appendChild(
+                        card
+                    );
+
+                });
+
+            }
+
+
+            catch (error) {
+
+                console.error(error);
+
+
+                container.innerHTML = `
+
+                    <div class="empty">
+
+                        Unable to load photos.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* ================= START ================= */
+
+        if (festivalYear) {
+
+            loadEvents();
+
+            loadPhotos();
+
+        }
+
+        else {
+
+            document.getElementById(
+                "eventsContainer"
+            ).innerHTML = `
+
+                <div class="empty">
+
+                    Please select a festival year.
+
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "photoContainer"
+            ).innerHTML = `
+
+                <div class="empty">
+
+                    Please select a festival year.
+
+                </div>
+
+            `;
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

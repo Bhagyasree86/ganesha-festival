@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find Us | Sri Durgamamba Youth</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #120909;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            width: 100%;
+            padding: 22px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            background: rgba(18, 9, 9, 0.95);
+            border-bottom: 1px solid rgba(232, 200, 120, 0.35);
+        }
+
+        .logo {
+            color: #e8c878;
+            font-family: "Playfair Display", serif;
+            font-size: 21px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: #e8c878;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            min-height: 45vh;
+            position: relative;
+
+            background-image:
+                linear-gradient(
+                    rgba(20, 8, 8, 0.48),
+                    rgba(20, 8, 8, 0.58)
+                ),
+                url("images/vinayaka.jpg");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            border-bottom: 1px solid rgba(232, 200, 120, 0.35);
+        }
+
+        .hero-content {
+            padding: 50px 20px;
+        }
+
+        .small-title {
+            color: #e8c878;
+            font-size: 13px;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 60px;
+            color: #f4d58a;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #f5eeee;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+
+        /* LOCATION SECTION */
+
+        .location-section {
+            padding: 75px 7%;
+            background: #160b0b;
+        }
+
+        .location-container {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+
+            gap: 45px;
+            align-items: stretch;
+        }
+
+
+        /* LOCATION CARD */
+
+        .location-card {
+            padding: 45px 35px;
+
+            border: 1px solid rgba(232, 200, 120, 0.5);
+
+            background: rgba(255, 255, 255, 0.035);
+
+            border-radius: 6px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .location-label {
+            color: #e8c878;
+            font-size: 12px;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .location-card h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 38px;
+            color: #f4d58a;
+            margin-bottom: 25px;
+        }
+
+        .address {
+            color: #eee;
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .address strong {
+            color: #e8c878;
+        }
+
+
+        /* MAP BUTTON */
+
+        .location-btn {
+            display: inline-block;
+
+            width: fit-content;
+
+            padding: 13px 28px;
+
+            background: #e8c878;
+
+            color: #211010;
+
+            text-decoration: none;
+
+            border-radius: 30px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .location-btn:hover {
+            background: #f4d58a;
+            transform: translateY(-2px);
+        }
+
+
+        /* MAP */
+
+        .map-container {
+            min-height: 450px;
+
+            border: 1px solid rgba(232, 200, 120, 0.5);
+
+            border-radius: 6px;
+
+            overflow: hidden;
+
+            background: #0e0707;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
+
+            border: 0;
+        }
+
+
+        /* EXTRA LOCATION INFO */
+
+        .location-info {
+            max-width: 1100px;
+            margin: 50px auto 0;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .info-box {
+            padding: 25px;
+
+            text-align: center;
+
+            border: 1px solid rgba(232, 200, 120, 0.3);
+
+            background: rgba(255, 255, 255, 0.025);
+
+            border-radius: 5px;
+        }
+
+        .info-box h3 {
+            font-family: "Playfair Display", serif;
+            color: #e8c878;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #ddd;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            padding: 45px 20px 30px;
+
+            text-align: center;
+
+            border-top: 1px solid rgba(232, 200, 120, 0.35);
+
+            background: #0d0606;
+        }
+
+        .footer-title {
+            font-family: "Playfair Display", serif;
+            color: #e8c878;
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .footer-instagram {
+            margin-bottom: 10px;
+        }
+
+        .footer-instagram a {
+            color: #e8c878;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-address {
+            color: #ccc;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            color: #777;
+            font-size: 12px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .nav-links {
+                gap: 12px 18px;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .location-container {
+                grid-template-columns: 1fr;
+            }
+
+            .location-info {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                min-height: 350px;
+            }
+
+            .map-container iframe {
+                min-height: 350px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .small-title {
+                font-size: 10px;
+                letter-spacing: 3px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .location-section {
+                padding: 50px 20px;
+            }
+
+            .location-card {
+                padding: 30px 25px;
+            }
+
+            .location-card h2 {
+                font-size: 30px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            SRI DURGAMAMBA YOUTH
+        </a>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+
+            <li>
+                <a href="about.html">About</a>
+            </li>
+
+            <li>
+                <a href="events.html">Events</a>
+            </li>
+
+            <li>
+                <a href="festival-years.html">Festival Years</a>
+            </li>
+
+            <li>
+                <a href="gallery.html">Gallery</a>
+            </li>
+
+            <li>
+                <a href="videos.html">Videos</a>
+            </li>
+
+            <li>
+                <a href="auction.html">Laddu Auction</a>
+            </li>
+
+            <li>
+                <a href="nimajjanam.html">Nimajjanam</a>
+            </li>
+
+            <li>
+                <a href="sponsors.html">Sponsors</a>
+            </li>
+
+            <li>
+                <a href="committee.html">Committee</a>
+            </li>
+
+            <li>
+                <a href="find-us.html" class="active">Find Us</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                SRI DURGAMAMBA YOUTH
+            </div>
+
+            <h1>FIND US</h1>
+
+            <p>
+                Visit the place where our celebrations,
+                memories and community moments come together.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- LOCATION -->
+
+    <section class="location-section">
+
+        <div class="location-container">
+
+
+            <!-- LOCATION DETAILS -->
+
+            <div class="location-card">
+
+                <div class="location-label">
+                    OUR LOCATION
+                </div>
+
+                <h2>
+                    Sri Durgamamba Youth
+                </h2>
+
+                <p class="address">
+
+                    <strong>Address</strong><br>
+
+                    Durga Nagar, Saripalli,<br>
+                    Pendurthi, Visakhapatnam,<br>
+                    Andhra Pradesh, India
+
+                </p>
+
+
+                <a
+                    href="https://maps.app.goo.gl/RjuCo9UVsfwZjLX26"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="location-btn"
+                >
+                    Open Location
+                </a>
+
+            </div>
+
+
+
+            <!-- GOOGLE MAP -->
+
+            <div class="map-container">
+
+                <iframe
+                    src="https://www.google.com/maps?q=17.8341389,83.2009048&output=embed"
+                    allowfullscreen
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- INFORMATION -->
+
+        <div class="location-info">
+
+            <div class="info-box">
+
+                <h3>Location</h3>
+
+                <p>
+                    Durga Nagar, Saripalli,
+                    Pendurthi, Visakhapatnam
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h3>Google Maps</h3>
+
+                <p>
+                    Use the Open Location button
+                    for directions and navigation.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h3>Community</h3>
+
+                <p>
+                    Sri Durgamamba Youth
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-title">
+            SRI DURGAMAMBA YOUTH
+        </div>
+
+        <div class="footer-instagram">
+
+            <a
+                href="https://www.instagram.com/durga_mamba_youth/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                @durga_mamba_youth
+            </a>
+
+        </div>
+
+        <div class="footer-address">
+            Durga Nagar, Saripalli, Pendurthi
+        </div>
+
+        <div class="copyright">
+            © Sri Durgamamba Youth
+        </div>
+
+    </footer>
+
+
+</body>
+</html>

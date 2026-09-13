@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Laddu Auction Management | Sri Durgamamba Youth
+    </title>
+
+
+    <!-- GOOGLE FONTS -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* ==============================
+           BODY
+        ============================== */
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            color: #f5f1e8;
+
+            background:
+
+                linear-gradient(
+                    rgba(18, 9, 9, 0.92),
+                    rgba(18, 9, 9, 0.97)
+                ),
+
+                url("images/vinayaka.jpg")
+                center / cover fixed no-repeat;
+
+        }
+
+
+        /* ==============================
+           NAVBAR
+        ============================== */
+
+        nav {
+
+            width: 100%;
+
+            padding:
+                18px 5%;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            background:
+                rgba(
+                    12,
+                    6,
+                    6,
+                    0.96
+                );
+
+            border-bottom:
+                1px solid #6f5720;
+
+        }
+
+
+        .logo {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                23px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                1px;
+
+            color:
+                #d4af37;
+
+        }
+
+
+        .nav-btn {
+
+            text-decoration:
+                none;
+
+            color:
+                #d4af37;
+
+            border:
+                1px solid #8b712b;
+
+            padding:
+                10px 20px;
+
+            border-radius:
+                7px;
+
+            font-size:
+                13px;
+
+            transition:
+                0.3s;
+
+        }
+
+
+        .nav-btn:hover {
+
+            background:
+                #d4af37;
+
+            color:
+                #15100a;
+
+        }
+
+
+        /* ==============================
+           MAIN CONTAINER
+        ============================== */
+
+        .container {
+
+            width:
+                90%;
+
+            max-width:
+                950px;
+
+            margin:
+                55px auto;
+
+        }
+
+
+        /* ==============================
+           PAGE HEADING
+        ============================== */
+
+        .page-heading {
+
+            text-align:
+                center;
+
+            margin-bottom:
+                35px;
+
+        }
+
+
+        .page-heading h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                45px;
+
+            color:
+                #d4af37;
+
+            letter-spacing:
+                1px;
+
+            margin-bottom:
+                10px;
+
+        }
+
+
+        .page-heading p {
+
+            color:
+                #cfc6b6;
+
+            font-size:
+                14px;
+
+        }
+
+
+        /* ==============================
+           CARDS
+        ============================== */
+
+        .card {
+
+            position:
+                relative;
+
+            background:
+                rgba(
+                    25,
+                    12,
+                    12,
+                    0.96
+                );
+
+            border:
+                1px solid #6f5720;
+
+            border-radius:
+                17px;
+
+            padding:
+                28px;
+
+            margin-bottom:
+                28px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.45
+                );
+
+        }
+
+
+        .card::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            width:
+                100%;
+
+            height:
+                3px;
+
+            background:
+                #d4af37;
+
+            border-radius:
+                17px 17px 0 0;
+
+        }
+
+
+        .card h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color:
+                #d4af37;
+
+            font-size:
+                28px;
+
+            margin-bottom:
+                22px;
+
+        }
+
+
+        /* ==============================
+           FORM
+        ============================== */
+
+        label {
+
+            display:
+                block;
+
+            margin-top:
+                16px;
+
+            margin-bottom:
+                7px;
+
+            color:
+                #d4af37;
+
+            font-size:
+                13px;
+
+            font-weight:
+                600;
+
+        }
+
+
+        input,
+        textarea {
+
+            width:
+                100%;
+
+            padding:
+                13px 14px;
+
+            border:
+                1px solid #6f5720;
+
+            border-radius:
+                7px;
+
+            background:
+                #160b0b;
+
+            color:
+                #f5f1e8;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size:
+                14px;
+
+            outline:
+                none;
+
+        }
+
+
+        input:focus,
+        textarea:focus {
+
+            border-color:
+                #d4af37;
+
+        }
+
+
+        input::placeholder,
+        textarea::placeholder {
+
+            color:
+                #77736b;
+
+        }
+
+
+        /* FILE INPUT */
+
+        input[type="file"] {
+
+            padding:
+                10px;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        input[type="file"]::file-selector-button {
+
+            margin-right:
+                12px;
+
+            padding:
+                8px 14px;
+
+            border:
+                1px solid #8b712b;
+
+            border-radius:
+                6px;
+
+            background:
+                #33261a;
+
+            color:
+                #d4af37;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        input[type="file"]::file-selector-button:hover {
+
+            background:
+                #d4af37;
+
+            color:
+                #15100a;
+
+        }
+
+
+        textarea {
+
+            min-height:
+                100px;
+
+            resize:
+                vertical;
+
+        }
+
+
+        /* ==============================
+           ADD BUTTON
+        ============================== */
+
+        .submit-btn {
+
+            margin-top:
+                22px;
+
+            padding:
+                12px 25px;
+
+            border:
+                1px solid #d4af37;
+
+            border-radius:
+                7px;
+
+            background:
+                #d4af37;
+
+            color:
+                #15100a;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.3s;
+
+        }
+
+
+        .submit-btn:hover {
+
+            background:
+                #f0d878;
+
+        }
+
+
+        /* ==============================
+           MESSAGE
+        ============================== */
+
+        .message {
+
+            margin-top:
+                15px;
+
+            color:
+                #d4af37;
+
+            font-size:
+                13px;
+
+            font-weight:
+                500;
+
+        }
+
+
+        /* ==============================
+           AUCTION ITEM
+        ============================== */
+
+        .auction-item {
+
+            padding:
+                22px;
+
+            margin-top:
+                18px;
+
+            background:
+                rgba(
+                    18,
+                    9,
+                    9,
+                    0.85
+                );
+
+            border:
+                1px solid #59471d;
+
+            border-radius:
+                12px;
+
+            transition:
+                0.3s;
+
+        }
+
+
+        .auction-item:hover {
+
+            border-color:
+                #d4af37;
+
+            transform:
+                translateY(-3px);
+
+        }
+
+
+        .auction-item h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color:
+                #d4af37;
+
+            font-size:
+                23px;
+
+            margin-bottom:
+                14px;
+
+        }
+
+
+        .auction-item p {
+
+            color:
+                #cfc6b6;
+
+            font-size:
+                13px;
+
+            line-height:
+                1.8;
+
+            margin:
+                5px 0;
+
+        }
+
+
+        .auction-item strong {
+
+            color:
+                #d4af37;
+
+        }
+
+
+        /* WINNER PHOTO */
+
+        .winner-photo {
+
+            width:
+                220px;
+
+            max-height:
+                280px;
+
+            object-fit:
+                contain;
+
+            display:
+                block;
+
+            margin:
+                18px 0;
+
+            border:
+                1px solid #6f5720;
+
+            border-radius:
+                10px;
+
+            background:
+                #0d0606;
+
+        }
+
+
+        /* ==============================
+           DELETE
+        ============================== */
+
+        .delete-btn {
+
+            margin-top:
+                15px;
+
+            padding:
+                9px 18px;
+
+            border:
+                1px solid #71333b;
+
+            border-radius:
+                7px;
+
+            background:
+                #5a2028;
+
+            color:
+                #f5e9e9;
+
+            cursor:
+                pointer;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size:
+                12px;
+
+            font-weight:
+                600;
+
+            transition:
+                0.3s;
+
+        }
+
+
+        .delete-btn:hover {
+
+            background:
+                #7c2d38;
+
+        }
+
+
+        /* ==============================
+           EMPTY
+        ============================== */
+
+        .empty {
+
+            text-align:
+                center;
+
+            padding:
+                35px 20px;
+
+            color:
+                #aaa294;
+
+            font-size:
+                14px;
+
+        }
+
+
+        /* ==============================
+           BACK BUTTON
+        ============================== */
+
+        .bottom-actions {
+
+            text-align:
+                center;
+
+            margin-top:
+                35px;
+
+        }
+
+
+        .back-btn {
+
+            display:
+                inline-block;
+
+            padding:
+                12px 24px;
+
+            border:
+                1px solid #6f5720;
+
+            border-radius:
+                7px;
+
+            background:
+                #33261a;
+
+            color:
+                #d4af37;
+
+            text-decoration:
+                none;
+
+            font-size:
+                13px;
+
+            font-weight:
+                600;
+
+            transition:
+                0.3s;
+
+        }
+
+
+        .back-btn:hover {
+
+            background:
+                #d4af37;
+
+            color:
+                #15100a;
+
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+
+            margin-top:
+                70px;
+
+            padding:
+                35px 20px;
+
+            text-align:
+                center;
+
+            background:
+                #0d0606;
+
+            border-top:
+                1px solid #6f5720;
+
+            color:
+                #aaa294;
+
+            font-size:
+                13px;
+
+            line-height:
+                1.8;
+
+        }
+
+
+        .footer-title {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color:
+                #d4af37;
+
+            font-size:
+                21px;
+
+            letter-spacing:
+                1px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .footer-instagram {
+
+            color:
+                #d4af37;
+
+        }
+
+
+        .copyright {
+
+            color:
+                #77736b;
+
+            font-size:
+                12px;
+
+            margin-top:
+                10px;
+
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 600px) {
+
+            .container {
+
+                width:
+                    94%;
+
+                margin:
+                    40px auto;
+
+            }
+
+
+            .page-heading h1 {
+
+                font-size:
+                    34px;
+
+            }
+
+
+            .card {
+
+                padding:
+                    21px;
+
+            }
+
+
+            .card h2 {
+
+                font-size:
+                    24px;
+
+            }
+
+
+            .logo {
+
+                font-size:
+                    18px;
+
+            }
+
+
+            .nav-btn {
+
+                padding:
+                    8px 13px;
+
+                font-size:
+                    11px;
+
+            }
+
+
+            .winner-photo {
+
+                width:
+                    100%;
+
+                max-width:
+                    300px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+
+<nav>
+
+    <div class="logo">
+
+        Sri Durgamamba Youth
+
+    </div>
+
+
+    <a
+        href="admin.html"
+        class="nav-btn">
+
+        Admin Dashboard
+
+    </a>
+
+</nav>
+
+
+
+<!-- =====================================
+     MAIN
+===================================== -->
+
+<div class="container">
+
+
+    <!-- PAGE HEADING -->
+
+    <div class="page-heading">
+
+        <h1>
+            Laddu Auction Management
+        </h1>
+
+        <p>
+            Committee Member Panel
+        </p>
+
+    </div>
+
+
+
+    <!-- =====================================
+         ADD AUCTION
+    ===================================== -->
+
+    <div class="card">
+
+
+        <h2>
+            Add Auction
+        </h2>
+
+
+        <form id="auctionForm">
+
+
+            <label for="festivalYear">
+                Festival Year
+            </label>
+
+            <input
+                type="number"
+                id="festivalYear"
+                placeholder="Enter festival year"
+                required
+            >
+
+
+            <label for="winnerName">
+                Winner Name
+            </label>
+
+            <input
+                type="text"
+                id="winnerName"
+                placeholder="Enter winner name"
+                required
+            >
+
+
+            <label for="winningBid">
+                Winning Bid
+            </label>
+
+            <input
+                type="number"
+                id="winningBid"
+                placeholder="Enter winning bid amount"
+                min="1"
+                required
+            >
+
+
+            <label for="auctionDate">
+                Auction Date
+            </label>
+
+            <input
+                type="date"
+                id="auctionDate"
+                required
+            >
+
+
+            <label for="description">
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                placeholder="Enter auction details"
+            ></textarea>
+
+
+            <!-- DIRECT PHOTO UPLOAD -->
+
+            <label for="photo">
+                Winner Photo
+            </label>
+
+            <input
+                type="file"
+                id="photo"
+                accept="image/jpeg,image/png,image/jpg,image/webp"
+            >
+
+
+            <button
+                type="submit"
+                class="submit-btn">
+
+                Add Auction
+
+            </button>
+
+
+            <div
+                id="message"
+                class="message">
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         EXISTING AUCTIONS
+    ===================================== -->
+
+    <div class="card">
+
+
+        <h2>
+            Existing Auctions
+        </h2>
+
+
+        <div id="auctionList">
+
+            <div class="empty">
+
+                Loading auctions...
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- BACK -->
+
+    <div class="bottom-actions">
+
+        <a
+            href="admin.html"
+            class="back-btn">
+
+            ← Back to Admin Dashboard
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer>
+
+
+    <div class="footer-title">
+
+        SRI DURGAMAMBA YOUTH
+
+    </div>
+
+
+    <div class="footer-instagram">
+
+        @durga_mamba_youth
+
+    </div>
+
+
+    <div>
+
+        Durga Nagar, Saripalli, Pendurthi
+
+    </div>
+
+
+    <div class="copyright">
+
+        © Sri Durgamamba Youth
+
+    </div>
+
+
+</footer>
+
+
+
+<script>
+
+
+const API_URL =
+    "http://localhost:5000/api/auctions";
+
+
+const SERVER_URL =
+    "http://localhost:5000";
+
+
+const token =
+    localStorage.getItem("token");
+
+
+// ==================================
+// CHECK LOGIN
+// ==================================
+
+if (!token) {
+
+    alert(
+        "Please login first."
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+// ==================================
+// ADD AUCTION
+// ==================================
+
+document
+    .getElementById("auctionForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const festivalYear =
+                document
+                    .getElementById(
+                        "festivalYear"
+                    )
+                    .value;
+
+
+            const winnerName =
+                document
+                    .getElementById(
+                        "winnerName"
+                    )
+                    .value;
+
+
+            const winningBid =
+                document
+                    .getElementById(
+                        "winningBid"
+                    )
+                    .value;
+
+
+            const auctionDate =
+                document
+                    .getElementById(
+                        "auctionDate"
+                    )
+                    .value;
+
+
+            const description =
+                document
+                    .getElementById(
+                        "description"
+                    )
+                    .value;
+
+
+            const photo =
+                document
+                    .getElementById(
+                        "photo"
+                    )
+                    .files[0];
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                );
+
+
+            // CREATE FORMDATA
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "festivalYear",
+                festivalYear
+            );
+
+
+            formData.append(
+                "winnerName",
+                winnerName
+            );
+
+
+            formData.append(
+                "winningBid",
+                winningBid
+            );
+
+
+            formData.append(
+                "auctionDate",
+                auctionDate
+            );
+
+
+            formData.append(
+                "description",
+                description
+            );
+
+
+            if (photo) {
+
+                formData.append(
+                    "photo",
+                    photo
+                );
+
+            }
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        API_URL,
+                        {
+
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "Authorization":
+                                    "Bearer " +
+                                    token
+
+                            },
+
+                            body:
+                                formData
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    message.textContent =
+                        data.message ||
+                        "Failed to add auction.";
+
+                    return;
+
+                }
+
+
+                message.textContent =
+                    "Auction added successfully!";
+
+
+                document
+                    .getElementById(
+                        "auctionForm"
+                    )
+                    .reset();
+
+
+                loadAuctions();
+
+            }
+
+
+            catch (error) {
+
+                console.log(
+                    error
+                );
+
+
+                message.textContent =
+                    "Unable to connect to server.";
+
+            }
+
+        }
+    );
+
+
+
+// ==================================
+// LOAD AUCTIONS
+// ==================================
+
+async function loadAuctions() {
+
+
+    const list =
+        document.getElementById(
+            "auctionList"
+        );
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                API_URL
+            );
+
+
+        const auctions =
+            await response.json();
+
+
+        if (
+            !auctions ||
+            auctions.length === 0
+        ) {
+
+
+            list.innerHTML = `
+
+                <div class="empty">
+
+                    No auction records available.
+
+                </div>
+
+            `;
+
+
+            return;
+
+        }
+
+
+        list.innerHTML =
+            "";
+
+
+        auctions.forEach(
+            function(auction) {
+
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "auction-item";
+
+
+                const date =
+                    new Date(
+                        auction.auctionDate
+                    )
+                    .toLocaleDateString(
+                        "en-IN"
+                    );
+
+
+                item.innerHTML = `
+
+                    <h3>
+
+                        ${escapeHtml(
+                            auction.winnerName
+                        )}
+
+                    </h3>
+
+
+                    ${
+                        auction.photoUrl
+                        ?
+
+                        `
+
+                        <img
+                            src="${SERVER_URL}${escapeHtml(auction.photoUrl)}"
+                            class="winner-photo"
+                            alt="Winner Photo"
+                        >
+
+                        `
+
+                        :
+
+                        ""
+                    }
+
+
+                    <p>
+
+                        <strong>
+                            Festival Year:
+                        </strong>
+
+                        ${escapeHtml(
+                            auction.festivalYear
+                        )}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Winning Bid:
+                        </strong>
+
+                        ₹${Number(
+                            auction.winningBid
+                        ).toLocaleString(
+                            "en-IN"
+                        )}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Auction Date:
+                        </strong>
+
+                        ${date}
+
+                    </p>
+
+
+                    ${
+                        auction.description
+                        ?
+
+                        `
+
+                        <p>
+
+                            <strong>
+                                Details:
+                            </strong>
+
+                            ${escapeHtml(
+                                auction.description
+                            )}
+
+                        </p>
+
+                        `
+
+                        :
+
+                        ""
+                    }
+
+
+                    <button
+                        class="delete-btn"
+                        onclick="
+                            deleteAuction(
+                                '${auction._id}'
+                            )
+                        ">
+
+                        Delete
+
+                    </button>
+
+                `;
+
+
+                list.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+
+    catch (error) {
+
+        console.log(
+            error
+        );
+
+
+        list.innerHTML = `
+
+            <div class="empty">
+
+                Unable to load auctions.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+// ==================================
+// DELETE AUCTION
+// ==================================
+
+async function deleteAuction(
+    id
+) {
+
+
+    const confirmDelete =
+        confirm(
+            "Are you sure you want to delete this auction?"
+        );
+
+
+    if (!confirmDelete) {
+
+        return;
+
+    }
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                API_URL +
+                "/" +
+                id,
+                {
+
+                    method:
+                        "DELETE",
+
+                    headers: {
+
+                        "Authorization":
+                            "Bearer " +
+                            token
+
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+
+            alert(
+                data.message ||
+                "Failed to delete auction."
+            );
+
+
+            return;
+
+        }
+
+
+        alert(
+            "Auction deleted successfully!"
+        );
+
+
+        loadAuctions();
+
+    }
+
+
+    catch (error) {
+
+
+        console.log(
+            error
+        );
+
+
+        alert(
+            "Unable to connect to server."
+        );
+
+    }
+
+}
+
+
+
+// ==================================
+// ESCAPE HTML
+// ==================================
+
+function escapeHtml(
+    text
+) {
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+
+// ==================================
+// START
+// ==================================
+
+loadAuctions();
+
+</script>
+
+
+</body>
+
+</html>

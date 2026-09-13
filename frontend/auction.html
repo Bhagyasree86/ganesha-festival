@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Laddu Auction | Sri Durgamamba Youth</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family: "Poppins", sans-serif;
+
+            min-height: 100vh;
+
+            color: #f5e6c8;
+
+            background:
+                linear-gradient(
+                    rgba(18, 9, 9, 0.84),
+                    rgba(18, 9, 9, 0.94)
+                ),
+                url("images/vinayaka.jpg")
+                center / cover fixed no-repeat;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 23px;
+
+            padding: 18px 5%;
+
+            background:
+                rgba(10, 5, 5, 0.96);
+
+            border-bottom:
+                1px solid
+                rgba(212, 175, 55, 0.45);
+        }
+
+
+        nav a {
+
+            color: #e8ddc8;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            transition: 0.3s;
+        }
+
+
+        nav a:hover {
+
+            color: #d4af37;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        header {
+
+            min-height: 340px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.28),
+                    rgba(0, 0, 0, 0.58)
+                ),
+                url("images/vinayaka.jpg")
+                center / cover no-repeat;
+
+            border-bottom:
+                1px solid
+                rgba(212, 175, 55, 0.45);
+        }
+
+
+        .brand {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 13px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            color: #d4af37;
+
+            margin-bottom: 12px;
+        }
+
+
+        header h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(42px, 7vw, 68px);
+
+            font-weight: 600;
+
+            color: #d4af37;
+
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 4px 18px
+                rgba(0, 0, 0, 0.8);
+        }
+
+
+        header p {
+
+            margin-top: 14px;
+
+            font-size: 14px;
+
+            letter-spacing: 1px;
+
+            color: #eee7d5;
+        }
+
+
+        .gold-line {
+
+            width: 70px;
+
+            height: 2px;
+
+            background: #d4af37;
+
+            margin-top: 20px;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 65px 0 80px;
+        }
+
+
+        /* =========================
+           SECTION TITLE
+        ========================= */
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 40px;
+        }
+
+
+        .section-title h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #d4af37;
+
+            font-size: 38px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-title p {
+
+            color: #c8bdb0;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           FILTER
+        ========================= */
+
+        .filter-box {
+
+            max-width: 550px;
+
+            margin:
+                0 auto 45px;
+
+            padding: 24px;
+
+            background:
+                rgba(22, 11, 11, 0.92);
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.45);
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.35);
+
+            text-align: center;
+        }
+
+
+        .filter-box label {
+
+            display: block;
+
+            color: #d4af37;
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+        }
+
+
+        select {
+
+            width: 100%;
+
+            padding:
+                13px 15px;
+
+            background:
+                #160b0b;
+
+            color: #f5e6c8;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.5);
+
+            border-radius: 8px;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size: 13px;
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+
+        select:focus {
+
+            border-color:
+                #d4af37;
+        }
+
+
+        select option {
+
+            background: #180c0c;
+
+            color: #f5e6c8;
+        }
+
+
+        /* =========================
+           AUCTION GRID
+        ========================= */
+
+        .auction-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(300px, 1fr)
+                );
+
+            gap: 30px;
+        }
+
+
+        /* =========================
+           AUCTION CARD
+        ========================= */
+
+        .auction-card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(35, 18, 18, 0.97),
+                    rgba(18, 9, 9, 0.97)
+                );
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.42);
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.42);
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        .auction-card:hover {
+
+            transform:
+                translateY(-7px);
+
+            border-color:
+                #d4af37;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0, 0, 0, 0.55);
+        }
+
+
+        .auction-card::before {
+
+            content: "";
+
+            display: block;
+
+            width: 100%;
+
+            height: 3px;
+
+            background:
+                #d4af37;
+        }
+
+
+        /* =========================
+           WINNER PHOTO
+        ========================= */
+
+        .winner-photo-container {
+
+            width: 100%;
+
+            min-height: 280px;
+
+            padding: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(8, 4, 4, 0.72);
+
+            border-bottom:
+                1px solid
+                rgba(212, 175, 55, 0.22);
+        }
+
+
+        .winner-photo {
+
+            width: 100%;
+
+            max-width: 280px;
+
+            max-height: 350px;
+
+            object-fit: contain;
+
+            display: block;
+
+            border-radius: 12px;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.65);
+
+            background:
+                #160b0b;
+        }
+
+
+        .no-photo {
+
+            min-height: 230px;
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #92877d;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           CARD CONTENT
+        ========================= */
+
+        .auction-content {
+
+            padding: 28px;
+        }
+
+
+        .year {
+
+            display: inline-block;
+
+            background:
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.08
+                );
+
+            color: #d4af37;
+
+            border:
+                1px solid
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.45
+                );
+
+            padding:
+                6px 13px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 17px;
+        }
+
+
+        .auction-content h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #d4af37;
+
+            font-size: 26px;
+
+            font-weight: 600;
+
+            margin-bottom: 12px;
+
+            line-height: 1.3;
+        }
+
+
+        .bid-label {
+
+            color: #c9ad6b;
+
+            font-size: 12px;
+
+            margin-top: 10px;
+        }
+
+
+        .bid {
+
+            font-size: 32px;
+
+            font-weight: 600;
+
+            color: #f0d477;
+
+            margin:
+                4px 0 20px;
+        }
+
+
+        .auction-content p {
+
+            margin: 10px 0;
+
+            line-height: 1.7;
+
+            font-size: 13px;
+
+            color: #c8bda9;
+        }
+
+
+        .auction-content strong {
+
+            color: #d4af37;
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+
+            grid-column:
+                1 / -1;
+
+            text-align: center;
+
+            padding:
+                60px 20px;
+
+            color: #aaa294;
+
+            background:
+                rgba(
+                    22,
+                    11,
+                    11,
+                    0.92
+                );
+
+            border:
+                1px solid
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.38
+                );
+
+            border-radius: 15px;
+
+            font-size: 14px;
+        }
+
+
+        .error {
+
+            color: #d99797;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-section {
+
+            text-align: center;
+
+            margin-top: 55px;
+        }
+
+
+        .back-button {
+
+            display: inline-block;
+
+            padding:
+                13px 28px;
+
+            background:
+                #d4af37;
+
+            color:
+                #160b0b;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+
+        .back-button:hover {
+
+            background:
+                #efd77c;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            padding:
+                45px 20px;
+
+            text-align: center;
+
+            background:
+                rgba(
+                    8,
+                    4,
+                    4,
+                    0.97
+                );
+
+            border-top:
+                1px solid
+                rgba(
+                    212,
+                    175,
+                    55,
+                    0.38
+                );
+        }
+
+
+        footer h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 23px;
+
+            color: #d4af37;
+
+            margin-bottom: 14px;
+        }
+
+
+        footer p {
+
+            color: #aaa294;
+
+            font-size: 13px;
+
+            margin: 7px 0;
+        }
+
+
+        footer a {
+
+            color: #d4af37;
+
+            text-decoration: none;
+        }
+
+
+        footer a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        .copyright {
+
+            margin-top: 18px;
+
+            color: #77736b;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+
+                gap: 13px;
+
+                padding:
+                    15px 10px;
+            }
+
+
+            nav a {
+
+                font-size: 11px;
+            }
+
+
+            header {
+
+                min-height: 290px;
+
+                padding:
+                    55px 15px;
+            }
+
+
+            header h1 {
+
+                font-size: 42px;
+            }
+
+
+            .container {
+
+                width: 92%;
+
+                padding:
+                    50px 0 65px;
+            }
+
+
+            .section-title h2 {
+
+                font-size: 31px;
+            }
+
+
+            .auction-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .winner-photo-container {
+
+                min-height: 240px;
+            }
+
+
+            .winner-photo {
+
+                max-height: 300px;
+            }
+
+
+            .auction-content {
+
+                padding: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
+<nav>
+
+    <a href="index.html">
+        Home
+    </a>
+
+    <a href="about.html">
+        About
+    </a>
+
+    <a href="events.html">
+        Events
+    </a>
+
+    <a href="festival-years.html">
+        Festival Years
+    </a>
+
+    <a href="gallery.html">
+        Gallery
+    </a>
+
+    <a href="videos.html">
+        Videos
+    </a>
+
+    <a href="auction.html">
+        Laddu Auction
+    </a>
+
+    <a href="nimajjanam.html">
+        Nimajjanam
+    </a>
+
+    <a href="sponsors.html">
+        Sponsors
+    </a>
+
+    <a href="committee.html">
+        Committee
+    </a>
+
+    <a href="find-us.html">
+        Find Us
+    </a>
+
+</nav>
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<header>
+
+    <div class="brand">
+        Sri Durgamamba Youth
+    </div>
+
+    <h1>
+        LADDU AUCTION
+    </h1>
+
+    <p>
+        A record of our festival auction
+    </p>
+
+    <div class="gold-line"></div>
+
+</header>
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main class="container">
+
+
+    <div class="section-title">
+
+        <h2>
+            Auction Records
+        </h2>
+
+        <p>
+            Celebrating the tradition and memories of our Laddu Auction.
+        </p>
+
+    </div>
+
+
+    <!-- =========================================
+         YEAR FILTER
+    ========================================= -->
+
+    <div class="filter-box">
+
+        <label for="yearFilter">
+            Select Festival Year
+        </label>
+
+        <select id="yearFilter">
+
+            <option value="all">
+                All Years
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- =========================================
+         AUCTION GRID
+    ========================================= -->
+
+    <div
+        id="auctionGrid"
+        class="auction-grid"
+    >
+
+        <div class="empty">
+            Loading auction records...
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         BACK BUTTON
+    ========================================= -->
+
+    <div class="back-section">
+
+        <a
+            href="index.html"
+            class="back-button"
+        >
+            Back to Home
+        </a>
+
+    </div>
+
+</main>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <h3>
+        SRI DURGAMAMBA YOUTH
+    </h3>
+
+    <p>
+
+        Instagram:
+
+        <a
+            href="https://www.instagram.com/durga_mamba_youth/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            @durga_mamba_youth
+        </a>
+
+    </p>
+
+    <p>
+        Durga Nagar, Saripalli, Pendurthi
+    </p>
+
+    <p class="copyright">
+        © Sri Durgamamba Youth
+    </p>
+
+</footer>
+
+
+<script>
+
+    // =========================================
+    // API
+    // =========================================
+
+    const API_URL =
+        "http://localhost:5000/api/auctions";
+
+    const SERVER_URL =
+        "http://localhost:5000";
+
+
+    // =========================================
+    // ELEMENTS
+    // =========================================
+
+    const auctionGrid =
+        document.getElementById(
+            "auctionGrid"
+        );
+
+
+    const yearFilter =
+        document.getElementById(
+            "yearFilter"
+        );
+
+
+    let allAuctions = [];
+
+
+    // =========================================
+    // ESCAPE HTML
+    // =========================================
+
+    function escapeHTML(value) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+            return "";
+        }
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+        div.textContent =
+            String(value);
+
+        return div.innerHTML;
+    }
+
+
+    // =========================================
+    // PHOTO URL
+    // =========================================
+
+    function getPhotoUrl(
+        photoUrl
+    ) {
+
+        if (!photoUrl) {
+            return "";
+        }
+
+
+        if (
+            photoUrl.startsWith(
+                "http://"
+            ) ||
+            photoUrl.startsWith(
+                "https://"
+            )
+        ) {
+
+            return photoUrl;
+
+        }
+
+
+        return (
+            SERVER_URL +
+            photoUrl
+        );
+
+    }
+
+
+    // =========================================
+    // LOAD AUCTIONS
+    // =========================================
+
+    async function loadAuctions() {
+
+        auctionGrid.innerHTML = `
+
+            <div class="empty">
+                Loading auction records...
+            </div>
+
+        `;
+
+
+        try {
+
+            const response =
+                await fetch(API_URL);
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to fetch auctions"
+                );
+
+            }
+
+
+            allAuctions =
+                await response.json();
+
+
+            createYearOptions();
+
+
+            // =================================
+            // URL YEAR
+            // =================================
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            const urlYear =
+                params.get("year");
+
+
+            if (
+                urlYear &&
+                allAuctions.some(
+                    auction =>
+                        String(
+                            auction.festivalYear
+                        ) ===
+                        String(urlYear)
+                )
+            ) {
+
+                yearFilter.value =
+                    urlYear;
+
+
+                filterAuctions(
+                    urlYear
+                );
+
+            }
+            else {
+
+                displayAuctions(
+                    allAuctions
+                );
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Auction error:",
+                error
+            );
+
+
+            auctionGrid.innerHTML = `
+
+                <div class="empty error">
+
+                    Unable to load auction records.
+
+                    <br><br>
+
+                    Please make sure the backend
+                    server is running.
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    // =========================================
+    // CREATE YEAR OPTIONS
+    // =========================================
+
+    function createYearOptions() {
+
+        yearFilter.innerHTML = `
+
+            <option value="all">
+                All Years
+            </option>
+
+        `;
+
+
+        const years =
+            [
+                ...new Set(
+                    allAuctions
+                        .map(
+                            auction =>
+                                auction.festivalYear
+                        )
+                        .filter(Boolean)
+                )
+            ]
+            .sort(
+                (a, b) =>
+                    Number(b) -
+                    Number(a)
+            );
+
+
+        years.forEach(
+            year => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    year;
+
+
+                option.textContent =
+                    year;
+
+
+                yearFilter.appendChild(
+                    option
+                );
+
+            }
+        );
+
+    }
+
+
+    // =========================================
+    // FILTER AUCTIONS
+    // =========================================
+
+    function filterAuctions(
+        selectedYear
+    ) {
+
+        if (
+            !selectedYear ||
+            selectedYear === "all"
+        ) {
+
+            displayAuctions(
+                allAuctions
+            );
+
+            return;
+
+        }
+
+
+        const filtered =
+            allAuctions.filter(
+                auction =>
+                    String(
+                        auction.festivalYear
+                    ) ===
+                    String(selectedYear)
+            );
+
+
+        displayAuctions(
+            filtered
+        );
+
+    }
+
+
+    // =========================================
+    // FILTER CHANGE
+    // =========================================
+
+    yearFilter.addEventListener(
+        "change",
+        function() {
+
+            const selectedYear =
+                this.value;
+
+
+            const url =
+                new URL(
+                    window.location.href
+                );
+
+
+            if (
+                selectedYear === "all"
+            ) {
+
+                url.searchParams.delete(
+                    "year"
+                );
+
+            }
+            else {
+
+                url.searchParams.set(
+                    "year",
+                    selectedYear
+                );
+
+            }
+
+
+            window.history.replaceState(
+                {},
+                "",
+                url
+            );
+
+
+            filterAuctions(
+                selectedYear
+            );
+
+        }
+    );
+
+
+    // =========================================
+    // DISPLAY AUCTIONS
+    // =========================================
+
+    function displayAuctions(
+        auctions
+    ) {
+
+        if (
+            !auctions ||
+            auctions.length === 0
+        ) {
+
+            auctionGrid.innerHTML = `
+
+                <div class="empty">
+
+                    No auction records
+                    available for this year.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        auctionGrid.innerHTML = "";
+
+
+        auctions.forEach(
+            auction => {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "auction-card";
+
+
+                // =================================
+                // PHOTO
+                // =================================
+
+                let photoHTML = "";
+
+
+                if (
+                    auction.photoUrl
+                ) {
+
+                    const photoUrl =
+                        getPhotoUrl(
+                            auction.photoUrl
+                        );
+
+
+                    photoHTML = `
+
+                        <div
+                            class="winner-photo-container"
+                        >
+
+                            <img
+                                src="${escapeHTML(photoUrl)}"
+                                class="winner-photo"
+                                alt="Laddu Auction Winner"
+                                loading="lazy"
+                                onerror="this.parentElement.innerHTML='<div class=\\'no-photo\\'>Photo unavailable</div>'"
+                            >
+
+                        </div>
+
+                    `;
+
+                }
+                else {
+
+                    photoHTML = `
+
+                        <div
+                            class="winner-photo-container"
+                        >
+
+                            <div class="no-photo">
+                                No winner photo
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                // =================================
+                // YEAR
+                // =================================
+
+                const year =
+                    escapeHTML(
+                        auction.festivalYear ||
+                        ""
+                    );
+
+
+                // =================================
+                // WINNER
+                // =================================
+
+                const winner =
+                    escapeHTML(
+                        auction.winnerName ||
+                        "Auction Winner"
+                    );
+
+
+                // =================================
+                // BID
+                // =================================
+
+                const bidAmount =
+                    Number(
+                        auction.winningBid
+                    );
+
+
+                const formattedBid =
+                    Number.isFinite(
+                        bidAmount
+                    )
+                    ?
+                    bidAmount.toLocaleString(
+                        "en-IN"
+                    )
+                    :
+                    "0";
+
+
+                // =================================
+                // DATE
+                // =================================
+
+                let dateText =
+                    "Not available";
+
+
+                if (
+                    auction.auctionDate
+                ) {
+
+                    const date =
+                        new Date(
+                            auction.auctionDate
+                        );
+
+
+                    if (
+                        !isNaN(
+                            date.getTime()
+                        )
+                    ) {
+
+                        dateText =
+                            date.toLocaleDateString(
+                                "en-IN",
+                                {
+                                    day: "2-digit",
+                                    month: "long",
+                                    year: "numeric"
+                                }
+                            );
+
+                    }
+
+                }
+
+
+                // =================================
+                // DESCRIPTION
+                // =================================
+
+                const description =
+                    auction.description
+                    ?
+                    `
+                        <p>
+                            ${escapeHTML(
+                                auction.description
+                            )}
+                        </p>
+                    `
+                    :
+                    "";
+
+
+                // =================================
+                // CARD HTML
+                // =================================
+
+                card.innerHTML = `
+
+                    ${photoHTML}
+
+                    <div class="auction-content">
+
+                        <span class="year">
+
+                            Festival Year:
+                            ${year}
+
+                        </span>
+
+
+                        <h2>
+                            ${winner}
+                        </h2>
+
+
+                        <div class="bid-label">
+                            Winning Bid
+                        </div>
+
+
+                        <div class="bid">
+
+                            ₹${formattedBid}
+
+                        </div>
+
+
+                        <p>
+
+                            <strong>
+                                Auction Date:
+                            </strong>
+
+                            ${escapeHTML(
+                                dateText
+                            )}
+
+                        </p>
+
+
+                        ${description}
+
+                    </div>
+
+                `;
+
+
+                auctionGrid.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+    // =========================================
+    // START
+    // =========================================
+
+    loadAuctions();
+
+</script>
+
+
+</body>
+
+</html>

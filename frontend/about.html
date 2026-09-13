@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About | Sri Durgamamba Youth</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #120909;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            width: 100%;
+            padding: 22px 6%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            position: relative;
+            z-index: 10;
+
+            background: rgba(18, 9, 9, 0.95);
+
+            border-bottom: 1px solid rgba(232, 200, 120, 0.35);
+        }
+
+        .logo {
+            color: #e8c878;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 21px;
+
+            font-weight: 600;
+
+            letter-spacing: 1px;
+
+            text-decoration: none;
+
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+
+            gap: 25px;
+
+            list-style: none;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #e8c878;
+        }
+
+
+        /* =========================
+           ABOUT HERO
+        ========================= */
+
+        .about-hero {
+
+            min-height: 45vh;
+
+            position: relative;
+
+            background-image:
+                linear-gradient(
+                    rgba(20, 8, 8, 0.48),
+                    rgba(20, 8, 8, 0.58)
+                ),
+                url("images/vinayaka.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            border-bottom: 1px solid rgba(232, 200, 120, 0.35);
+        }
+
+        .about-hero-content {
+            padding: 50px 20px;
+        }
+
+        .small-title {
+
+            color: #e8c878;
+
+            font-size: 13px;
+
+            letter-spacing: 5px;
+
+            margin-bottom: 15px;
+        }
+
+        .about-hero h1 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 60px;
+
+            color: #f4d58a;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 15px;
+        }
+
+        .about-hero p {
+
+            font-size: 16px;
+
+            color: #f5eeee;
+
+            max-width: 650px;
+
+            margin: auto;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           ABOUT CONTENT
+        ========================= */
+
+        .about-section {
+
+            padding: 75px 7%;
+
+            background: #160b0b;
+        }
+
+        .about-content {
+
+            max-width: 1000px;
+
+            margin: auto;
+
+            text-align: center;
+        }
+
+        .about-content h2 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(32px, 5vw, 52px);
+
+            line-height: 1.25;
+
+            font-weight: 600;
+
+            color: #f4d58a;
+
+            margin-bottom: 25px;
+        }
+
+        .about-content > p {
+
+            max-width: 760px;
+
+            margin: auto;
+
+            color: #eee;
+
+            font-size: 15px;
+
+            line-height: 1.9;
+        }
+
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .about-cards {
+
+            max-width: 1000px;
+
+            margin: 65px auto 0;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 24px;
+        }
+
+        .about-card {
+
+            padding: 38px 28px;
+
+            min-height: 210px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.035);
+
+            border: 1px solid rgba(232, 200, 120, 0.4);
+
+            border-radius: 6px;
+
+            transition: 0.35s ease;
+        }
+
+        .about-card:hover {
+
+            transform: translateY(-7px);
+
+            background: rgba(255, 255, 255, 0.06);
+
+            border-color: rgba(232, 200, 120, 0.75);
+        }
+
+        .about-card h3 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 28px;
+
+            font-weight: 600;
+
+            color: #e8c878;
+
+            margin-bottom: 15px;
+        }
+
+        .about-card p {
+
+            color: #ddd;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .about-back {
+
+            display: inline-block;
+
+            margin-top: 60px;
+
+            padding: 13px 30px;
+
+            border-radius: 30px;
+
+            border: 1px solid #e8c878;
+
+            color: #e8c878;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            background: transparent;
+
+            transition: 0.3s;
+        }
+
+        .about-back:hover {
+
+            background: #e8c878;
+
+            color: #211010;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            padding: 45px 20px 30px;
+
+            text-align: center;
+
+            border-top: 1px solid rgba(232, 200, 120, 0.35);
+
+            background: #0d0606;
+        }
+
+        .footer-title {
+
+            font-family: "Playfair Display", serif;
+
+            color: #e8c878;
+
+            font-size: 23px;
+
+            margin-bottom: 10px;
+        }
+
+        .footer-instagram {
+
+            margin-bottom: 10px;
+        }
+
+        .footer-instagram a {
+
+            color: #e8c878;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .footer-address {
+
+            color: #ccc;
+
+            font-size: 13px;
+
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+
+            color: #777;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .navbar {
+
+                flex-direction: column;
+
+                gap: 18px;
+            }
+
+            .nav-links {
+
+                gap: 12px 18px;
+            }
+
+            .about-hero h1 {
+
+                font-size: 45px;
+            }
+
+            .about-cards {
+
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .logo {
+
+                font-size: 18px;
+            }
+
+            .nav-links a {
+
+                font-size: 11px;
+            }
+
+            .about-hero h1 {
+
+                font-size: 38px;
+            }
+
+            .small-title {
+
+                font-size: 10px;
+
+                letter-spacing: 3px;
+            }
+
+            .about-hero p {
+
+                font-size: 14px;
+            }
+
+            .about-section {
+
+                padding: 55px 20px;
+            }
+
+            .about-content h2 {
+
+                font-size: 32px;
+            }
+
+            .about-content > p {
+
+                font-size: 13px;
+            }
+
+            .about-cards {
+
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+
+                margin-top: 45px;
+            }
+
+            .about-card {
+
+                min-height: 180px;
+
+                padding: 30px 22px;
+            }
+
+            .about-card h3 {
+
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            SRI DURGAMAMBA YOUTH
+        </a>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html" class="active">
+                About
+            </a>
+
+            <a href="events.html">
+                Events
+            </a>
+
+            <a href="festival-years.html">
+                Festival Years
+            </a>
+
+            <a href="gallery.html">
+                Gallery
+            </a>
+
+            <a href="videos.html">
+                Videos
+            </a>
+
+            <a href="auction.html">
+                Laddu Auction
+            </a>
+
+            <a href="nimajjanam.html">
+                Nimajjanam
+            </a>
+
+            <a href="sponsors.html">
+                Sponsors
+            </a>
+
+            <a href="committee.html">
+                Committee
+            </a>
+
+            <a href="find-us.html">
+                Find Us
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         ABOUT HERO
+    ========================= -->
+
+    <section class="about-hero">
+
+        <div class="about-hero-content">
+
+            <div class="small-title">
+                SRI DURGAMAMBA YOUTH
+            </div>
+
+            <h1>
+                ABOUT
+            </h1>
+
+            <p>
+                Discover the spirit, traditions and memories
+                behind our Ganesh Chaturthi celebrations.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ABOUT CONTENT
+    ========================= -->
+
+    <section class="about-section">
+
+        <div class="about-content">
+
+            <h2>
+                A Celebration of Faith,
+                <br>
+                Togetherness & Tradition
+            </h2>
+
+            <p>
+                Sri Durgamamba Youth brings everyone together
+                to celebrate the divine spirit of Lord Ganesha
+                with devotion, happiness and unity.
+                Every celebration creates beautiful memories
+                that can be cherished for years to come.
+            </p>
+
+
+            <!-- CARDS -->
+
+            <div class="about-cards">
+
+
+                <div class="about-card">
+
+                    <h3>
+                        Tradition
+                    </h3>
+
+                    <p>
+                        Keeping the spirit of Ganesh Chaturthi
+                        alive through meaningful celebrations
+                        and cherished traditions.
+                    </p>
+
+                </div>
+
+
+                <div class="about-card">
+
+                    <h3>
+                        Togetherness
+                    </h3>
+
+                    <p>
+                        Bringing families, friends and
+                        well-wishers together to celebrate
+                        every special moment.
+                    </p>
+
+                </div>
+
+
+                <div class="about-card">
+
+                    <h3>
+                        Memories
+                    </h3>
+
+                    <p>
+                        Preserving photographs, videos and
+                        special moments so they can be
+                        revisited in the future.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BACK BUTTON -->
+
+            <a
+                href="index.html"
+                class="about-back"
+            >
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-title">
+            SRI DURGAMAMBA YOUTH
+        </div>
+
+        <div class="footer-instagram">
+
+            <a
+                href="https://www.instagram.com/durga_mamba_youth/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                @durga_mamba_youth
+            </a>
+
+        </div>
+
+        <div class="footer-address">
+            Durga Nagar, Saripalli, Pendurthi
+        </div>
+
+        <div class="copyright">
+            © Sri Durgamamba Youth
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>

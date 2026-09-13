@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sponsors | Sri Durgamamba Youth</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background:
+                linear-gradient(
+                    rgba(12, 6, 6, 0.82),
+                    rgba(12, 6, 6, 0.88)
+                ),
+                url("images/vinayaka.jpg") center / cover fixed no-repeat;
+
+            color: #f5eeee;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            width: 100%;
+            padding: 18px 6%;
+            background: rgba(10, 5, 5, 0.92);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.45);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #d4af37;
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            color: #f4eeee;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 330px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 70px 20px 50px;
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+
+            background:
+                linear-gradient(
+                    rgba(20, 10, 10, 0.55),
+                    rgba(20, 10, 10, 0.7)
+                ),
+                url("images/vinayaka.jpg") center / cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero-small {
+            color: #d4af37;
+            font-size: 14px;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(42px, 7vw, 76px);
+            color: #d4af37;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: #eee0e0;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 65px 0 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-family: "Playfair Display", serif;
+            color: #d4af37;
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #cdbebe;
+            font-size: 14px;
+        }
+
+        /* =========================
+           FILTER
+        ========================= */
+
+        .filter-box {
+            max-width: 500px;
+            margin: 0 auto 45px;
+
+            background: rgba(20, 10, 10, 0.88);
+
+            border: 1px solid rgba(212, 175, 55, 0.45);
+
+            border-radius: 14px;
+
+            padding: 22px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .filter-box label {
+            display: block;
+
+            color: #d4af37;
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+        }
+
+        .filter-box select {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border-radius: 8px;
+
+            border: 1px solid rgba(212, 175, 55, 0.5);
+
+            background: #180d0d;
+
+            color: #fff;
+
+            font-family: "Poppins", sans-serif;
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+        .filter-box select:focus {
+            border-color: #d4af37;
+        }
+
+        /* =========================
+           SPONSOR GRID
+        ========================= */
+
+        .sponsors-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 30px;
+        }
+
+        .sponsor-card {
+            background: rgba(18, 9, 9, 0.92);
+
+            border: 1px solid rgba(212, 175, 55, 0.42);
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-7px);
+
+            border-color: #d4af37;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* =========================
+           SPONSOR PHOTO
+        ========================= */
+
+        .sponsor-photo-container {
+            width: 100%;
+
+            min-height: 240px;
+
+            padding: 18px;
+
+            background: rgba(8, 4, 4, 0.8);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        .sponsor-photo {
+            width: 100%;
+
+            max-height: 330px;
+
+            object-fit: contain;
+
+            display: block;
+
+            border-radius: 10px;
+        }
+
+        .no-photo {
+            min-height: 220px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            color: #9e8c8c;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           SPONSOR CONTENT
+        ========================= */
+
+        .sponsor-content {
+            padding: 25px;
+        }
+
+        .sponsor-year {
+            display: inline-block;
+
+            color: #d4af37;
+
+            font-size: 12px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .sponsor-name {
+            font-family: "Playfair Display", serif;
+
+            color: #ffffff;
+
+            font-size: 25px;
+
+            margin-bottom: 12px;
+
+            line-height: 1.3;
+        }
+
+        .amount {
+            color: #d4af37;
+
+            font-size: 17px;
+
+            font-weight: 600;
+
+            margin-bottom: 14px;
+        }
+
+        .description {
+            color: #cdbebe;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            text-align: center;
+
+            padding: 30px;
+
+            color: #cdbebe;
+
+            font-size: 14px;
+        }
+
+        .error {
+            color: #e89b9b;
+        }
+
+        .empty {
+            background: rgba(18, 9, 9, 0.9);
+
+            border: 1px solid rgba(212, 175, 55, 0.35);
+
+            border-radius: 14px;
+
+            padding: 45px 25px;
+
+            text-align: center;
+
+            color: #bdaaaa;
+        }
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-home {
+            text-align: center;
+
+            margin-top: 55px;
+        }
+
+        .back-home a {
+            display: inline-block;
+
+            padding: 13px 28px;
+
+            border: 1px solid #d4af37;
+
+            color: #d4af37;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+
+            transition: 0.3s;
+        }
+
+        .back-home a:hover {
+            background: #d4af37;
+
+            color: #160b0b;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: rgba(8, 4, 4, 0.96);
+
+            border-top: 1px solid rgba(212, 175, 55, 0.35);
+
+            padding: 45px 20px;
+
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: "Playfair Display", serif;
+
+            color: #d4af37;
+
+            font-size: 24px;
+
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            color: #bdaaaa;
+
+            font-size: 13px;
+
+            margin: 7px 0;
+        }
+
+        footer a {
+            color: #d4af37;
+
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            margin-top: 22px;
+
+            color: #8f7e7e;
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            nav {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .nav-links {
+                justify-content: center;
+
+                gap: 14px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                min-height: 280px;
+
+                padding: 50px 15px;
+            }
+
+            .hero h1 {
+                font-size: 44px;
+            }
+
+            .section-title h2 {
+                font-size: 31px;
+            }
+
+            .container {
+                width: 92%;
+
+                padding-top: 50px;
+            }
+
+            .sponsors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sponsor-content {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <a href="index.html" class="logo">
+            SRI DURGAMAMBA YOUTH
+        </a>
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="about.html">About</a>
+
+            <a href="events.html">Events</a>
+
+            <a href="festival-years.html">Festival Years</a>
+
+            <a href="gallery.html">Gallery</a>
+
+            <a href="videos.html">Videos</a>
+
+            <a href="auction.html">Laddu Auction</a>
+
+            <a href="nimajjanam.html">Nimajjanam</a>
+
+            <a href="sponsors.html">Sponsors</a>
+
+            <a href="committee.html">Committee</a>
+
+            <a href="find-us.html">Find Us</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                Our Supporters
+            </div>
+
+            <h1>
+                SPONSORS
+            </h1>
+
+            <p>
+                Honouring the support that makes our celebrations possible
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+        <div class="section-title">
+
+            <h2>
+                Our Sponsors
+            </h2>
+
+            <p>
+                A record of the people and organizations who supported our celebrations
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             YEAR FILTER
+        ========================= -->
+
+        <div class="filter-box">
+
+            <label for="yearFilter">
+                Select Festival Year
+            </label>
+
+            <select id="yearFilter">
+
+                <option value="all">
+                    All Years
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- =========================
+             SPONSORS
+        ========================= -->
+
+        <div
+            id="sponsorsContainer"
+            class="sponsors-grid">
+        </div>
+
+        <div
+            id="status"
+            class="status">
+            Loading sponsors...
+        </div>
+
+
+        <!-- =========================
+             BACK BUTTON
+        ========================= -->
+
+        <div class="back-home">
+
+            <a href="index.html">
+                Back to Home
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-title">
+            SRI DURGAMAMBA YOUTH
+        </div>
+
+        <p>
+            Instagram:
+            <a
+                href="https://www.instagram.com/durga_mamba_youth/"
+                target="_blank">
+                @durga_mamba_youth
+            </a>
+        </p>
+
+        <p>
+            Durga Nagar, Saripalli, Pendurthi
+        </p>
+
+        <p class="copyright">
+            © Sri Durgamamba Youth
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const API_URL =
+            "http://localhost:5000/api/sponsors";
+
+        const SERVER_URL =
+            "http://localhost:5000";
+
+
+        const sponsorsContainer =
+            document.getElementById("sponsorsContainer");
+
+        const status =
+            document.getElementById("status");
+
+        const yearFilter =
+            document.getElementById("yearFilter");
+
+
+        let allSponsors = [];
+
+
+        // =========================
+        // ESCAPE HTML
+        // =========================
+
+        function escapeHTML(value) {
+
+            if (value === null || value === undefined) {
+                return "";
+            }
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        // =========================
+        // FORMAT AMOUNT
+        // =========================
+
+        function formatAmount(amount) {
+
+            if (
+                amount === null ||
+                amount === undefined ||
+                amount === "" ||
+                Number(amount) === 0
+            ) {
+                return "";
+            }
+
+            return "Sponsorship Amount: ₹" +
+                Number(amount).toLocaleString("en-IN");
+        }
+
+
+        // =========================
+        // GET IMAGE URL
+        // =========================
+
+        function getImageUrl(photoUrl) {
+
+            if (!photoUrl) {
+                return "";
+            }
+
+            if (
+                photoUrl.startsWith("http://") ||
+                photoUrl.startsWith("https://")
+            ) {
+                return photoUrl;
+            }
+
+            return SERVER_URL + photoUrl;
+        }
+
+
+        // =========================
+        // DISPLAY SPONSORS
+        // =========================
+
+        function displaySponsors(sponsors) {
+
+            sponsorsContainer.innerHTML = "";
+
+            if (!sponsors || sponsors.length === 0) {
+
+                status.innerHTML = `
+                    <div class="empty">
+                        No sponsors available for the selected year.
+                    </div>
+                `;
+
+                return;
+            }
+
+            status.innerHTML = "";
+
+
+            sponsors.forEach(sponsor => {
+
+                const photoUrl =
+                    getImageUrl(sponsor.photoUrl);
+
+                const amountText =
+                    formatAmount(sponsor.amount);
+
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "sponsor-card";
+
+
+                let photoHTML = "";
+
+                if (photoUrl) {
+
+                    photoHTML = `
+                        <div class="sponsor-photo-container">
+
+                            <img
+                                src="${escapeHTML(photoUrl)}"
+                                alt="${escapeHTML(sponsor.sponsorName)}"
+                                class="sponsor-photo"
+                                loading="lazy"
+                                onerror="this.parentElement.innerHTML='<div class=\\'no-photo\\'>Photo unavailable</div>'"
+                            >
+
+                        </div>
+                    `;
+
+                } else {
+
+                    photoHTML = `
+                        <div class="sponsor-photo-container">
+
+                            <div class="no-photo">
+                                No sponsor photo
+                            </div>
+
+                        </div>
+                    `;
+
+                }
+
+
+                card.innerHTML = `
+
+                    ${photoHTML}
+
+                    <div class="sponsor-content">
+
+                        <div class="sponsor-year">
+                            Festival Year:
+                            ${escapeHTML(sponsor.festivalYear)}
+                        </div>
+
+                        <div class="sponsor-name">
+                            ${escapeHTML(sponsor.sponsorName)}
+                        </div>
+
+                        ${
+                            amountText
+                                ? `
+                                    <div class="amount">
+                                        ${escapeHTML(amountText)}
+                                    </div>
+                                  `
+                                : ""
+                        }
+
+                        ${
+                            sponsor.description
+                                ? `
+                                    <div class="description">
+                                        ${escapeHTML(
+                                            sponsor.description
+                                        )}
+                                    </div>
+                                  `
+                                : ""
+                        }
+
+                    </div>
+
+                `;
+
+
+                sponsorsContainer.appendChild(card);
+
+            });
+
+        }
+
+
+        // =========================
+        // LOAD SPONSORS
+        // =========================
+
+        async function loadSponsors() {
+
+            status.innerHTML =
+                "Loading sponsors...";
+
+
+            try {
+
+                const response =
+                    await fetch(API_URL);
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to fetch sponsors"
+                    );
+
+                }
+
+
+                allSponsors =
+                    await response.json();
+
+
+                // =========================
+                // CREATE YEAR FILTER
+                // =========================
+
+                const years =
+                    [
+                        ...new Set(
+                            allSponsors
+                                .map(
+                                    sponsor =>
+                                        sponsor.festivalYear
+                                )
+                                .filter(Boolean)
+                        )
+                    ]
+                    .sort(
+                        (a, b) => b - a
+                    );
+
+
+                years.forEach(year => {
+
+                    const option =
+                        document.createElement("option");
+
+                    option.value = year;
+
+                    option.textContent = year;
+
+                    yearFilter.appendChild(option);
+
+                });
+
+
+                // =========================
+                // CHECK URL YEAR
+                // =========================
+
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+                const urlYear =
+                    params.get("year");
+
+
+                if (
+                    urlYear &&
+                    years.includes(Number(urlYear))
+                ) {
+
+                    yearFilter.value =
+                        urlYear;
+
+                }
+
+
+                applyFilter();
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                sponsorsContainer.innerHTML = "";
+
+                status.innerHTML = `
+                    <div class="status error">
+                        Unable to load sponsors.
+                        Please make sure the backend server is running.
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        // =========================
+        // APPLY FILTER
+        // =========================
+
+        function applyFilter() {
+
+            const selectedYear =
+                yearFilter.value;
+
+
+            if (selectedYear === "all") {
+
+                displaySponsors(
+                    allSponsors
+                );
+
+                return;
+
+            }
+
+
+            const filteredSponsors =
+                allSponsors.filter(
+                    sponsor =>
+                        String(
+                            sponsor.festivalYear
+                        ) === String(selectedYear)
+                );
+
+
+            displaySponsors(
+                filteredSponsors
+            );
+
+        }
+
+
+        // =========================
+        // FILTER CHANGE
+        // =========================
+
+        yearFilter.addEventListener(
+            "change",
+            function () {
+
+                const selectedYear =
+                    this.value;
+
+
+                const url =
+                    new URL(
+                        window.location.href
+                    );
+
+
+                if (selectedYear === "all") {
+
+                    url.searchParams.delete(
+                        "year"
+                    );
+
+                } else {
+
+                    url.searchParams.set(
+                        "year",
+                        selectedYear
+                    );
+
+                }
+
+
+                window.history.replaceState(
+                    {},
+                    "",
+                    url
+                );
+
+
+                applyFilter();
+
+            }
+        );
+
+
+        // =========================
+        // START
+        // =========================
+
+        loadSponsors();
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sri Durgamamba Youth | Upload Photos</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff1e6, #ffd6d6);
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .ganesha {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #b85c6b;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+        }
+
+        .upload-box {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #e88a9a;
+        }
+
+        input[type="file"] {
+            background: #fff8f8;
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #e88a9a;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b85c6b;
+        }
+
+        .back-btn {
+            margin-top: 12px;
+            background: #777;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        .preview {
+            margin-top: 25px;
+            text-align: center;
+            display: none;
+        }
+
+        .preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <div class="ganesha">
+                🙏
+            </div>
+
+            <h1>Sri Durgamamba Youth</h1>
+
+            <p class="subtitle">
+                Ganesha Festival Photo Upload
+            </p>
+
+        </div>
+
+
+        <div class="upload-box">
+
+            <form id="photoForm">
+
+                <label for="festivalYear">
+                    Festival Year
+                </label>
+
+                <input
+                    type="number"
+                    id="festivalYear"
+                    placeholder="Example: 2026"
+                    min="2000"
+                    max="2100"
+                    required
+                >
+
+
+                <label for="event">
+                    Festival Event
+                </label>
+
+                <input
+                    type="text"
+                    id="event"
+                    placeholder="Example: Ganesh Chaturthi"
+                    required
+                >
+
+
+                <label for="title">
+                    Photo Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Example: Ganesha Idol"
+                    required
+                >
+
+
+                <label for="photo">
+                    Select Photo
+                </label>
+
+                <input
+                    type="file"
+                    id="photo"
+                    accept="image/*"
+                    required
+                >
+
+
+                <button type="submit">
+                    📸 Upload Photo
+                </button>
+
+            </form>
+
+
+            <p id="message"></p>
+
+
+            <div class="preview" id="preview">
+
+                <h3>Selected Photo</h3>
+
+                <br>
+
+                <img id="previewImage" src="" alt="Photo Preview">
+
+            </div>
+
+
+            <button
+                class="back-btn"
+                onclick="window.location.href='admin.html'">
+                ← Back to Admin Dashboard
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // Check login
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // Photo preview
+        const photoInput =
+            document.getElementById("photo");
+
+        photoInput.addEventListener("change", function () {
+
+            const file = this.files[0];
+
+            if (file) {
+
+                const imageURL =
+                    URL.createObjectURL(file);
+
+                document.getElementById("previewImage").src =
+                    imageURL;
+
+                document.getElementById("preview").style.display =
+                    "block";
+            }
+
+        });
+
+
+        // Upload photo
+        const form =
+            document.getElementById("photoForm");
+
+        form.addEventListener("submit", async function (event) {
+
+            event.preventDefault();
+
+
+            const festivalYear =
+                document.getElementById("festivalYear").value;
+
+            const festivalEvent =
+                document.getElementById("event").value.trim();
+
+            const title =
+                document.getElementById("title").value.trim();
+
+            const photo =
+                document.getElementById("photo").files[0];
+
+            const message =
+                document.getElementById("message");
+
+
+            if (!photo) {
+
+                message.textContent =
+                    "Please select a photo.";
+
+                message.style.color = "red";
+
+                return;
+            }
+
+
+            const formData = new FormData();
+
+            formData.append(
+                "festivalYear",
+                festivalYear
+            );
+
+            formData.append(
+                "event",
+                festivalEvent
+            );
+
+            formData.append(
+                "title",
+                title
+            );
+
+            formData.append(
+                "photo",
+                photo
+            );
+
+
+            message.textContent =
+                "Uploading photo...";
+
+            message.style.color =
+                "#b85c6b";
+
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:5000/api/photos",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Authorization":
+                                "Bearer " + token
+                        },
+
+                        body: formData
+                    }
+                );
+
+
+                const data =
+                    await response.json();
+
+
+                if (response.ok) {
+
+                    message.textContent =
+                        "✅ Photo uploaded successfully!";
+
+                    message.style.color =
+                        "green";
+
+
+                    form.reset();
+
+                    document.getElementById(
+                        "preview"
+                    ).style.display = "none";
+
+
+                } else {
+
+                    message.textContent =
+                        data.message ||
+                        "Photo upload failed.";
+
+                    message.style.color =
+                        "red";
+                }
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Unable to connect to server.";
+
+                message.style.color =
+                    "red";
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

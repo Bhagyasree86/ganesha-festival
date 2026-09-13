@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ganesh Festival | Sri Durgamamba Youth</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            background: #fff8f6;
+            color: #24191a;
+        }
+
+        /* =========================================
+           HERO SECTION
+        ========================================= */
+
+        .hero {
+            height: 100vh;
+            min-height: 650px;
+
+            position: relative;
+
+            background-image:
+                url("images/vinayaka.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            overflow: hidden;
+        }
+
+        /* Soft dark overlay */
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.16),
+                    rgba(0,0,0,0.30)
+                );
+
+            z-index: 1;
+        }
+
+
+        /* =========================================
+           GOLD DECORATIVE BORDER
+        ========================================= */
+
+        .gold-border {
+            position: absolute;
+
+            top: 0;
+            left: 4%;
+
+            width: 92%;
+            height: 100%;
+
+            border-left: 7px solid #c08a35;
+            border-right: 7px solid #c08a35;
+
+            border-radius:
+                48% 48% 0 0 /
+                20% 20% 0 0;
+
+            z-index: 2;
+
+            pointer-events: none;
+
+            opacity: 0.9;
+        }
+
+
+        /* =========================================
+           NAVBAR
+        ========================================= */
+
+        .navbar {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            padding:
+                32px 4.3%;
+
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            z-index: 10;
+        }
+
+        .logo {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            white-space: nowrap;
+
+            text-shadow:
+                0 2px 10px rgba(0,0,0,0.5);
+        }
+
+
+        .nav-links {
+            list-style: none;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 500;
+
+            transition: 0.3s;
+
+            text-shadow:
+                0 2px 8px rgba(0,0,0,0.5);
+
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: #d7a74c;
+        }
+
+
+        /* =========================================
+           HERO CENTER CARD
+        ========================================= */
+
+        .hero-card {
+            position: absolute;
+
+            z-index: 5;
+
+            top: 50%;
+            left: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            width: min(855px, 78%);
+
+            padding:
+                48px 50px;
+
+            text-align: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.35);
+
+            border-radius: 20px;
+
+            background:
+                rgba(0,0,0,0.28);
+
+            backdrop-filter: blur(3px);
+
+            -webkit-backdrop-filter: blur(3px);
+
+            box-shadow:
+                0 15px 50px
+                rgba(0,0,0,0.22);
+        }
+
+
+        /* =========================================
+           PRESENTS
+        ========================================= */
+
+        .presents {
+            font-family: "Montserrat", sans-serif;
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            letter-spacing: 7px;
+
+            color: white;
+
+            margin-bottom: 32px;
+
+            text-transform: uppercase;
+
+            text-shadow:
+                0 2px 10px rgba(0,0,0,0.5);
+        }
+
+
+        /* =========================================
+           GANESH FESTIVAL
+        ========================================= */
+
+        .festival-title {
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                clamp(90px, 9vw, 145px);
+
+            font-weight: 600;
+
+            line-height: 0.78;
+
+            letter-spacing: 3px;
+
+            color: white;
+
+            text-transform: uppercase;
+
+            text-shadow:
+                0 5px 25px
+                rgba(0,0,0,0.55);
+        }
+
+        .festival-title span {
+            display: block;
+        }
+
+
+        /* =========================================
+           TAGLINE
+        ========================================= */
+
+        .tagline {
+            margin-top: 42px;
+
+            font-size: 17px;
+
+            font-weight: 500;
+
+            letter-spacing: 2px;
+
+            color: white;
+
+            text-shadow:
+                0 2px 10px rgba(0,0,0,0.5);
+        }
+
+
+        /* =========================================
+           EXPLORE BUTTON
+        ========================================= */
+
+        .explore-btn {
+            display: inline-block;
+
+            margin-top: 40px;
+
+            padding:
+                16px 38px;
+
+            border:
+                1px solid white;
+
+            border-radius: 40px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            background:
+                rgba(0,0,0,0.10);
+
+            transition:
+                0.3s ease;
+        }
+
+        .explore-btn:hover {
+            background: white;
+
+            color: #24191a;
+
+            transform:
+                translateY(-3px);
+        }
+
+
+        /* =========================================
+           INSTAGRAM BOTTOM LEFT
+        ========================================= */
+
+        .instagram-corner {
+            position: absolute;
+
+            left: 6%;
+
+            bottom: 32px;
+
+            z-index: 8;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+            text-align: left;
+        }
+
+        .instagram-name {
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            letter-spacing: 1px;
+
+            text-shadow:
+                0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .instagram-id {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            letter-spacing: 0.5px;
+
+            transition: 0.3s;
+        }
+
+        .instagram-id:hover {
+            color: #d8a64b;
+        }
+
+
+        /* =========================================
+           CELEBRATIONS SECTION
+        ========================================= */
+
+        .celebrations {
+            min-height: 510px;
+
+            background:
+                #fff9f7;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding:
+                90px 20px;
+        }
+
+        .celebration-content {
+            max-width: 850px;
+
+            width: 100%;
+        }
+
+
+        /* Small heading */
+
+        .celebration-label {
+            font-size: 13px;
+
+            letter-spacing: 6px;
+
+            color: #c45f6e;
+
+            font-weight: 500;
+
+            margin-bottom: 35px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* Main heading */
+
+        .celebration-title {
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                clamp(55px, 6vw, 82px);
+
+            font-weight: 500;
+
+            line-height: 0.95;
+
+            color: #291d1e;
+
+            letter-spacing: -1px;
+        }
+
+
+        .celebration-title span {
+            display: block;
+        }
+
+
+        /* Discover link */
+
+        .discover-link {
+            display: inline-block;
+
+            margin-top: 45px;
+
+            color: #c45f6e;
+
+            text-decoration: none;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            padding-bottom: 8px;
+
+            border-bottom:
+                1px solid #c45f6e;
+
+            transition:
+                0.3s ease;
+        }
+
+        .discover-link:hover {
+            letter-spacing: 0.5px;
+
+            color: #9f4352;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            background:
+                #241719;
+
+            min-height: 325px;
+
+            padding:
+                62px 20px 35px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            color: white;
+        }
+
+
+        .footer-title {
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size: 34px;
+
+            font-weight: 600;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .footer-instagram {
+            font-size: 14px;
+
+            margin-bottom: 12px;
+
+            color: white;
+        }
+
+        .footer-instagram a {
+            color: #e98b98;
+
+            text-decoration: none;
+        }
+
+        .footer-instagram a:hover {
+            color: white;
+        }
+
+
+        .footer-address {
+            font-size: 14px;
+
+            color: #f0dfe0;
+
+            margin-bottom: 30px;
+        }
+
+
+        .footer-line {
+            width: 95px;
+
+            height: 1px;
+
+            background: #a95b67;
+
+            margin-bottom: 28px;
+        }
+
+
+        .copyright {
+            font-size: 12px;
+
+            color: #aa9698;
+        }
+
+
+        /* =========================================
+           TABLET
+        ========================================= */
+
+        @media (max-width: 1100px) {
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            .navbar {
+                padding: 25px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+
+            .hero-card {
+                width: 88%;
+
+                padding:
+                    40px 25px;
+            }
+
+
+            .presents {
+                font-size: 14px;
+
+                letter-spacing: 4px;
+
+                margin-bottom: 25px;
+            }
+
+
+            .festival-title {
+                font-size: 75px;
+            }
+
+
+            .tagline {
+                font-size: 14px;
+
+                margin-top: 32px;
+            }
+
+
+            .instagram-corner {
+                left: 25px;
+
+                bottom: 22px;
+            }
+
+
+            .celebrations {
+                min-height: 450px;
+
+                padding:
+                    70px 20px;
+            }
+
+
+            .celebration-label {
+                font-size: 11px;
+
+                letter-spacing: 4px;
+            }
+
+
+            .celebration-title {
+                font-size: 55px;
+            }
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+        ========================================= */
+
+        @media (max-width: 500px) {
+
+            .hero {
+                min-height: 600px;
+            }
+
+
+            .gold-border {
+                left: 3%;
+
+                width: 94%;
+
+                border-width: 4px;
+            }
+
+
+            .hero-card {
+                width: 90%;
+
+                padding:
+                    35px 15px;
+
+                border-radius: 15px;
+            }
+
+
+            .presents {
+                font-size: 11px;
+
+                letter-spacing: 2.5px;
+
+                line-height: 1.5;
+
+                margin-bottom: 24px;
+            }
+
+
+            .festival-title {
+                font-size: 55px;
+
+                line-height: 0.82;
+            }
+
+
+            .tagline {
+                font-size: 11px;
+
+                letter-spacing: 1px;
+
+                margin-top: 28px;
+            }
+
+
+            .explore-btn {
+                margin-top: 30px;
+
+                padding:
+                    13px 28px;
+
+                font-size: 13px;
+            }
+
+
+            .instagram-name {
+                font-size: 12px;
+            }
+
+
+            .instagram-id {
+                font-size: 11px;
+            }
+
+
+            .celebrations {
+                min-height: 400px;
+
+                padding:
+                    65px 18px;
+            }
+
+
+            .celebration-label {
+                font-size: 10px;
+
+                letter-spacing: 3px;
+
+                margin-bottom: 25px;
+            }
+
+
+            .celebration-title {
+                font-size: 45px;
+            }
+
+
+            .discover-link {
+                margin-top: 35px;
+
+                font-size: 14px;
+            }
+
+
+            footer {
+                min-height: 290px;
+
+                padding:
+                    50px 20px 30px;
+            }
+
+
+            .footer-title {
+                font-size: 28px;
+            }
+
+
+            .footer-instagram,
+            .footer-address {
+                font-size: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <section class="hero">
+
+        <!-- Gold border -->
+        <div class="gold-border"></div>
+
+
+        <!-- Navigation -->
+
+        <nav class="navbar">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                SRI DURGAMAMBA YOUTH
+            </a>
+
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="events.html">
+                        Events
+                    </a>
+                </li>
+
+                <li>
+                    <a href="festival-years.html">
+                        Festival Years
+                    </a>
+                </li>
+
+                <li>
+                    <a href="gallery.html">
+                        Gallery
+                    </a>
+                </li>
+
+                <li>
+                    <a href="videos.html">
+                        Videos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="auction.html">
+                        Laddu Auction
+                    </a>
+                </li>
+
+                <li>
+                    <a href="nimajjanam.html">
+                        Nimajjanam
+                    </a>
+                </li>
+
+                <li>
+                    <a href="sponsors.html">
+                        Sponsors
+                    </a>
+                </li>
+
+                <li>
+                    <a href="committee.html">
+                        Committee
+                    </a>
+                </li>
+
+                <li>
+                    <a href="find-us.html">
+                        Find Us
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <!-- Center hero card -->
+
+        <div class="hero-card">
+
+            <div class="presents">
+                SRI DURGAMAMBA YOUTH PRESENTS
+            </div>
+
+
+            <h1 class="festival-title">
+
+                <span>GANESH</span>
+
+                <span>FESTIVAL</span>
+
+            </h1>
+
+
+            <p class="tagline">
+                Our Festival • Our Memories
+            </p>
+
+
+            <a
+                href="about.html"
+                class="explore-btn"
+            >
+                Explore Festival
+            </a>
+
+        </div>
+
+
+        <!-- Instagram bottom left -->
+
+        <div class="instagram-corner">
+
+            <div class="instagram-name">
+                Sri Durgamamba Youth
+            </div>
+
+            <a
+                href="https://www.instagram.com/durga_mamba_youth/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="instagram-id"
+            >
+                @durga_mamba_youth
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         OUR CELEBRATIONS
+    ================================================== -->
+
+    <section class="celebrations">
+
+        <div class="celebration-content">
+
+            <div class="celebration-label">
+                OUR CELEBRATIONS
+            </div>
+
+
+            <h2 class="celebration-title">
+
+                <span>
+                    Celebrating together,
+                </span>
+
+                <span>
+                    remembering forever.
+                </span>
+
+            </h2>
+
+
+            <a
+                href="about.html"
+                class="discover-link"
+            >
+                Discover Our Festival →
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer>
+
+        <div class="footer-title">
+            SRI DURGAMAMBA YOUTH
+        </div>
+
+
+        <div class="footer-instagram">
+
+            Instagram:
+
+            <a
+                href="https://www.instagram.com/durga_mamba_youth/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                @durga_mamba_youth
+            </a>
+
+        </div>
+
+
+        <div class="footer-address">
+            Address: Durga Nagar, Saripalli, Pendurthi
+        </div>
+
+
+        <div class="footer-line"></div>
+
+
+        <div class="copyright">
+            © Sri Durgamamba Youth
+        </div>
+
+    </footer>
+
+
+</body>
+</html>
