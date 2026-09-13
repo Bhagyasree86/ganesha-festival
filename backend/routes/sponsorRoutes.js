@@ -1,7 +1,7 @@
 const express = require("express");
 
 const Sponsor =
-    require("../models/Sponsor");
+    require("../models/sponsor");
 
 const authMiddleware =
     require("../middleware/authMiddleware");

@@ -1,5 +1,5 @@
 const express = require("express");
-const Committee = require("../models/Committee");
+const Committee = require("../models/committee");
 const authMiddleware = require("../middleware/authMiddleware");
 const multer = require("multer");
 const path = require("path");

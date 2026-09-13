@@ -3,7 +3,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-const Photo = require("../models/Photo");
+const Photo = require("../models/photo");
 const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
