@@ -1216,7 +1216,7 @@ async function loadEvent() {
 
         const response =
             await fetch(
-                "http://localhost:5000/api/events/" +
+                "https://gnesha-festival-backend.onrender.com/api/events/" +
                 eventId
             );
 
@@ -1412,10 +1412,10 @@ form.addEventListener(
         const url =
             isEditMode
 
-            ? "http://localhost:5000/api/events/" +
+            ? "https://gnesha-festival-backend.onrender.com/api/events/" +
               eventId
 
-            : "http://localhost:5000/api/events";
+            : "https://gnesha-festival-backend.onrender.com/api/events";
 
 
         // ==================================
