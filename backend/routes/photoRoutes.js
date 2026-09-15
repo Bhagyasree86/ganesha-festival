@@ -1,44 +1,24 @@
 const express = require("express");
 const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
+const { Readable } = require("stream");
 
 const Photo = require("../models/photo");
 const authMiddleware = require("../middleware/authMiddleware");
+const cloudinary = require("../config/cloudinary");
 
 const router = express.Router();
 
 
-// ===============================
-// WHERE UPLOADED IMAGES ARE STORED
-// ===============================
+// ==========================================
+// MULTER MEMORY STORAGE
+// ==========================================
 
-const storage = multer.diskStorage({
-
-    destination: function (req, file, cb) {
-
-        cb(null, "uploads/");
-
-    },
-
-    filename: function (req, file, cb) {
-
-        const uniqueName =
-            Date.now() +
-            "-" +
-            Math.round(Math.random() * 1E9) +
-            path.extname(file.originalname);
-
-        cb(null, uniqueName);
-
-    }
-
-});
+const storage = multer.memoryStorage();
 
 
-// ===============================
+// ==========================================
 // ONLY ALLOW IMAGE FILES
-// ===============================
+// ==========================================
 
 const fileFilter = function (req, file, cb) {
 
@@ -59,35 +39,83 @@ const fileFilter = function (req, file, cb) {
 
 
 const upload = multer({
-
     storage: storage,
-    fileFilter: fileFilter
-
+    fileFilter: fileFilter,
+    limits: {
+        fileSize: 10 * 1024 * 1024
+    }
 });
 
 
-// ===============================
+// ==========================================
+// UPLOAD IMAGE TO CLOUDINARY
+// ==========================================
+
+function uploadToCloudinary(buffer) {
+
+    return new Promise((resolve, reject) => {
+
+        const stream =
+            cloudinary.uploader.upload_stream(
+                {
+                    folder: "sri-durgamamba-youth/photos",
+                    resource_type: "image"
+                },
+
+                (error, result) => {
+
+                    if (error) {
+
+                        reject(error);
+
+                    } else {
+
+                        resolve(result);
+
+                    }
+
+                }
+            );
+
+
+        Readable
+            .from(buffer)
+            .pipe(stream);
+
+    });
+
+}
+
+
+// ==========================================
 // UPLOAD PHOTO
-// ===============================
+// ==========================================
 
 router.post(
     "/",
     authMiddleware,
     upload.single("photo"),
+
     async (req, res) => {
 
         try {
 
+            // ----------------------------------
+            // CHECK FILE
+            // ----------------------------------
+
             if (!req.file) {
 
                 return res.status(400).json({
-
                     message: "Please select a photo."
-
                 });
 
             }
 
+
+            // ----------------------------------
+            // GET FORM DATA
+            // ----------------------------------
 
             const {
                 festivalYear,
@@ -96,6 +124,10 @@ router.post(
             } = req.body;
 
 
+            // ----------------------------------
+            // VALIDATE DATA
+            // ----------------------------------
+
             if (
                 !festivalYear ||
                 !event ||
@@ -103,33 +135,100 @@ router.post(
             ) {
 
                 return res.status(400).json({
-
                     message:
                         "Please enter year, event and title."
-
                 });
 
             }
 
 
+            console.log(
+                "================================="
+            );
+
+            console.log(
+                "Uploading photo to Cloudinary..."
+            );
+
+            console.log(
+                "File:",
+                req.file.originalname
+            );
+
+            console.log(
+                "Size:",
+                req.file.size
+            );
+
+            console.log(
+                "Type:",
+                req.file.mimetype
+            );
+
+
+            // ----------------------------------
+            // UPLOAD TO CLOUDINARY
+            // ----------------------------------
+
+            const result =
+                await uploadToCloudinary(
+                    req.file.buffer
+                );
+
+
+            console.log(
+                "Cloudinary upload successful!"
+            );
+
+            console.log(
+                "Cloudinary URL:",
+                result.secure_url
+            );
+
+            console.log(
+                "Cloudinary Public ID:",
+                result.public_id
+            );
+
+
+            // ----------------------------------
+            // SAVE TO MONGODB
+            // ----------------------------------
+
             const photo = new Photo({
 
-                festivalYear: festivalYear,
+                festivalYear: Number(
+                    festivalYear
+                ),
 
                 event: event,
 
                 title: title,
 
                 imageUrl:
-                    `/uploads/${req.file.filename}`,
+                    result.secure_url,
 
-                uploadedBy: req.user.id
+                uploadedBy:
+                    req.user.id
 
             });
 
 
             await photo.save();
 
+
+            console.log(
+                "Photo saved to MongoDB!"
+            );
+
+            console.log(
+                "================================="
+            );
+
+
+            // ----------------------------------
+            // SUCCESS
+            // ----------------------------------
 
             res.status(201).json({
 
@@ -140,10 +239,24 @@ router.post(
 
             });
 
+        }
 
-        } catch (error) {
+
+        catch (error) {
+
+            console.log(
+                "================================="
+            );
+
+            console.log(
+                "PHOTO UPLOAD ERROR"
+            );
 
             console.log(error);
+
+            console.log(
+                "================================="
+            );
 
 
             res.status(500).json({
@@ -162,18 +275,34 @@ router.post(
 );
 
 
-// ===============================
+// ==========================================
 // GET ALL PHOTOS
-// ===============================
+// ==========================================
 
 router.get(
     "/",
+
     async (req, res) => {
 
         try {
 
+            const filter = {};
+
+
+            // Optional year filter
+
+            if (req.query.festivalYear) {
+
+                filter.festivalYear =
+                    Number(
+                        req.query.festivalYear
+                    );
+
+            }
+
+
             const photos =
-                await Photo.find()
+                await Photo.find(filter)
                     .populate(
                         "uploadedBy",
                         "name email"
@@ -185,10 +314,14 @@ router.get(
 
             res.json(photos);
 
+        }
 
-        } catch (error) {
+        catch (error) {
 
-            console.log(error);
+            console.log(
+                "Get photos error:",
+                error
+            );
 
 
             res.status(500).json({
@@ -207,12 +340,13 @@ router.get(
 );
 
 
-// ===============================
+// ==========================================
 // GET SINGLE PHOTO
-// ===============================
+// ==========================================
 
 router.get(
     "/:id",
+
     async (req, res) => {
 
         try {
@@ -237,10 +371,14 @@ router.get(
 
             res.json(photo);
 
+        }
 
-        } catch (error) {
+        catch (error) {
 
-            console.log(error);
+            console.log(
+                "Get single photo error:",
+                error
+            );
 
 
             res.status(500).json({
@@ -259,25 +397,28 @@ router.get(
 );
 
 
-// ===============================
+// ==========================================
 // DELETE PHOTO
-// ===============================
+// ==========================================
 
 router.delete(
     "/:id",
     authMiddleware,
+
     async (req, res) => {
 
         try {
 
-            // Find photo in MongoDB
+            // ----------------------------------
+            // FIND PHOTO
+            // ----------------------------------
+
             const photo =
                 await Photo.findById(
                     req.params.id
                 );
 
 
-            // Check if photo exists
             if (!photo) {
 
                 return res.status(404).json({
@@ -290,29 +431,82 @@ router.delete(
             }
 
 
-            // ===============================
-            // DELETE IMAGE FILE
-            // ===============================
+            // ----------------------------------
+            // DELETE FROM CLOUDINARY
+            // ----------------------------------
 
-            if (photo.imageUrl) {
+            if (
+                photo.imageUrl &&
+                photo.imageUrl.includes(
+                    "cloudinary.com"
+                )
+            ) {
 
-                const imagePath =
-                    path.join(
-                        __dirname,
-                        "..",
-                        photo.imageUrl
-                    );
+                try {
+
+                    const url =
+                        photo.imageUrl;
 
 
-                if (
-                    fs.existsSync(imagePath)
-                ) {
+                    const uploadIndex =
+                        url.indexOf(
+                            "/upload/"
+                        );
 
-                    fs.unlinkSync(imagePath);
+
+                    if (uploadIndex !== -1) {
+
+                        let publicId =
+                            url.substring(
+                                uploadIndex + 8
+                            );
+
+
+                        // Remove version number
+
+                        publicId =
+                            publicId.replace(
+                                /^v\d+\//,
+                                ""
+                            );
+
+
+                        // Remove file extension
+
+                        publicId =
+                            publicId.replace(
+                                /\.[^/.]+$/,
+                                ""
+                            );
+
+
+                        console.log(
+                            "Deleting Cloudinary image:",
+                            publicId
+                        );
+
+
+                        await cloudinary.uploader.destroy(
+                            publicId,
+                            {
+                                resource_type: "image"
+                            }
+                        );
+
+
+                        console.log(
+                            "Cloudinary image deleted."
+                        );
+
+                    }
+
+                }
+
+                catch (cloudinaryError) {
 
                     console.log(
-                        "Image file deleted:",
-                        imagePath
+                        "Cloudinary delete error:",
+                        cloudinaryError.message
                     );
 
                 }
@@ -320,18 +514,18 @@ router.delete(
             }
 
 
-            // ===============================
-            // DELETE DATABASE RECORD
-            // ===============================
+            // ----------------------------------
+            // DELETE MONGODB RECORD
+            // ----------------------------------
 
             await Photo.findByIdAndDelete(
                 req.params.id
             );
 
 
-            // ===============================
-            // SUCCESS RESPONSE
-            // ===============================
+            // ----------------------------------
+            // SUCCESS
+            // ----------------------------------
 
             res.json({
 
@@ -340,8 +534,9 @@ router.delete(
 
             });
 
+        }
 
-        } catch (error) {
+        catch (error) {
 
             console.log(
                 "Delete photo error:",
@@ -365,8 +560,8 @@ router.delete(
 );
 
 
-// ===============================
-// EXPORT ROUTER
-// ===============================
+// ==========================================
+// EXPORT
+// ==========================================
 
 module.exports = router;

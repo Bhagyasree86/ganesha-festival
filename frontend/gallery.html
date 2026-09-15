@@ -13,6 +13,10 @@
     <title>Gallery | Sri Durgamamba Youth</title>
 
 
+    <!-- =========================
+         GOOGLE FONTS
+    ========================= -->
+
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -32,12 +36,20 @@
 
     <style>
 
+        /* =========================
+           RESET
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+
+        /* =========================
+           BODY
+        ========================= */
 
         body {
 
@@ -853,7 +865,9 @@
         </header>
 
 
-        <!-- YEAR FILTER -->
+        <!-- =========================
+             YEAR FILTER
+        ========================= -->
 
         <div class="filter-box">
 
@@ -873,7 +887,9 @@
         </div>
 
 
-        <!-- GALLERY TITLE -->
+        <!-- =========================
+             GALLERY TITLE
+        ========================= -->
 
         <div class="gallery-title">
 
@@ -884,7 +900,9 @@
         </div>
 
 
-        <!-- STATUS -->
+        <!-- =========================
+             STATUS
+        ========================= -->
 
         <div id="loading">
             Loading photos...
@@ -901,7 +919,9 @@
         </div>
 
 
-        <!-- GALLERY -->
+        <!-- =========================
+             GALLERY
+        ========================= -->
 
         <div
             class="gallery-wrapper"
@@ -951,6 +971,7 @@
             <a
                 href="https://www.instagram.com/durga_mamba_youth/"
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 @durga_mamba_youth
             </a>
@@ -1060,6 +1081,58 @@
 
 
         /* =========================
+           GET CORRECT IMAGE URL
+        ========================= */
+
+        function getImageUrl(imageUrl) {
+
+            if (!imageUrl) {
+
+                return "";
+            }
+
+
+            /*
+                NEW CLOUDINARY IMAGE
+
+                Example:
+                https://res.cloudinary.com/...
+            */
+
+            if (
+                imageUrl.startsWith("http://") ||
+                imageUrl.startsWith("https://")
+            ) {
+
+                return imageUrl;
+            }
+
+
+            /*
+                OLD LOCAL/RENDER IMAGE
+
+                Example:
+                /uploads/photo.jpg
+            */
+
+            if (
+                imageUrl.startsWith("/")
+            ) {
+
+                return API_URL + imageUrl;
+            }
+
+
+            /*
+                If path doesn't start
+                with /
+            */
+
+            return API_URL + "/" + imageUrl;
+        }
+
+
+        /* =========================
            DISPLAY PHOTOS
         ========================= */
 
@@ -1073,11 +1146,14 @@
                 wrapper.style.display =
                     "none";
 
+
                 hint.style.display =
                     "none";
 
+
                 noPhotos.style.display =
                     "block";
+
 
                 noPhotos.textContent =
                     "No photos found for this festival year.";
@@ -1101,6 +1177,10 @@
             photos.forEach(
                 function(photo, index) {
 
+
+                    /* =====================
+                       ITEM
+                    ===================== */
 
                     const item =
                         document.createElement(
@@ -1155,9 +1235,22 @@
                         );
 
 
+                    /*
+                        IMPORTANT:
+
+                        Supports BOTH:
+
+                        1. Cloudinary URL
+                           https://res.cloudinary.com/...
+
+                        2. Old Render URL
+                           /uploads/photo.jpg
+                    */
+
                     image.src =
-                        API_URL +
-                        photo.imageUrl;
+                        getImageUrl(
+                            photo.imageUrl
+                        );
 
 
                     image.alt =
@@ -1167,6 +1260,24 @@
 
                     image.loading =
                         "lazy";
+
+
+                    /*
+                        If image fails,
+                        show a simple message
+                    */
+
+                    image.onerror =
+                        function() {
+
+                            console.error(
+                                "Image failed:",
+                                image.src
+                            );
+
+                            image.alt =
+                                "Unable to load image";
+                        };
 
 
                     /* =====================
@@ -1206,9 +1317,12 @@
                         "click",
                         function() {
 
-                            openModal(
-                                image.src
-                            );
+                            if (image.src) {
+
+                                openModal(
+                                    image.src
+                                );
+                            }
 
                         }
                     );
@@ -1218,9 +1332,12 @@
                         "click",
                         function() {
 
-                            openModal(
-                                image.src
-                            );
+                            if (image.src) {
+
+                                openModal(
+                                    image.src
+                                );
+                            }
 
                         }
                     );
@@ -1281,12 +1398,13 @@
                         "Ganesh Festival";
 
 
-                    if (photo.festivalYear) {
+                    if (
+                        photo.festivalYear
+                    ) {
 
                         detailsText +=
                             "  •  " +
                             photo.festivalYear;
-
                     }
 
 
@@ -1359,12 +1477,17 @@
                     throw new Error(
                         "Failed to load photos"
                     );
-
                 }
 
 
                 allPhotos =
                     await response.json();
+
+
+                console.log(
+                    "Photos received:",
+                    allPhotos
+                );
 
 
                 loading.style.display =
@@ -1391,7 +1514,6 @@
                                     photo.festivalYear
                                 )
                             );
-
                         }
 
                     }
@@ -1432,7 +1554,7 @@
 
 
                 /* =====================
-                   URL YEAR
+                   CHECK URL YEAR
                 ===================== */
 
                 const urlParams =
@@ -1447,16 +1569,12 @@
 
                 if (selectedYear) {
 
-                    yearFilter.value =
-                        selectedYear;
-
-
-                    const filtered =
-                        allPhotos.filter(
-                            function(photo) {
+                    const yearExists =
+                        sortedYears.some(
+                            function(year) {
 
                                 return String(
-                                    photo.festivalYear
+                                    year
                                 ) ===
                                 String(
                                     selectedYear
@@ -1466,18 +1584,47 @@
                         );
 
 
-                    displayPhotos(
-                        filtered
-                    );
+                    if (yearExists) {
 
-                }
+                        yearFilter.value =
+                            selectedYear;
 
-                else {
+
+                        const filtered =
+                            allPhotos.filter(
+                                function(photo) {
+
+                                    return String(
+                                        photo.festivalYear
+                                    ) ===
+                                    String(
+                                        selectedYear
+                                    );
+
+                                }
+                            );
+
+
+                        displayPhotos(
+                            filtered
+                        );
+
+                    } else {
+
+                        yearFilter.value =
+                            "all";
+
+
+                        displayPhotos(
+                            allPhotos
+                        );
+                    }
+
+                } else {
 
                     displayPhotos(
                         allPhotos
                     );
-
                 }
 
             }
@@ -1485,7 +1632,10 @@
 
             catch (err) {
 
-                console.error(err);
+                console.error(
+                    "Gallery error:",
+                    err
+                );
 
 
                 loading.style.display =
@@ -1502,7 +1652,6 @@
 
                 hint.style.display =
                     "none";
-
             }
 
         }
@@ -1520,7 +1669,13 @@
                     yearFilter.value;
 
 
-                if (selected === "all") {
+                /* =====================
+                   ALL YEARS
+                ===================== */
+
+                if (
+                    selected === "all"
+                ) {
 
                     displayPhotos(
                         allPhotos
@@ -1533,9 +1688,14 @@
                         "gallery.html"
                     );
 
+
                     return;
                 }
 
+
+                /* =====================
+                   SELECTED YEAR
+                ===================== */
 
                 const filtered =
                     allPhotos.filter(
@@ -1557,11 +1717,17 @@
                 );
 
 
+                /* =====================
+                   UPDATE URL
+                ===================== */
+
                 window.history.replaceState(
                     {},
                     "",
                     "gallery.html?year=" +
-                    selected
+                    encodeURIComponent(
+                        selected
+                    )
                 );
 
             }
@@ -1569,7 +1735,7 @@
 
 
         /* =========================
-           MODAL
+           OPEN MODAL
         ========================= */
 
         function openModal(src) {
@@ -1596,9 +1762,12 @@
 
             document.body.style.overflow =
                 "hidden";
-
         }
 
+
+        /* =========================
+           CLOSE MODAL
+        ========================= */
 
         function closeModal() {
 
@@ -1615,6 +1784,10 @@
             document.body.style.overflow =
                 "auto";
 
+
+            document.getElementById(
+                "modalImage"
+            ).src = "";
         }
 
 
@@ -1631,7 +1804,7 @@
 
 
         /* =========================
-           CLOSE OUTSIDE
+           CLOSE OUTSIDE MODAL
         ========================= */
 
         document
@@ -1645,7 +1818,6 @@
                     ) {
 
                         closeModal();
-
                     }
 
                 }
@@ -1665,7 +1837,6 @@
                 ) {
 
                     closeModal();
-
                 }
 
             }
