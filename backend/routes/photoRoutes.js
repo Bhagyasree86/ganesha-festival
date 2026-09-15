@@ -558,7 +558,42 @@ router.delete(
 
     }
 );
+// ==========================================
+// CLEANUP OLD BROKEN LOCAL-UPLOAD RECORDS
+// ==========================================
 
+router.delete(
+    "/cleanup-old-uploads",
+    authMiddleware,
+    async (req, res) => {
+        try {
+            const result = await Photo.deleteMany({
+                imageUrl: {
+                    $regex: "^/uploads/"
+                }
+            });
+
+            res.json({
+                message:
+                    "Old broken photo records deleted successfully.",
+                deletedCount:
+                    result.deletedCount
+            });
+        } catch (error) {
+            console.log(
+                "Cleanup old photos error:",
+                error
+            );
+
+            res.status(500).json({
+                message:
+                    "Failed to clean old photo records.",
+                error:
+                    error.message
+            });
+        }
+    }
+);
 
 // ==========================================
 // EXPORT
