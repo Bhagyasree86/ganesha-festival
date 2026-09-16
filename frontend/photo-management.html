@@ -399,7 +399,7 @@
         }
 
         /* =====================================
-           FULL PHOTO DISPLAY
+           PHOTO
         ===================================== */
 
         .photo-card img {
@@ -417,6 +417,36 @@
             display: block;
 
             background: #111;
+
+            border-bottom:
+                1px solid #6f5720;
+        }
+
+        /* =====================================
+           IMAGE ERROR
+        ===================================== */
+
+        .image-error {
+
+            min-height: 220px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 20px;
+
+            background: #180c0c;
+
+            color: #bfae8d;
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
 
             border-bottom:
                 1px solid #6f5720;
@@ -638,7 +668,9 @@
 
 </head>
 
+
 <body>
+
 
 <nav>
 
@@ -657,7 +689,9 @@
 </nav>
 
 
+
 <div class="container">
+
 
     <div class="heading">
 
@@ -666,11 +700,16 @@
         </h1>
 
         <p>
-            Upload and manage festival memories
+            Upload and manage festival photos
         </p>
 
     </div>
 
+
+
+    <!-- =====================================
+         UPLOAD
+    ====================================== -->
 
     <div class="upload-box">
 
@@ -678,7 +717,9 @@
             Upload Festival Photo
         </h2>
 
+
         <form id="photoForm">
+
 
             <div class="form-group">
 
@@ -694,6 +735,7 @@
                 >
 
             </div>
+
 
 
             <div class="form-group">
@@ -712,6 +754,7 @@
             </div>
 
 
+
             <div class="form-group">
 
                 <label for="title">
@@ -726,6 +769,7 @@
                 >
 
             </div>
+
 
 
             <div class="form-group">
@@ -744,6 +788,7 @@
             </div>
 
 
+
             <button
                 type="submit"
                 class="btn">
@@ -752,18 +797,26 @@
 
             </button>
 
+
         </form>
+
 
         <p id="message"></p>
 
     </div>
 
 
+
+    <!-- =====================================
+         PHOTO LIST
+    ====================================== -->
+
     <div class="photo-header">
 
         <h2>
             Uploaded Photos
         </h2>
+
 
         <select
             id="yearFilter"
@@ -778,6 +831,7 @@
     </div>
 
 
+
     <div
         id="photoGrid"
         class="photo-grid">
@@ -788,8 +842,14 @@
 
     </div>
 
+
 </div>
 
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
 
 <footer>
 
@@ -812,43 +872,110 @@
 </footer>
 
 
+
 <script>
 
-const API_URL = "https://gnesha-festival-backend.onrender.com";
+
+/* =====================================
+   API
+===================================== */
+
+const API_URL =
+    "https://gnesha-festival-backend.onrender.com";
+
+
+/* =====================================
+   TOKEN
+===================================== */
 
 const token =
     localStorage.getItem("token");
+
 
 if (!token) {
 
     window.location.href =
         "login.html";
+
 }
 
 
+/* =====================================
+   ELEMENTS
+===================================== */
+
 const photoForm =
-    document.getElementById(
-        "photoForm"
-    );
+    document.getElementById("photoForm");
 
 const photoGrid =
-    document.getElementById(
-        "photoGrid"
-    );
+    document.getElementById("photoGrid");
 
 const yearFilter =
-    document.getElementById(
-        "yearFilter"
-    );
+    document.getElementById("yearFilter");
 
 const message =
-    document.getElementById(
-        "message"
-    );
+    document.getElementById("message");
 
 
 let allPhotos = [];
 
+
+
+/* =====================================
+   IMAGE URL HANDLER
+===================================== */
+
+function getImageUrl(imageUrl) {
+
+    if (!imageUrl) {
+
+        return "";
+
+    }
+
+
+    /*
+       Cloudinary URL
+       Example:
+       https://res.cloudinary.com/...
+    */
+
+    if (
+        imageUrl.startsWith("http://") ||
+        imageUrl.startsWith("https://")
+    ) {
+
+        return imageUrl;
+
+    }
+
+
+    /*
+       Old/local backend image
+       Example:
+       /uploads/photo.jpg
+    */
+
+    if (imageUrl.startsWith("/")) {
+
+        return API_URL + imageUrl;
+
+    }
+
+
+    /*
+       Relative image path
+    */
+
+    return API_URL + "/" + imageUrl;
+
+}
+
+
+
+/* =====================================
+   LOAD PHOTOS
+===================================== */
 
 async function loadPhotos() {
 
@@ -859,8 +986,10 @@ async function loadPhotos() {
                 `${API_URL}/api/photos`
             );
 
+
         const data =
             await response.json();
+
 
         if (!response.ok) {
 
@@ -868,15 +997,22 @@ async function loadPhotos() {
                 data.message ||
                 "Unable to load photos."
             );
+
         }
+
 
         allPhotos = data;
 
+
         createYearFilter();
 
-        displayPhotos(allPhotos);
+
+        displayPhotos(
+            allPhotos
+        );
 
     }
+
     catch (error) {
 
         console.error(
@@ -884,24 +1020,41 @@ async function loadPhotos() {
             error
         );
 
+
         photoGrid.innerHTML = `
+
             <div class="empty">
+
                 Unable to load photos.
+
             </div>
+
         `;
+
     }
+
 }
 
+
+
+/* =====================================
+   YEAR FILTER
+===================================== */
 
 function createYearFilter() {
 
     yearFilter.innerHTML = `
+
         <option value="all">
             All Years
         </option>
+
     `;
 
-    const years = new Set();
+
+    const years =
+        new Set();
+
 
     allPhotos.forEach(
         photo => {
@@ -913,7 +1066,9 @@ function createYearFilter() {
                         photo.festivalYear
                     )
                 );
+
             }
+
         }
     );
 
@@ -930,21 +1085,34 @@ function createYearFilter() {
                         "option"
                     );
 
-                option.value = year;
 
-                option.textContent = year;
+                option.value =
+                    year;
+
+
+                option.textContent =
+                    year;
+
 
                 yearFilter.appendChild(
                     option
                 );
+
             }
         );
+
 }
 
+
+
+/* =====================================
+   DISPLAY PHOTOS
+===================================== */
 
 function displayPhotos(photos) {
 
     photoGrid.innerHTML = "";
+
 
     if (
         !photos ||
@@ -952,112 +1120,287 @@ function displayPhotos(photos) {
     ) {
 
         photoGrid.innerHTML = `
+
             <div class="empty">
+
                 No photos found.
+
             </div>
+
         `;
 
         return;
+
     }
+
 
 
     photos.forEach(
         photo => {
+
 
             const card =
                 document.createElement(
                     "div"
                 );
 
+
             card.className =
                 "photo-card";
 
 
+
+            /*
+               IMPORTANT:
+               Use getImageUrl()
+               so Cloudinary URLs are
+               NOT prefixed with Render URL.
+            */
+
             const imageUrl =
-                `${API_URL}${photo.imageUrl}`;
+                getImageUrl(
+                    photo.imageUrl
+                );
 
 
-            card.innerHTML = `
 
-                <img
-                    src="${imageUrl}"
-                    alt="${escapeHTML(
-                        photo.title ||
-                        "Festival Photo"
-                    )}"
-                    onerror="
-                        this.alt='Image unavailable';
-                    "
-                >
+            /* =================================
+               IMAGE
+            ================================= */
 
-                <div class="photo-info">
-
-                    <h3>
-                        ${escapeHTML(
-                            photo.title ||
-                            "Untitled"
-                        )}
-                    </h3>
-
-                    <p>
-                        <strong>
-                            Year:
-                        </strong>
-
-                        ${escapeHTML(
-                            photo.festivalYear
-                        )}
-                    </p>
-
-                    <p>
-                        <strong>
-                            Event:
-                        </strong>
-
-                        ${escapeHTML(
-                            photo.event ||
-                            ""
-                        )}
-                    </p>
-
-                    <button
-                        class="delete-btn"
-                        onclick="
-                            deletePhoto(
-                                '${photo._id}'
-                            )
-                        ">
-
-                        Delete Photo
-
-                    </button>
-
-                </div>
-            `;
+            const image =
+                document.createElement(
+                    "img"
+                );
 
 
-            photoGrid.appendChild(card);
+            image.src =
+                imageUrl;
+
+
+            image.alt =
+                photo.title ||
+                "Festival Photo";
+
+
+
+            /* =================================
+               IMAGE ERROR
+            ================================= */
+
+            image.onerror =
+                function() {
+
+                    image.style.display =
+                        "none";
+
+
+                    const errorBox =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    errorBox.className =
+                        "image-error";
+
+
+                    errorBox.textContent =
+                        "Image unavailable";
+
+
+                    card.insertBefore(
+                        errorBox,
+                        image
+                    );
+
+                };
+
+
+
+            /* =================================
+               PHOTO INFO
+            ================================= */
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+
+            info.className =
+                "photo-info";
+
+
+
+            const title =
+                document.createElement(
+                    "h3"
+                );
+
+
+            title.textContent =
+                photo.title ||
+                "Untitled";
+
+
+
+            const year =
+                document.createElement(
+                    "p"
+                );
+
+
+            const yearStrong =
+                document.createElement(
+                    "strong"
+                );
+
+
+            yearStrong.textContent =
+                "Year: ";
+
+
+            year.appendChild(
+                yearStrong
+            );
+
+
+            year.appendChild(
+                document.createTextNode(
+                    photo.festivalYear || ""
+                )
+            );
+
+
+
+            const event =
+                document.createElement(
+                    "p"
+                );
+
+
+            const eventStrong =
+                document.createElement(
+                    "strong"
+                );
+
+
+            eventStrong.textContent =
+                "Event: ";
+
+
+            event.appendChild(
+                eventStrong
+            );
+
+
+            event.appendChild(
+                document.createTextNode(
+                    photo.event || ""
+                )
+            );
+
+
+
+            /* =================================
+               DELETE BUTTON
+            ================================= */
+
+            const deleteButton =
+                document.createElement(
+                    "button"
+                );
+
+
+            deleteButton.className =
+                "delete-btn";
+
+
+            deleteButton.textContent =
+                "Delete Photo";
+
+
+            deleteButton.addEventListener(
+                "click",
+                function() {
+
+                    deletePhoto(
+                        photo._id
+                    );
+
+                }
+            );
+
+
+
+            info.appendChild(
+                title
+            );
+
+
+            info.appendChild(
+                year
+            );
+
+
+            info.appendChild(
+                event
+            );
+
+
+            info.appendChild(
+                deleteButton
+            );
+
+
+
+            card.appendChild(
+                image
+            );
+
+
+            card.appendChild(
+                info
+            );
+
+
+            photoGrid.appendChild(
+                card
+            );
 
         }
     );
+
 }
 
+
+
+/* =====================================
+   YEAR FILTER CHANGE
+===================================== */
 
 yearFilter.addEventListener(
     "change",
     function() {
 
+
         const selected =
             this.value;
 
-        if (selected === "all") {
+
+        if (
+            selected === "all"
+        ) {
 
             displayPhotos(
                 allPhotos
             );
 
             return;
+
         }
+
 
 
         const filtered =
@@ -1069,15 +1412,23 @@ yearFilter.addEventListener(
             );
 
 
-        displayPhotos(filtered);
+        displayPhotos(
+            filtered
+        );
 
     }
 );
 
 
+
+/* =====================================
+   UPLOAD PHOTO
+===================================== */
+
 photoForm.addEventListener(
     "submit",
     async function(event) {
+
 
         event.preventDefault();
 
@@ -1106,13 +1457,16 @@ photoForm.addEventListener(
             ).files[0];
 
 
+
         if (!photo) {
 
             message.textContent =
                 "Please select a photo.";
 
             return;
+
         }
+
 
 
         const formData =
@@ -1143,11 +1497,18 @@ photoForm.addEventListener(
         );
 
 
+
         message.textContent =
             "Uploading photo...";
 
 
+        message.style.color =
+            "#d4af37";
+
+
+
         try {
+
 
             const response =
                 await fetch(
@@ -1161,16 +1522,20 @@ photoForm.addEventListener(
                             "Authorization":
                                 "Bearer " +
                                 token
+
                         },
 
                         body:
                             formData
+
                     }
                 );
 
 
+
             const data =
                 await response.json();
+
 
 
             if (!response.ok) {
@@ -1179,36 +1544,68 @@ photoForm.addEventListener(
                     data.message ||
                     "Upload failed.";
 
+                message.style.color =
+                    "#ff7777";
+
                 return;
+
             }
+
 
 
             message.textContent =
                 "Photo uploaded successfully!";
 
 
+            message.style.color =
+                "#7fd18a";
+
+
+
             photoForm.reset();
 
+
+
+            /*
+               Reload list.
+               The new Cloudinary image
+               will now display correctly.
+            */
 
             await loadPhotos();
 
         }
+
+
         catch (error) {
+
 
             console.error(
                 "Upload error:",
                 error
             );
 
+
             message.textContent =
                 "Unable to connect to server.";
+
+
+            message.style.color =
+                "#ff7777";
+
         }
 
     }
 );
 
 
+
+/* =====================================
+   DELETE PHOTO
+===================================== */
+
 async function deletePhoto(id) {
+
 
     const confirmed =
         confirm(
@@ -1217,11 +1614,15 @@ async function deletePhoto(id) {
 
 
     if (!confirmed) {
+
         return;
+
     }
 
 
+
     try {
+
 
         const response =
             await fetch(
@@ -1235,14 +1636,17 @@ async function deletePhoto(id) {
                         "Authorization":
                             "Bearer " +
                             token
+
                     }
 
                 }
             );
 
 
+
         const data =
             await response.json();
+
 
 
         if (!response.ok) {
@@ -1253,7 +1657,9 @@ async function deletePhoto(id) {
             );
 
             return;
+
         }
+
 
 
         alert(
@@ -1264,57 +1670,35 @@ async function deletePhoto(id) {
         await loadPhotos();
 
     }
+
+
     catch (error) {
+
 
         console.error(
             "Delete error:",
             error
         );
 
+
         alert(
             "Unable to connect to server."
         );
+
     }
 
 }
 
 
-function escapeHTML(value) {
 
-    return String(
-        value || ""
-    )
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-}
-
+/* =====================================
+   START
+===================================== */
 
 loadPhotos();
 
 </script>
+
 
 </body>
 
