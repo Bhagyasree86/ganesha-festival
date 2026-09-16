@@ -615,7 +615,9 @@
         }
 
 
-        /* WINNER PHOTO */
+        /* ==============================
+           WINNER PHOTO
+        ============================== */
 
         .winner-photo {
 
@@ -642,6 +644,51 @@
 
             background:
                 #0d0606;
+
+        }
+
+
+        /* ==============================
+           PHOTO ERROR MESSAGE
+        ============================== */
+
+        .photo-error {
+
+            width:
+                220px;
+
+            min-height:
+                120px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            margin:
+                18px 0;
+
+            border:
+                1px solid #6f5720;
+
+            border-radius:
+                10px;
+
+            background:
+                #0d0606;
+
+            color:
+                #77736b;
+
+            font-size:
+                12px;
+
+            text-align:
+                center;
 
         }
 
@@ -925,6 +972,17 @@
 
             }
 
+
+            .photo-error {
+
+                width:
+                    100%;
+
+                max-width:
+                    300px;
+
+            }
+
         }
 
     </style>
@@ -1126,7 +1184,7 @@
             href="admin.html"
             class="back-btn">
 
-            ← Back to Admin Dashboard
+            Back to Admin Dashboard
 
         </a>
 
@@ -1205,6 +1263,48 @@ if (!token) {
         "login.html";
 
 }
+
+
+// ==================================
+// IMAGE URL HELPER
+// ==================================
+
+function getImageUrl(photoUrl) {
+
+    if (!photoUrl) {
+
+        return "";
+
+    }
+
+
+    // Cloudinary / absolute URL
+
+    if (
+        photoUrl.startsWith("http://") ||
+        photoUrl.startsWith("https://")
+    ) {
+
+        return photoUrl;
+
+    }
+
+
+    // Old local upload
+
+    if (
+        photoUrl.startsWith("/")
+    ) {
+
+        return SERVER_URL + photoUrl;
+
+    }
+
+
+    return SERVER_URL + "/" + photoUrl;
+
+}
+
 
 
 // ==================================
@@ -1322,7 +1422,6 @@ document
 
             try {
 
-
                 const response =
                     await fetch(
                         API_URL,
@@ -1400,7 +1499,6 @@ document
 
 async function loadAuctions() {
 
-
     const list =
         document.getElementById(
             "auctionList"
@@ -1408,7 +1506,6 @@ async function loadAuctions() {
 
 
     try {
-
 
         const response =
             await fetch(
@@ -1425,7 +1522,6 @@ async function loadAuctions() {
             auctions.length === 0
         ) {
 
-
             list.innerHTML = `
 
                 <div class="empty">
@@ -1435,7 +1531,6 @@ async function loadAuctions() {
                 </div>
 
             `;
-
 
             return;
 
@@ -1469,6 +1564,12 @@ async function loadAuctions() {
                     );
 
 
+                const imageUrl =
+                    getImageUrl(
+                        auction.photoUrl
+                    );
+
+
                 item.innerHTML = `
 
                     <h3>
@@ -1481,15 +1582,16 @@ async function loadAuctions() {
 
 
                     ${
-                        auction.photoUrl
+                        imageUrl
                         ?
 
                         `
 
                         <img
-                            src="${SERVER_URL}${escapeHtml(auction.photoUrl)}"
+                            src="${escapeHtml(imageUrl)}"
                             class="winner-photo"
                             alt="Winner Photo"
+                            onerror="this.outerHTML='<div class=&quot;photo-error&quot;>Photo unavailable</div>';"
                         >
 
                         `
