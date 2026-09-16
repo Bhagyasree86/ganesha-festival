@@ -1,48 +1,26 @@
 const express = require("express");
+const multer = require("multer");
+const { Readable } = require("stream");
 
 const Auction = require("../models/Auction");
 const authMiddleware = require("../middleware/authMiddleware");
-
-const multer = require("multer");
-const path = require("path");
+const cloudinary = require("../config/cloudinary");
 
 const router = express.Router();
 
 
-// ===============================
-// MULTER PHOTO UPLOAD
-// ===============================
+// =====================================================
+// MULTER MEMORY STORAGE
+// =====================================================
 
-const storage = multer.diskStorage({
+const storage = multer.memoryStorage();
 
-    destination: function (req, file, cb) {
 
-        cb(
-            null,
-            path.join(__dirname, "../uploads")
-        );
-
-    },
-
-    filename: function (req, file, cb) {
-
-        const uniqueName =
-            Date.now() +
-            "-" +
-            file.originalname.replace(/\s+/g, "-");
-
-        cb(
-            null,
-            uniqueName
-        );
-
-    }
-
-});
-
+// =====================================================
+// PHOTO UPLOAD CONFIGURATION
+// =====================================================
 
 const upload = multer({
-
     storage: storage,
 
     limits: {
@@ -52,45 +30,63 @@ const upload = multer({
     fileFilter: function (req, file, cb) {
 
         const allowedTypes = [
-
             "image/jpeg",
             "image/png",
             "image/jpg",
             "image/webp"
-
         ];
 
-
-        if (
-            allowedTypes.includes(
-                file.mimetype
-            )
-        ) {
-
-            cb(
-                null,
-                true
-            );
-
-        }
-        else {
-
+        if (allowedTypes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
             cb(
                 new Error(
                     "Only image files are allowed."
                 )
             );
-
         }
-
     }
-
 });
 
 
-// ===============================
+// =====================================================
+// UPLOAD IMAGE TO CLOUDINARY
+// =====================================================
+
+function uploadToCloudinary(buffer) {
+
+    return new Promise((resolve, reject) => {
+
+        const stream =
+            cloudinary.uploader.upload_stream(
+                {
+                    folder:
+                        "sri-durgamamba-youth/auction",
+
+                    resource_type:
+                        "image"
+                },
+
+                function (error, result) {
+
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(result);
+                    }
+                }
+            );
+
+        Readable
+            .from(buffer)
+            .pipe(stream);
+    });
+}
+
+
+// =====================================================
 // ADD AUCTION
-// ===============================
+// =====================================================
 
 router.post(
     "/",
@@ -110,7 +106,9 @@ router.post(
             } = req.body;
 
 
-            // Check required fields
+            // =================================================
+            // CHECK REQUIRED FIELDS
+            // =================================================
 
             if (
                 !festivalYear ||
@@ -120,50 +118,54 @@ router.post(
             ) {
 
                 return res.status(400).json({
-
                     message:
                         "Please enter all required auction details."
-
                 });
-
             }
 
 
-            // ===============================
-            // PHOTO URL
-            // ===============================
+            // =================================================
+            // UPLOAD PHOTO TO CLOUDINARY
+            // =================================================
 
             let photoUrl = "";
 
-
             if (req.file) {
 
-                photoUrl =
-                    "/uploads/" +
-                    req.file.filename;
+                console.log(
+                    "Uploading auction photo to Cloudinary..."
+                );
 
+                const result =
+                    await uploadToCloudinary(
+                        req.file.buffer
+                    );
+
+                photoUrl =
+                    result.secure_url;
+
+                console.log(
+                    "Auction photo uploaded successfully:",
+                    photoUrl
+                );
             }
 
 
-            // ===============================
-            // CREATE AUCTION
-            // ===============================
+            // =================================================
+            // CREATE AUCTION RECORD
+            // =================================================
 
             const auction =
                 new Auction({
 
                     festivalYear:
-                        Number(
-                            festivalYear
-                        ),
+                        Number(festivalYear),
 
                     winnerName:
                         winnerName,
 
                     winningBid:
-                        Number(
-                            winningBid
-                        ),
+                        Number(winningBid),
 
                     auctionDate:
                         auctionDate,
@@ -176,12 +178,15 @@ router.post(
 
                     uploadedBy:
                         req.user.id
-
                 });
 
 
             await auction.save();
 
+
+            // =================================================
+            // RESPONSE
+            // =================================================
 
             res.status(201).json({
 
@@ -190,11 +195,9 @@ router.post(
 
                 auction:
                     auction
-
             });
 
         }
-
 
         catch (error) {
 
@@ -203,7 +206,6 @@ router.post(
                 error
             );
 
-
             res.status(500).json({
 
                 message:
@@ -211,21 +213,19 @@ router.post(
 
                 error:
                     error.message
-
             });
-
         }
-
     }
 );
 
 
-// ===============================
+// =====================================================
 // GET ALL AUCTIONS
-// ===============================
+// =====================================================
 
 router.get(
     "/",
+
     async (req, res) => {
 
         try {
@@ -233,45 +233,39 @@ router.get(
             const filter = {};
 
 
-            // Filter by festival year
+            // =================================================
+            // FILTER BY FESTIVAL YEAR
+            // =================================================
 
-            if (
-                req.query.festivalYear
-            ) {
+            if (req.query.festivalYear) {
 
                 filter.festivalYear =
                     Number(
                         req.query.festivalYear
                     );
-
             }
 
 
+            // =================================================
+            // FETCH AUCTIONS
+            // =================================================
+
             const auctions =
-                await Auction.find(
-                    filter
-                )
-                .populate(
-                    "uploadedBy",
-                    "name email"
-                )
-                .sort({
-
-                    festivalYear:
-                        -1,
-
-                    auctionDate:
-                        -1
-
-                });
+                await Auction
+                    .find(filter)
+                    .populate(
+                        "uploadedBy",
+                        "name email"
+                    )
+                    .sort({
+                        festivalYear: -1,
+                        auctionDate: -1
+                    });
 
 
-            res.json(
-                auctions
-            );
+            res.json(auctions);
 
         }
-
 
         catch (error) {
 
@@ -280,7 +274,6 @@ router.get(
                 error
             );
 
-
             res.status(500).json({
 
                 message:
@@ -288,33 +281,32 @@ router.get(
 
                 error:
                     error.message
-
             });
-
         }
-
     }
 );
 
 
-// ===============================
+// =====================================================
 // GET SINGLE AUCTION
-// ===============================
+// =====================================================
 
 router.get(
     "/:id",
+
     async (req, res) => {
 
         try {
 
             const auction =
-                await Auction.findById(
-                    req.params.id
-                )
-                .populate(
-                    "uploadedBy",
-                    "name email"
-                );
+                await Auction
+                    .findById(
+                        req.params.id
+                    )
+                    .populate(
+                        "uploadedBy",
+                        "name email"
+                    );
 
 
             if (!auction) {
@@ -323,18 +315,13 @@ router.get(
 
                     message:
                         "Auction not found."
-
                 });
-
             }
 
 
-            res.json(
-                auction
-            );
+            res.json(auction);
 
         }
-
 
         catch (error) {
 
@@ -343,7 +330,6 @@ router.get(
                 error
             );
 
-
             res.status(500).json({
 
                 message:
@@ -351,26 +337,28 @@ router.get(
 
                 error:
                     error.message
-
             });
-
         }
-
     }
 );
 
 
-// ===============================
+// =====================================================
 // DELETE AUCTION
-// ===============================
+// =====================================================
 
 router.delete(
     "/:id",
+
     authMiddleware,
 
     async (req, res) => {
 
         try {
+
+            // =================================================
+            // FIND AUCTION
+            // =================================================
 
             const auction =
                 await Auction.findById(
@@ -384,26 +372,137 @@ router.delete(
 
                     message:
                         "Auction not found."
-
                 });
-
             }
 
+
+            // =================================================
+            // DELETE CLOUDINARY IMAGE
+            // =================================================
+
+            if (
+                auction.photoUrl &&
+                auction.photoUrl.includes(
+                    "cloudinary.com"
+                )
+            ) {
+
+                try {
+
+                    const url =
+                        auction.photoUrl;
+
+                    const uploadIndex =
+                        url.indexOf("/upload/");
+
+
+                    if (uploadIndex !== -1) {
+
+                        let publicId =
+                            url.substring(
+                                uploadIndex + 8
+                            );
+
+
+                        // =====================================
+                        // REMOVE TRANSFORMATION PARTS
+                        // =====================================
+
+                        if (publicId.includes("/")) {
+
+                            const parts =
+                                publicId.split("/");
+
+                            // Keep version + folder + filename
+                            // while removing transformation
+                            if (
+                                parts[0] &&
+                                parts[0].startsWith("v")
+                            ) {
+
+                                publicId =
+                                    parts.slice(1).join("/");
+                            }
+                        }
+
+
+                        // =====================================
+                        // REMOVE VERSION
+                        // =====================================
+
+                        publicId =
+                            publicId.replace(
+                                /^v\d+\//,
+                                ""
+                            );
+
+
+                        // =====================================
+                        // REMOVE FILE EXTENSION
+                        // =====================================
+
+                        publicId =
+                            publicId.replace(
+                                /\.[^/.]+$/,
+                                ""
+                            );
+
+
+                        // =====================================
+                        // DELETE FROM CLOUDINARY
+                        // =====================================
+
+                        await cloudinary
+                            .uploader
+                            .destroy(
+                                publicId,
+                                {
+                                    resource_type:
+                                        "image"
+                                }
+                            );
+
+
+                        console.log(
+                            "Auction image deleted from Cloudinary:",
+                            publicId
+                        );
+                    }
+
+                }
+
+                catch (cloudinaryError) {
+
+                    console.log(
+                        "Cloudinary delete error:",
+                        cloudinaryError.message
+                    );
+
+                    // Do not stop database deletion
+                }
+            }
+
+
+            // =================================================
+            // DELETE DATABASE RECORD
+            // =================================================
 
             await Auction.findByIdAndDelete(
                 req.params.id
             );
 
 
+            // =================================================
+            // RESPONSE
+            // =================================================
+
             res.json({
 
                 message:
                     "Auction deleted successfully!"
-
             });
 
         }
-
 
         catch (error) {
 
@@ -412,7 +511,6 @@ router.delete(
                 error
             );
 
-
             res.status(500).json({
 
                 message:
@@ -420,13 +518,54 @@ router.delete(
 
                 error:
                     error.message
-
             });
-
         }
-
     }
 );
 
+
+// =====================================================
+// MULTER ERROR HANDLER
+// =====================================================
+
+router.use(
+    function (error, req, res, next) {
+
+        if (
+            error instanceof multer.MulterError
+        ) {
+
+            if (
+                error.code ===
+                "LIMIT_FILE_SIZE"
+            ) {
+
+                return res.status(400).json({
+
+                    message:
+                        "Photo size must be less than 10 MB"
+                });
+            }
+        }
+
+
+        if (error) {
+
+            return res.status(400).json({
+
+                message:
+                    error.message
+            });
+        }
+
+
+        next();
+    }
+);
+
+
+// =====================================================
+// EXPORT ROUTER
+// =====================================================
 
 module.exports = router;
