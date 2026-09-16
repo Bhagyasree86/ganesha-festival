@@ -2,41 +2,20 @@ const express = require("express");
 const Committee = require("../models/committee");
 const authMiddleware = require("../middleware/authMiddleware");
 const multer = require("multer");
-const path = require("path");
+const { Readable } = require("stream");
+const cloudinary = require("../config/cloudinary");
 
 const router = express.Router();
 
 
 // ===============================
-// MULTER PHOTO STORAGE
+// MULTER MEMORY STORAGE
 // ===============================
 
-const storage = multer.diskStorage({
-
-    destination: function (req, file, cb) {
-
-        cb(
-            null,
-            path.join(__dirname, "../uploads")
-        );
-
-    },
-
-    filename: function (req, file, cb) {
-
-        const uniqueName =
-            Date.now() +
-            "-" +
-            file.originalname
-                .replace(/\s+/g, "-");
-
-        cb(null, uniqueName);
-
-    }
-
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({
+
     storage: storage,
 
     limits: {
@@ -52,18 +31,15 @@ const upload = multer({
             "image/webp"
         ];
 
-        if (
-            allowedTypes.includes(
-                file.mimetype
-            )
-        ) {
+        if (allowedTypes.includes(file.mimetype)) {
+
             cb(null, true);
 
         } else {
 
             cb(
                 new Error(
-                    "Only image files are allowed"
+                    "Only JPG, PNG and WebP images are allowed"
                 )
             );
 
@@ -72,6 +48,45 @@ const upload = multer({
     }
 
 });
+
+
+// ===============================
+// CLOUDINARY IMAGE UPLOAD
+// ===============================
+
+function uploadToCloudinary(fileBuffer) {
+
+    return new Promise((resolve, reject) => {
+
+        const stream =
+            cloudinary.uploader.upload_stream(
+
+                {
+                    folder:
+                        "sri-durgamamba-youth/committee",
+
+                    resource_type: "image"
+                },
+
+                (error, result) => {
+
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(result);
+                    }
+
+                }
+
+            );
+
+        Readable
+            .from(fileBuffer)
+            .pipe(stream);
+
+    });
+
+}
 
 
 // ===============================
@@ -113,19 +128,26 @@ router.post(
             let photoUrl = "";
 
 
+            // Upload photo to Cloudinary
             if (req.file) {
 
+                const result =
+                    await uploadToCloudinary(
+                        req.file.buffer
+                    );
+
                 photoUrl =
-                    "/uploads/" +
-                    req.file.filename;
+                    result.secure_url;
 
             }
 
 
+            // Save committee member
             const committeeMember =
                 await Committee.create({
 
-                    festivalYear,
+                    festivalYear:
+                        Number(festivalYear),
 
                     memberName,
 
@@ -142,19 +164,30 @@ router.post(
                 });
 
 
-            res.status(201).json(
+            res.status(201).json({
+
+                message:
+                    "Committee member added successfully",
+
                 committeeMember
-            );
+
+            });
 
 
         } catch (error) {
 
-            console.log(error);
+            console.log(
+                "Committee upload error:",
+                error
+            );
 
             res.status(500).json({
 
                 message:
-                    "Failed to add committee member"
+                    "Failed to add committee member",
+
+                error:
+                    error.message
 
             });
 
@@ -215,7 +248,10 @@ router.get("/", async (req, res) => {
         res.status(500).json({
 
             message:
-                "Failed to fetch committee members"
+                "Failed to fetch committee members",
+
+            error:
+                error.message
 
         });
 
@@ -260,7 +296,10 @@ router.get("/:id", async (req, res) => {
         res.status(500).json({
 
             message:
-                "Failed to fetch committee member"
+                "Failed to fetch committee member",
+
+            error:
+                error.message
 
         });
 
@@ -281,7 +320,7 @@ router.delete(
         try {
 
             const member =
-                await Committee.findByIdAndDelete(
+                await Committee.findById(
                     req.params.id
                 );
 
@@ -296,6 +335,57 @@ router.delete(
                 });
 
             }
+
+
+            // Delete image from Cloudinary
+            if (
+                member.photoUrl &&
+                member.photoUrl.includes(
+                    "res.cloudinary.com"
+                )
+            ) {
+
+                try {
+
+                    let publicId =
+                        member.photoUrl
+                            .split("/upload/")[1];
+
+                    publicId =
+                        publicId.replace(
+                            /^v\d+\//,
+                            ""
+                        );
+
+                    publicId =
+                        publicId.replace(
+                            /\.[^/.]+$/,
+                            ""
+                        );
+
+                    await cloudinary.uploader.destroy(
+                        publicId,
+                        {
+                            resource_type: "image"
+                        }
+                    );
+
+                } catch (cloudinaryError) {
+
+                    console.log(
+                        "Cloudinary delete error:",
+                        cloudinaryError
+                    );
+
+                }
+
+            }
+
+
+            // Delete database record
+            await Committee.findByIdAndDelete(
+                req.params.id
+            );
 
 
             res.json({
@@ -313,11 +403,53 @@ router.delete(
             res.status(500).json({
 
                 message:
-                    "Failed to delete committee member"
+                    "Failed to delete committee member",
+
+                error:
+                    error.message
 
             });
 
         }
+
+    }
+);
+
+
+// ===============================
+// MULTER ERROR HANDLER
+// ===============================
+
+router.use(
+    (error, req, res, next) => {
+
+        if (
+            error instanceof multer.MulterError
+        ) {
+
+            return res.status(400).json({
+
+                message:
+                    error.message
+
+            });
+
+        }
+
+
+        if (error) {
+
+            return res.status(400).json({
+
+                message:
+                    error.message
+
+            });
+
+        }
+
+
+        next();
 
     }
 );
