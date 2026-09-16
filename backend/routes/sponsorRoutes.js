@@ -1,156 +1,99 @@
 const express = require("express");
+const multer = require("multer");
+const { Readable } = require("stream");
 
-const Sponsor =
-    require("../models/sponsor");
+const Sponsor = require("../models/sponsor");
+const authMiddleware = require("../middleware/authMiddleware");
+const cloudinary = require("../config/cloudinary");
 
-const authMiddleware =
-    require("../middleware/authMiddleware");
-
-const multer =
-    require("multer");
-
-const path =
-    require("path");
+const router = express.Router();
 
 
-const router =
-    express.Router();
+// =====================================================
+// MULTER MEMORY STORAGE
+// =====================================================
+
+const storage = multer.memoryStorage();
 
 
-/* =========================================
-   MULTER STORAGE
-========================================= */
+// =====================================================
+// FILE UPLOAD CONFIGURATION
+// =====================================================
 
-const storage =
-    multer.diskStorage({
+const upload = multer({
+    storage: storage,
 
-        destination:
-            function (
-                req,
-                file,
-                cb
-            ) {
+    limits: {
+        fileSize: 10 * 1024 * 1024
+    },
 
-                cb(
-                    null,
-                    path.join(
-                        __dirname,
-                        "../uploads"
-                    )
-                );
+    fileFilter: function (req, file, cb) {
 
-            },
+        const allowedTypes = [
+            "image/jpeg",
+            "image/png",
+            "image/jpg",
+            "image/webp"
+        ];
 
-
-        filename:
-            function (
-                req,
-                file,
-                cb
-            ) {
-
-                const safeName =
-                    file.originalname
-                        .replace(
-                            /\s+/g,
-                            "-"
-                        );
-
-                const uniqueName =
-                    Date.now() +
-                    "-" +
-                    safeName;
-
-                cb(
-                    null,
-                    uniqueName
-                );
-
-            }
-
-    });
+        if (allowedTypes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(
+                new Error(
+                    "Only JPG, JPEG, PNG and WebP images are allowed"
+                )
+            );
+        }
+    }
+});
 
 
-/* =========================================
-   FILE FILTER
-========================================= */
+// =====================================================
+// UPLOAD IMAGE TO CLOUDINARY
+// =====================================================
 
-const upload =
-    multer({
+function uploadToCloudinary(buffer) {
 
-        storage:
+    return new Promise((resolve, reject) => {
 
-            storage,
+        const stream =
+            cloudinary.uploader.upload_stream(
+                {
+                    folder:
+                        "sri-durgamamba-youth/sponsors",
 
-        limits: {
+                    resource_type:
+                        "image"
+                },
 
-            fileSize:
-                10 *
-                1024 *
-                1024
+                function (error, result) {
 
-        },
-
-        fileFilter:
-            function (
-                req,
-                file,
-                cb
-            ) {
-
-                const allowedTypes = [
-
-                    "image/jpeg",
-
-                    "image/png",
-
-                    "image/jpg",
-
-                    "image/webp"
-
-                ];
-
-
-                if (
-                    allowedTypes.includes(
-                        file.mimetype
-                    )
-                ) {
-
-                    cb(
-                        null,
-                        true
-                    );
-
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(result);
+                    }
                 }
-                else {
+            );
 
-                    cb(
-                        new Error(
-                            "Only JPG, JPEG, PNG and WebP images are allowed"
-                        )
-                    );
-
-                }
-
-            }
-
+        Readable
+            .from(buffer)
+            .pipe(stream);
     });
+}
 
 
-/* =========================================
-   ADD SPONSOR
-========================================= */
+// =====================================================
+// ADD SPONSOR
+// =====================================================
 
 router.post(
     "/",
     authMiddleware,
     upload.single("photo"),
 
-    async function (
-        req,
-        res
-    ) {
+    async function (req, res) {
 
         try {
 
@@ -162,118 +105,115 @@ router.post(
             } = req.body;
 
 
-            /* ==============================
-               VALIDATION
-            ============================== */
+            // =================================================
+            // VALIDATION
+            // =================================================
 
             if (
                 !festivalYear ||
                 !sponsorName
             ) {
 
-                return res.status(
-                    400
-                ).json({
+                return res.status(400).json({
 
                     message:
                         "Festival year and sponsor name are required"
-
                 });
-
             }
 
 
-            /* ==============================
-               PHOTO URL
-            ============================== */
+            // =================================================
+            // UPLOAD PHOTO TO CLOUDINARY
+            // =================================================
 
             let photoUrl = "";
 
-
             if (req.file) {
 
-                photoUrl =
-                    "/uploads/" +
-                    req.file.filename;
+                console.log(
+                    "Uploading sponsor photo to Cloudinary..."
+                );
 
+                const result =
+                    await uploadToCloudinary(
+                        req.file.buffer
+                    );
+
+                photoUrl =
+                    result.secure_url;
+
+                console.log(
+                    "Sponsor photo uploaded successfully:",
+                    photoUrl
+                );
             }
 
 
-            /* ==============================
-               CREATE SPONSOR
-            ============================== */
+            // =================================================
+            // CREATE SPONSOR
+            // =================================================
 
             const sponsor =
                 await Sponsor.create({
 
                     festivalYear:
-                        Number(
-                            festivalYear
-                        ),
+                        Number(festivalYear),
 
                     sponsorName:
                         sponsorName,
 
                     amount:
-                        Number(
-                            amount
-                        ) || 0,
+                        Number(amount) || 0,
 
                     photoUrl:
                         photoUrl,
 
                     description:
-                        description ||
-                        "",
+                        description || "",
 
                     uploadedBy:
                         req.user.id
-
                 });
 
 
-            res.status(
-                201
-            ).json(
+            // =================================================
+            // RESPONSE
+            // =================================================
+
+            res.status(201).json(
                 sponsor
             );
 
         }
 
-
         catch (error) {
 
             console.log(
+                "Add sponsor error:",
                 error
             );
 
-
-            res.status(
-                500
-            ).json({
+            res.status(500).json({
 
                 message:
-                    "Failed to add sponsor"
+                    "Failed to add sponsor",
 
+                error:
+                    error.message
             });
-
         }
-
     }
 );
 
 
-/* =========================================
-   GET ALL SPONSORS
-========================================= */
+// =====================================================
+// GET ALL SPONSORS
+// =====================================================
 
 router.get(
     "/",
 
-    async function (
-        req,
-        res
-    ) {
+    async function (req, res) {
 
         try {
 
@@ -281,39 +221,35 @@ router.get(
                 festivalYear
             } = req.query;
 
-
             const filter = {};
 
 
-            if (
-                festivalYear
-            ) {
+            // =================================================
+            // FILTER BY FESTIVAL YEAR
+            // =================================================
+
+            if (festivalYear) {
 
                 filter.festivalYear =
-                    Number(
-                        festivalYear
-                    );
-
+                    Number(festivalYear);
             }
 
 
+            // =================================================
+            // FETCH SPONSORS
+            // =================================================
+
             const sponsors =
-                await Sponsor.find(
-                    filter
-                )
-                .populate(
-                    "uploadedBy",
-                    "name email"
-                )
-                .sort({
-
-                    festivalYear:
-                        -1,
-
-                    createdAt:
-                        -1
-
-                });
+                await Sponsor
+                    .find(filter)
+                    .populate(
+                        "uploadedBy",
+                        "name email"
+                    )
+                    .sort({
+                        festivalYear: -1,
+                        createdAt: -1
+                    });
 
 
             res.json(
@@ -322,40 +258,34 @@ router.get(
 
         }
 
-
         catch (error) {
 
             console.log(
+                "Get sponsors error:",
                 error
             );
 
-
-            res.status(
-                500
-            ).json({
+            res.status(500).json({
 
                 message:
-                    "Failed to fetch sponsors"
+                    "Failed to fetch sponsors",
 
+                error:
+                    error.message
             });
-
         }
-
     }
 );
 
 
-/* =========================================
-   GET SINGLE SPONSOR
-========================================= */
+// =====================================================
+// GET SINGLE SPONSOR
+// =====================================================
 
 router.get(
     "/:id",
 
-    async function (
-        req,
-        res
-    ) {
+    async function (req, res) {
 
         try {
 
@@ -367,15 +297,11 @@ router.get(
 
             if (!sponsor) {
 
-                return res.status(
-                    404
-                ).json({
+                return res.status(404).json({
 
                     message:
                         "Sponsor not found"
-
                 });
-
             }
 
 
@@ -385,112 +311,194 @@ router.get(
 
         }
 
-
         catch (error) {
 
             console.log(
+                "Get sponsor error:",
                 error
             );
 
-
-            res.status(
-                500
-            ).json({
+            res.status(500).json({
 
                 message:
-                    "Failed to fetch sponsor"
+                    "Failed to fetch sponsor",
 
+                error:
+                    error.message
             });
-
         }
-
     }
 );
 
 
-/* =========================================
-   DELETE SPONSOR
-========================================= */
+// =====================================================
+// DELETE SPONSOR
+// =====================================================
 
 router.delete(
     "/:id",
 
     authMiddleware,
 
-    async function (
-        req,
-        res
-    ) {
+    async function (req, res) {
 
         try {
 
+            // =================================================
+            // FIND SPONSOR
+            // =================================================
+
             const sponsor =
-                await Sponsor.findByIdAndDelete(
+                await Sponsor.findById(
                     req.params.id
                 );
 
 
             if (!sponsor) {
 
-                return res.status(
-                    404
-                ).json({
+                return res.status(404).json({
 
                     message:
                         "Sponsor not found"
-
                 });
-
             }
 
+
+            // =================================================
+            // DELETE CLOUDINARY IMAGE
+            // =================================================
+
+            if (
+                sponsor.photoUrl &&
+                sponsor.photoUrl.includes(
+                    "cloudinary.com"
+                )
+            ) {
+
+                try {
+
+                    const url =
+                        sponsor.photoUrl;
+
+                    const uploadIndex =
+                        url.indexOf("/upload/");
+
+
+                    if (uploadIndex !== -1) {
+
+                        let publicId =
+                            url.substring(
+                                uploadIndex + 8
+                            );
+
+
+                        // =====================================
+                        // REMOVE VERSION
+                        // =====================================
+
+                        publicId =
+                            publicId.replace(
+                                /^v\d+\//,
+                                ""
+                            );
+
+
+                        // =====================================
+                        // REMOVE FILE EXTENSION
+                        // =====================================
+
+                        publicId =
+                            publicId.replace(
+                                /\.[^/.]+$/,
+                                ""
+                            );
+
+
+                        // =====================================
+                        // DELETE FROM CLOUDINARY
+                        // =====================================
+
+                        await cloudinary
+                            .uploader
+                            .destroy(
+                                publicId,
+                                {
+                                    resource_type:
+                                        "image"
+                                }
+                            );
+
+
+                        console.log(
+                            "Sponsor image deleted from Cloudinary:",
+                            publicId
+                        );
+                    }
+
+                }
+
+                catch (cloudinaryError) {
+
+                    console.log(
+                        "Cloudinary delete error:",
+                        cloudinaryError.message
+                    );
+
+                    // Continue deleting database record
+                }
+            }
+
+
+            // =================================================
+            // DELETE DATABASE RECORD
+            // =================================================
+
+            await Sponsor.findByIdAndDelete(
+                req.params.id
+            );
+
+
+            // =================================================
+            // RESPONSE
+            // =================================================
 
             res.json({
 
                 message:
                     "Sponsor deleted successfully"
-
             });
 
         }
-
 
         catch (error) {
 
             console.log(
+                "Delete sponsor error:",
                 error
             );
 
-
-            res.status(
-                500
-            ).json({
+            res.status(500).json({
 
                 message:
-                    "Failed to delete sponsor"
+                    "Failed to delete sponsor",
 
+                error:
+                    error.message
             });
-
         }
-
     }
 );
 
 
-/* =========================================
-   MULTER ERROR HANDLER
-========================================= */
+// =====================================================
+// MULTER ERROR HANDLER
+// =====================================================
 
 router.use(
-    function (
-        error,
-        req,
-        res,
-        next
-    ) {
+    function (error, req, res, next) {
 
         if (
-            error instanceof
-            multer.MulterError
+            error instanceof multer.MulterError
         ) {
 
             if (
@@ -498,39 +506,32 @@ router.use(
                 "LIMIT_FILE_SIZE"
             ) {
 
-                return res.status(
-                    400
-                ).json({
+                return res.status(400).json({
 
                     message:
                         "Photo size must be less than 10 MB"
-
                 });
-
             }
-
         }
 
 
         if (error) {
 
-            return res.status(
-                400
-            ).json({
+            return res.status(400).json({
 
                 message:
                     error.message
-
             });
-
         }
 
 
         next();
-
     }
 );
 
 
-module.exports =
-    router;
+// =====================================================
+// EXPORT ROUTER
+// =====================================================
+
+module.exports = router;
