@@ -4,47 +4,18 @@ const Nimajjanam = require("../models/Nimajjanam");
 const authMiddleware = require("../middleware/authMiddleware");
 
 const multer = require("multer");
-const path = require("path");
+const { Readable } = require("stream");
+
+const cloudinary = require("../config/cloudinary");
 
 const router = express.Router();
 
 
 // ==========================================
-// MULTER STORAGE
+// MULTER MEMORY STORAGE
 // ==========================================
 
-const storage = multer.diskStorage({
-
-    destination: function (req, file, cb) {
-
-        cb(
-            null,
-            path.join(
-                __dirname,
-                "../uploads"
-            )
-        );
-
-    },
-
-    filename: function (req, file, cb) {
-
-        const uniqueName =
-            Date.now() +
-            "-" +
-            file.originalname.replace(
-                /\s+/g,
-                "-"
-            );
-
-        cb(
-            null,
-            uniqueName
-        );
-
-    }
-
-});
+const storage = multer.memoryStorage();
 
 
 // ==========================================
@@ -92,6 +63,50 @@ const upload = multer({
 
 
 // ==========================================
+// CLOUDINARY UPLOAD FUNCTION
+// ==========================================
+
+function uploadToCloudinary(fileBuffer) {
+
+    return new Promise((resolve, reject) => {
+
+        const uploadStream =
+            cloudinary.uploader.upload_stream(
+
+                {
+                    folder:
+                        "sri-durgamamba-youth/nimajjanam",
+
+                    resource_type:
+                        "image"
+                },
+
+                function (error, result) {
+
+                    if (error) {
+
+                        reject(error);
+
+                    } else {
+
+                        resolve(result);
+
+                    }
+
+                }
+
+            );
+
+        Readable
+            .from(fileBuffer)
+            .pipe(uploadStream);
+
+    });
+
+}
+
+
+// ==========================================
 // ADD NIMAJJANAM DETAILS
 // ==========================================
 
@@ -135,7 +150,7 @@ router.post(
 
 
             // ==============================
-            // PHOTO
+            // PHOTO UPLOAD
             // ==============================
 
             let photoUrl = "";
@@ -143,9 +158,13 @@ router.post(
 
             if (req.file) {
 
+                const result =
+                    await uploadToCloudinary(
+                        req.file.buffer
+                    );
+
                 photoUrl =
-                    "/uploads/" +
-                    req.file.filename;
+                    result.secure_url;
 
             }
 
@@ -396,6 +415,61 @@ router.delete(
                         "Nimajjanam record not found."
 
                 });
+
+            }
+
+
+            // ==============================
+            // DELETE CLOUDINARY IMAGE
+            // ==============================
+
+            if (
+                record.photoUrl &&
+                record.photoUrl.includes(
+                    "res.cloudinary.com"
+                )
+            ) {
+
+                try {
+
+                    let publicId =
+                        record.photoUrl
+                            .split("/upload/")[1];
+
+                    if (publicId) {
+
+                        publicId =
+                            publicId.replace(
+                                /^v\d+\//,
+                                ""
+                            );
+
+                        publicId =
+                            publicId.replace(
+                                /\.[^/.]+$/,
+                                ""
+                            );
+
+                        await cloudinary.uploader.destroy(
+                            publicId,
+                            {
+                                resource_type:
+                                    "image"
+                            }
+                        );
+
+                    }
+
+                }
+
+                catch (cloudinaryError) {
+
+                    console.log(
+                        "Cloudinary delete error:",
+                        cloudinaryError
+                    );
+
+                }
 
             }
 
