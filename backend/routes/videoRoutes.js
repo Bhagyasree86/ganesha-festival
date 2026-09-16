@@ -11,15 +11,40 @@ const router = express.Router();
 
 // ======================================================
 // MULTER
-// Temporarily stores the selected video on the server
+// Temporarily stores selected video on the server
 // Maximum video size: 100 MB
 // ======================================================
 
 const upload = multer({
+
     dest: "uploads/videos/",
 
     limits: {
         fileSize: 100 * 1024 * 1024
+    },
+
+    fileFilter: function (req, file, cb) {
+
+        const allowedTypes = [
+            "video/mp4",
+            "video/webm",
+            "video/quicktime",
+            "video/x-msvideo",
+            "video/x-matroska"
+        ];
+
+        if (allowedTypes.includes(file.mimetype)) {
+
+            cb(null, true);
+
+        } else {
+
+            cb(
+                new Error(
+                    "Only video files are allowed."
+                )
+            );
+        }
     }
 });
 
@@ -38,7 +63,9 @@ router.post(
 
         try {
 
-            // Check whether video was selected
+            // ==================================================
+            // CHECK WHETHER VIDEO WAS SELECTED
+            // ==================================================
 
             if (!req.file) {
 
@@ -46,13 +73,13 @@ router.post(
 
                     message:
                         "Please select a video."
-
                 });
-
             }
 
 
-            // Get form data
+            // ==================================================
+            // GET FORM DATA
+            // ==================================================
 
             const {
                 festivalYear,
@@ -61,7 +88,9 @@ router.post(
             } = req.body;
 
 
-            // Validate year and title
+            // ==================================================
+            // VALIDATE YEAR AND TITLE
+            // ==================================================
 
             if (!festivalYear || !title) {
 
@@ -73,23 +102,23 @@ router.post(
                     fs.unlinkSync(
                         req.file.path
                     );
-
                 }
-
 
                 return res.status(400).json({
 
                     message:
                         "Please enter festival year and video title."
-
                 });
-
             }
 
 
             // ==================================================
-            // Upload video to Cloudinary
+            // UPLOAD VIDEO TO CLOUDINARY
             // ==================================================
+
+            console.log(
+                "Uploading video to Cloudinary..."
+            );
 
             const result =
                 await cloudinary.uploader.upload(
@@ -98,13 +127,19 @@ router.post(
                         resource_type: "video",
 
                         folder:
-                            "ganesha-festival/videos"
+                            "sri-durgamamba-youth/videos"
                     }
                 );
 
 
+            console.log(
+                "Video uploaded successfully:",
+                result.secure_url
+            );
+
+
             // ==================================================
-            // Delete temporary local video
+            // DELETE TEMPORARY LOCAL VIDEO
             // ==================================================
 
             if (
@@ -114,12 +149,11 @@ router.post(
                 fs.unlinkSync(
                     req.file.path
                 );
-
             }
 
 
             // ==================================================
-            // Save video details in MongoDB
+            // SAVE VIDEO DETAILS IN MONGODB
             // ==================================================
 
             const video =
@@ -139,7 +173,6 @@ router.post(
 
                     uploadedBy:
                         req.user.id
-
                 });
 
 
@@ -157,11 +190,9 @@ router.post(
 
                 video:
                     video
-
             });
 
         }
-
 
         catch (error) {
 
@@ -172,7 +203,7 @@ router.post(
 
 
             // ==================================================
-            // Remove temporary file if it exists
+            // REMOVE TEMPORARY FILE IF IT EXISTS
             // ==================================================
 
             if (
@@ -180,10 +211,19 @@ router.post(
                 fs.existsSync(req.file.path)
             ) {
 
-                fs.unlinkSync(
-                    req.file.path
-                );
+                try {
 
+                    fs.unlinkSync(
+                        req.file.path
+                    );
+
+                } catch (deleteError) {
+
+                    console.log(
+                        "Temporary video cleanup error:",
+                        deleteError.message
+                    );
+                }
             }
 
 
@@ -194,11 +234,8 @@ router.post(
 
                 error:
                     error.message
-
             });
-
         }
-
     }
 );
 
@@ -219,7 +256,7 @@ router.get(
 
 
             // ==================================================
-            // Filter by festival year
+            // FILTER BY FESTIVAL YEAR
             // ==================================================
 
             if (req.query.festivalYear) {
@@ -228,27 +265,23 @@ router.get(
                     Number(
                         req.query.festivalYear
                     );
-
             }
 
 
             // ==================================================
-            // Get videos
+            // GET VIDEOS
             // ==================================================
 
             const videos =
-                await Video.find(
-                    filter
-                )
-
-                .populate(
-                    "uploadedBy",
-                    "name email"
-                )
-
-                .sort({
-                    createdAt: -1
-                });
+                await Video
+                    .find(filter)
+                    .populate(
+                        "uploadedBy",
+                        "name email"
+                    )
+                    .sort({
+                        createdAt: -1
+                    });
 
 
             res.json(
@@ -257,14 +290,12 @@ router.get(
 
         }
 
-
         catch (error) {
 
             console.log(
                 "Get videos error:",
                 error
             );
-
 
             res.status(500).json({
 
@@ -273,11 +304,67 @@ router.get(
 
                 error:
                     error.message
-
             });
+        }
+    }
+);
+
+
+// ======================================================
+// GET SINGLE VIDEO
+// Public
+// ======================================================
+
+router.get(
+    "/:id",
+
+    async (req, res) => {
+
+        try {
+
+            const video =
+                await Video
+                    .findById(
+                        req.params.id
+                    )
+                    .populate(
+                        "uploadedBy",
+                        "name email"
+                    );
+
+
+            if (!video) {
+
+                return res.status(404).json({
+
+                    message:
+                        "Video not found."
+                });
+            }
+
+
+            res.json(
+                video
+            );
 
         }
 
+        catch (error) {
+
+            console.log(
+                "Get single video error:",
+                error
+            );
+
+            res.status(500).json({
+
+                message:
+                    "Unable to fetch video.",
+
+                error:
+                    error.message
+            });
+        }
     }
 );
 
@@ -298,7 +385,7 @@ router.delete(
         try {
 
             // ==================================================
-            // Find video in MongoDB
+            // FIND VIDEO IN MONGODB
             // ==================================================
 
             const video =
@@ -313,84 +400,125 @@ router.delete(
 
                     message:
                         "Video not found."
-
                 });
-
             }
 
 
             // ==================================================
-            // Get Cloudinary public ID
+            // DELETE VIDEO FROM CLOUDINARY
             // ==================================================
 
-            const videoUrl =
-                video.videoUrl;
+            if (
+                video.videoUrl &&
+                video.videoUrl.includes(
+                    "cloudinary.com"
+                )
+            ) {
+
+                try {
+
+                    const videoUrl =
+                        video.videoUrl;
+
+                    const uploadIndex =
+                        videoUrl.indexOf(
+                            "/upload/"
+                        );
 
 
-            const urlParts =
-                videoUrl.split("/");
+                    if (uploadIndex !== -1) {
+
+                        let publicId =
+                            videoUrl.substring(
+                                uploadIndex + 8
+                            );
 
 
-            const uploadIndex =
-                urlParts.indexOf("upload");
+                        // ======================================
+                        // REMOVE TRANSFORMATION PARAMETERS
+                        // ======================================
+
+                        const pathParts =
+                            publicId.split("/");
+
+                        if (
+                            pathParts.length > 0 &&
+                            pathParts[0].startsWith("v")
+                        ) {
+
+                            publicId =
+                                pathParts
+                                    .slice(1)
+                                    .join("/");
+                        }
 
 
-            if (uploadIndex !== -1) {
+                        // ======================================
+                        // REMOVE VERSION
+                        // ======================================
 
-                let publicId =
-                    urlParts
-                        .slice(
-                            uploadIndex + 1
-                        )
-                        .join("/");
-
-
-                // ==================================================
-                // Remove Cloudinary version
-                // ==================================================
-
-                publicId =
-                    publicId.replace(
-                        /^v\d+\//,
-                        ""
-                    );
+                        publicId =
+                            publicId.replace(
+                                /^v\d+\//,
+                                ""
+                            );
 
 
-                // ==================================================
-                // Remove file extension
-                // ==================================================
+                        // ======================================
+                        // REMOVE FILE EXTENSION
+                        // ======================================
 
-                publicId =
-                    publicId.replace(
-                        /\.[^/.]+$/,
-                        ""
-                    );
-
-
-                console.log(
-                    "Cloudinary public ID:",
-                    publicId
-                );
+                        publicId =
+                            publicId.replace(
+                                /\.[^/.]+$/,
+                                ""
+                            );
 
 
-                // ==================================================
-                // Delete video from Cloudinary
-                // ==================================================
+                        console.log(
+                            "Cloudinary video public ID:",
+                            publicId
+                        );
 
-                await cloudinary.uploader.destroy(
-                    publicId,
 
-                    {
-                        resource_type:
-                            "video"
+                        // ======================================
+                        // DELETE VIDEO FROM CLOUDINARY
+                        // ======================================
+
+                        const deleteResult =
+                            await cloudinary
+                                .uploader
+                                .destroy(
+                                    publicId,
+                                    {
+                                        resource_type:
+                                            "video"
+                                    }
+                                );
+
+
+                        console.log(
+                            "Cloudinary video deletion result:",
+                            deleteResult
+                        );
                     }
-                );
 
+                }
+
+                catch (cloudinaryError) {
+
+                    console.log(
+                        "Cloudinary video delete error:",
+                        cloudinaryError.message
+                    );
+
+                    // Continue with MongoDB deletion
+                }
             }
 
 
             // ==================================================
-            // Delete video from MongoDB
+            // DELETE VIDEO FROM MONGODB
             // ==================================================
 
             await Video.findByIdAndDelete(
@@ -406,11 +534,9 @@ router.delete(
 
                 message:
                     "Video deleted successfully!"
-
             });
 
         }
-
 
         catch (error) {
 
@@ -419,7 +545,6 @@ router.delete(
                 error
             );
 
-
             res.status(500).json({
 
                 message:
@@ -427,11 +552,48 @@ router.delete(
 
                 error:
                     error.message
-
             });
+        }
+    }
+);
 
+
+// ======================================================
+// MULTER ERROR HANDLER
+// ======================================================
+
+router.use(
+    function (error, req, res, next) {
+
+        if (
+            error instanceof multer.MulterError
+        ) {
+
+            if (
+                error.code ===
+                "LIMIT_FILE_SIZE"
+            ) {
+
+                return res.status(400).json({
+
+                    message:
+                        "Video size must be less than 100 MB"
+                });
+            }
         }
 
+
+        if (error) {
+
+            return res.status(400).json({
+
+                message:
+                    error.message
+            });
+        }
+
+
+        next();
     }
 );
 
